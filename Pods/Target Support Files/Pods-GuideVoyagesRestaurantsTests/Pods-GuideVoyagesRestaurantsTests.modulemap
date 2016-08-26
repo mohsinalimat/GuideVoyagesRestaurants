@@ -1,0 +1,6 @@
+framework module Pods_GuideVoyagesRestaurantsTests {
+  umbrella header "Pods-GuideVoyagesRestaurantsTests-umbrella.h"
+
+  export *
+  module * { export * }
+}
