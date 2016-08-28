@@ -9,13 +9,15 @@
 import UIKit
 import Firebase
 
-class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
     let menu = ["Accueil", "Restaurants", "Voyages", "Hotels", "Recettes", "Shopping"]
     let icon = ["home.png", "restaurants.png", "voyages.png", "travel.png", "chef.png", "magasins.png"]
     var selectedCategorie: Int = 0
     
     var hotels:[Hotel]?
+    
+    var searchController: UISearchController!
     
     var refreshControl: UIRefreshControl!
     var ref:FIRDatabaseReference?
@@ -93,7 +95,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             self.hotels = data
-            self.isAnimating = false
             self.tableView.reloadData()
             self.loadingView.hidden = true
             
@@ -122,6 +123,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         btnName = UIButton()
         btnName.setImage(UIImage(named: "search.png"), forState: .Normal)
         btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = btnName
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -187,6 +189,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Rechercher ici..."
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        
+        
         /*refreshControl = UIRefreshControl()
         
         // Custom Refresh View
@@ -199,8 +208,47 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    func searchClick(sender: UIButton) {
+        
+        self.navigationItem.rightBarButtonItem = nil
+        self.navigationItem.leftBarButtonItem = nil
+        self.navigationItem.titleView = searchController.searchBar
+        searchController.searchBar.delegate = self
+        self.searchController.searchBar.becomeFirstResponder()
+        
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+
+        self.navigationItem.titleView = nil
+        self.navigationItem.title = "Guide Voyages & Restaurants"
+
+        var btnName = UIButton()
+        btnName.setImage(UIImage(named: "placeholder.png"), forState: .Normal)
+        btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
+        btnName.frame = CGRectMake(0, 0, 22, 22)
+        let leftBarButton = UIBarButtonItem()
+        leftBarButton.customView = btnName
+        self.navigationItem.leftBarButtonItem = leftBarButton
+        
+        btnName = UIButton()
+        btnName.setImage(UIImage(named: "search.png"), forState: .Normal)
+        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
+        let rightBarButton = UIBarButtonItem()
+        rightBarButton.customView = btnName
+        self.navigationItem.rightBarButtonItem = rightBarButton
+        
+       
+
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    }
+    
+    
     func animate() {
-        if isAnimating {
+        if !self.loadingView.hidden {
             UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
                 self.animatingImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
                 

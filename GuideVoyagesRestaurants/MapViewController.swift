@@ -48,6 +48,45 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
     }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        
+        // Don't want to show a custom image if the annotation is the user's location.
+        if annotation.isKindOfClass(MKUserLocation) {
+            return nil
+        }
+        
+        let annotationIdentifier = "AnnotationIdentifier"
+        
+        var annotationView: MKAnnotationView?
+        
+        if let dequeuedAnnotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(annotationIdentifier) {
+            annotationView = dequeuedAnnotationView
+            annotationView?.annotation = annotation
+        }
+        else {
+            let av = MKAnnotationView(annotation: annotation, reuseIdentifier: annotationIdentifier)
+            av.rightCalloutAccessoryView = UIButton(type: .DetailDisclosure)
+            annotationView = av
+        }
+        
+        if let annotationView = annotationView {
+            // Configure your annotation view here
+            annotationView.canShowCallout = true
+            
+            // Resize image
+            let pinImage = UIImage(named: "travel.png")
+            let size = CGSize(width: 30, height: 30)
+            UIGraphicsBeginImageContext(size)
+            pinImage!.drawInRect(CGRectMake(0, 0, size.width, size.height))
+            let resizedImage = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+            
+            annotationView.image = resizedImage
+        }
+        
+        return annotationView
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
