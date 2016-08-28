@@ -11,7 +11,7 @@ import Firebase
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
-    let menu = ["Accueil", "Restaurants", "Voyages", "Hotels", "Recettes", "Shopping"]
+    let menu = ["Accueil", "Restaurant", "Voyage", "Hotel", "Recette", "Shopping"]
     let icon = ["home.png", "restaurants.png", "voyages.png", "travel.png", "chef.png", "magasins.png"]
     var selectedCategorie: Int = 0
     

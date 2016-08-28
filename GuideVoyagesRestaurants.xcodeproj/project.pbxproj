@@ -18,6 +18,7 @@
 		E428FED71D73437400EEA7E2 /* jquery.flexslider-min.js in Resources */ = {isa = PBXBuildFile; fileRef = E428FED61D73437400EEA7E2 /* jquery.flexslider-min.js */; };
 		E428FED91D73443800EEA7E2 /* flexslider.css in Resources */ = {isa = PBXBuildFile; fileRef = E428FED81D73443800EEA7E2 /* flexslider.css */; };
 		E428FEDD1D73456E00EEA7E2 /* jquery-3.1.0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E428FEDC1D73456E00EEA7E2 /* jquery-3.1.0.min.js */; };
+		E428FEDF1D7352D700EEA7E2 /* main.css in Resources */ = {isa = PBXBuildFile; fileRef = E428FEDE1D7352D700EEA7E2 /* main.css */; };
 		E42A97F41D53856900C0982C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A97F31D53856900C0982C /* AppDelegate.swift */; };
 		E42A97F61D53856900C0982C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A97F51D53856900C0982C /* HomeViewController.swift */; };
 		E42A97F91D53856900C0982C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42A97F71D53856900C0982C /* Main.storyboard */; };
@@ -87,6 +88,7 @@
 		E428FED61D73437400EEA7E2 /* jquery.flexslider-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery.flexslider-min.js"; sourceTree = "<group>"; };
 		E428FED81D73443800EEA7E2 /* flexslider.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = flexslider.css; sourceTree = "<group>"; };
 		E428FEDC1D73456E00EEA7E2 /* jquery-3.1.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.1.0.min.js"; sourceTree = "<group>"; };
+		E428FEDE1D7352D700EEA7E2 /* main.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = main.css; sourceTree = "<group>"; };
 		E42A97F01D53856900C0982C /* GuideVoyagesRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideVoyagesRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42A97F31D53856900C0982C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42A97F51D53856900C0982C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 		E42A97E71D53856900C0982C = {
 			isa = PBXGroup;
 			children = (
+				E428FEDE1D7352D700EEA7E2 /* main.css */,
 				E428FEDC1D73456E00EEA7E2 /* jquery-3.1.0.min.js */,
 				E428FED81D73443800EEA7E2 /* flexslider.css */,
 				E428FED61D73437400EEA7E2 /* jquery.flexslider-min.js */,
@@ -435,6 +438,7 @@
 				E42A97F91D53856900C0982C /* Main.storyboard in Resources */,
 				E428FEDD1D73456E00EEA7E2 /* jquery-3.1.0.min.js in Resources */,
 				E42A983A1D5644DD00C0982C /* travel.png in Resources */,
+				E428FEDF1D7352D700EEA7E2 /* main.css in Resources */,
 				E42A98511D565D5700C0982C /* CustomRefreshView.xib in Resources */,
 				E49237F91D56715300C7DB88 /* GoogleService-Info.plist in Resources */,
 				E428FED51D733B7500EEA7E2 /* share.png in Resources */,
