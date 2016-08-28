@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>Titre de la page</title>
   <link href="https://fonts.googleapis.com/css?family=Lato:300" rel="stylesheet">
+<link href="flexslider.css" rel="stylesheet">
+      
 </head>
 <body style="background: transparent; font-family: 'Lato', sans-serif; color: #1B4484; text-align: justify">
     <img src="5.jpg" width="100%">
@@ -16,6 +18,36 @@
 
 <p>Morbi quis tincidunt enim. In pulvinar nibh nec pulvinar aliquet. Vivamus ac aliquam est, et efficitur metus. Mauris nec magna quis est feugiat elementum. Donec eget nunc vestibulum magna condimentum volutpat. Aliquam tempus ipsum vitae urna suscipit, sit amet mattis ante ullamcorper. Pellentesque hendrerit tellus sit amet leo porttitor, nec consequat urna euismod. Phasellus placerat nunc vitae maximus blandit. Sed at lacus at ex convallis ultrices. In ultrices dictum est sit amet lobortis. Fusce molestie lectus nec posuere ornare. Praesent nisi mi, interdum quis dolor in, interdum gravida nisi. Proin congue metus eu ligula porttitor posuere. Pellentesque accumsan, sapien in malesuada efficitur, risus arcu aliquam nunc, in viverra mauris turpis et mi. Vivamus faucibus massa quis est posuere tristique vel eget ex. Ut nunc urna, malesuada quis eleifend sed, facilisis eu enim.</p>
 
+<div class="flexslider">
+    <ul class="slides">
+        <li>
+            <img src="1.jpg" />
+        </li>
+        <li>
+            <img src="2.jpg" />
+        </li>
+        <li>
+            <img src="3.jpg" />
+        </li>
+        <li>
+            <img src="4.jpg" />
+        </li>
+    </ul>
+</div>
+
 <p>Curabitur auctor posuere libero sed vulputate. Pellentesque vulputate ut est id dictum. Aenean ut nisl sed ex auctor feugiat. Maecenas ultricies purus at dui porttitor vehicula. Donec id ornare tellus, varius rutrum ante. Duis magna orci, euismod vitae dapibus at, sagittis pellentesque enim. Interdum et malesuada fames ac ante ipsum primis in faucibus. Pellentesque justo neque, interdum eget elit sed, dictum consectetur turpis. Nulla finibus eu risus in volutpat. Nulla quis mauris sit amet mauris porttitor ullamcorper vel pellentesque dui.</p>
+
+
+
+    <script src="jquery-3.1.0.min.js"></script>
+    <script src="jquery.flexslider-min.js"></script>
+    <script>
+        // Can also be used with $(document).ready()
+        $(document).ready(function() {
+                       $('.flexslider').flexslider({
+                                                   animation: "slide"
+                                                   });
+                       });
+        </script>
 </body>
 </html>

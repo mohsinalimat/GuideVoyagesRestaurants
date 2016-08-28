@@ -15,6 +15,9 @@
 		E428FED11D732A2400EEA7E2 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E428FECF1D732A2400EEA7E2 /* ArticleViewController.xib */; };
 		E428FED31D732C9F00EEA7E2 /* article.html in Resources */ = {isa = PBXBuildFile; fileRef = E428FED21D732C9F00EEA7E2 /* article.html */; };
 		E428FED51D733B7500EEA7E2 /* share.png in Resources */ = {isa = PBXBuildFile; fileRef = E428FED41D733B7500EEA7E2 /* share.png */; };
+		E428FED71D73437400EEA7E2 /* jquery.flexslider-min.js in Resources */ = {isa = PBXBuildFile; fileRef = E428FED61D73437400EEA7E2 /* jquery.flexslider-min.js */; };
+		E428FED91D73443800EEA7E2 /* flexslider.css in Resources */ = {isa = PBXBuildFile; fileRef = E428FED81D73443800EEA7E2 /* flexslider.css */; };
+		E428FEDD1D73456E00EEA7E2 /* jquery-3.1.0.min.js in Resources */ = {isa = PBXBuildFile; fileRef = E428FEDC1D73456E00EEA7E2 /* jquery-3.1.0.min.js */; };
 		E42A97F41D53856900C0982C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A97F31D53856900C0982C /* AppDelegate.swift */; };
 		E42A97F61D53856900C0982C /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A97F51D53856900C0982C /* HomeViewController.swift */; };
 		E42A97F91D53856900C0982C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42A97F71D53856900C0982C /* Main.storyboard */; };
@@ -81,6 +84,9 @@
 		E428FECF1D732A2400EEA7E2 /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleViewController.xib; sourceTree = "<group>"; };
 		E428FED21D732C9F00EEA7E2 /* article.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = article.html; sourceTree = "<group>"; };
 		E428FED41D733B7500EEA7E2 /* share.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = share.png; sourceTree = "<group>"; };
+		E428FED61D73437400EEA7E2 /* jquery.flexslider-min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery.flexslider-min.js"; sourceTree = "<group>"; };
+		E428FED81D73443800EEA7E2 /* flexslider.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = flexslider.css; sourceTree = "<group>"; };
+		E428FEDC1D73456E00EEA7E2 /* jquery-3.1.0.min.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "jquery-3.1.0.min.js"; sourceTree = "<group>"; };
 		E42A97F01D53856900C0982C /* GuideVoyagesRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideVoyagesRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42A97F31D53856900C0982C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42A97F51D53856900C0982C /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +194,9 @@
 		E42A97E71D53856900C0982C = {
 			isa = PBXGroup;
 			children = (
+				E428FEDC1D73456E00EEA7E2 /* jquery-3.1.0.min.js */,
+				E428FED81D73443800EEA7E2 /* flexslider.css */,
+				E428FED61D73437400EEA7E2 /* jquery.flexslider-min.js */,
 				E428FED21D732C9F00EEA7E2 /* article.html */,
 				E42A97F21D53856900C0982C /* GuideVoyagesRestaurants */,
 				E42A980A1D53856900C0982C /* GuideVoyagesRestaurantsTests */,
@@ -415,13 +424,16 @@
 				E48089BA1D59057B003AD03E /* geisha_head.png in Resources */,
 				E42A98391D5644DD00C0982C /* search.png in Resources */,
 				E428FED11D732A2400EEA7E2 /* ArticleViewController.xib in Resources */,
+				E428FED91D73443800EEA7E2 /* flexslider.css in Resources */,
 				E48089B91D59057B003AD03E /* geisha_body.png in Resources */,
+				E428FED71D73437400EEA7E2 /* jquery.flexslider-min.js in Resources */,
 				E42A97FE1D53856900C0982C /* Assets.xcassets in Resources */,
 				E42A984F1D564F2500C0982C /* 2.jpg in Resources */,
 				E42A982C1D5638D100C0982C /* magasins.png in Resources */,
 				E42A98381D5644DD00C0982C /* placeholder.png in Resources */,
 				E42A984B1D564F2500C0982C /* 5.jpg in Resources */,
 				E42A97F91D53856900C0982C /* Main.storyboard in Resources */,
+				E428FEDD1D73456E00EEA7E2 /* jquery-3.1.0.min.js in Resources */,
 				E42A983A1D5644DD00C0982C /* travel.png in Resources */,
 				E42A98511D565D5700C0982C /* CustomRefreshView.xib in Resources */,
 				E49237F91D56715300C7DB88 /* GoogleService-Info.plist in Resources */,
