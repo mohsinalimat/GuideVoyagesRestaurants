@@ -71,8 +71,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var loadingView: UIView!
     @IBOutlet weak var animatingImage: UIImageView!
     
-    var isAnimating:Bool = true
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -111,7 +109,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
         
-        // Navigation Bar :
+        // Setup Navigation items :
         var btnName = UIButton()
         btnName.setImage(UIImage(named: "placeholder.png"), forState: .Normal)
         btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
@@ -352,6 +350,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
+        self.navigationController?.pushViewController(articleViewController, animated: true)
     }
     
 
