@@ -51,8 +51,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         let url = NSURL(fileURLWithPath: path)
         self.articleWebView.loadRequest(NSURLRequest(URL:url))*/
         
-        let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        //let url = NSURL(string: "https://di2pra.com/voyages/article.html")
+        //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
+        let url = NSURL(string: "https://di2pra.com/voyages/article.html")
         self.articleWebView.loadRequest(NSURLRequest(URL: url!))
         self.articleWebView.scrollView.delegate = self
         self.articleWebView.scrollView.showsVerticalScrollIndicator = false
@@ -84,6 +84,18 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
+        let offset = scrollView.contentOffset.y
+        
+        if offset > 100 {
+           
+            self.navigationItem.title = "Velouté d'asperge et oeuf coulant"
+            
+        } else {
+           self.navigationItem.title = "Restaurant" 
+        }
+        
+        
+        
         /*let offset = scrollView.contentOffset.y
         var headerTransform = CATransform3DIdentity
         

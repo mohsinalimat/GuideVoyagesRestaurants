@@ -42,12 +42,89 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
             let dropPin = MKPointAnnotation()
             dropPin.coordinate = pinLocation
-            dropPin.title = hotel.nom
+            dropPin.title = hotel.nom.uppercaseString
+            dropPin.subtitle = "Par Frédéric Lacroix".uppercaseString
             mapView.addAnnotation(dropPin)
             
         }
         
     }
+    
+    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+        if annotation is MKUserLocation {
+            return nil
+        }
+        
+        let identifier = "ItemAnnotation"
+        
+        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+        if annotationView == nil {
+            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+            annotationView?.canShowCallout = true
+            
+            let button = UIButton(type: UIButtonType.DetailDisclosure) as UIButton
+            annotationView?.rightCalloutAccessoryView = button
+            
+        } else {
+            annotationView!.annotation = annotation
+        }
+        
+        //configureDetailView(annotationView!)
+        
+        annotationView?.tintColor = mainColor
+        
+        
+        /*let label = UILabel()
+        label.text = "Le titre de l'article"
+        label.font = UIFont(name: "Reglo-Bold", size: 14)
+        label.textColor = mainColor
+        
+        if #available(iOS 9.0, *) {
+            annotationView?.detailCalloutAccessoryView = label
+        } else {
+            annotationView?.leftCalloutAccessoryView = label
+        }*/
+        
+        
+        
+        return annotationView
+    }
+    
+    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+        
+        let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
+        self.navigationController?.pushViewController(articleViewController, animated: true)
+        
+    }
+    
+    func configureDetailView(annotationView: MKAnnotationView) {
+        let width = 300
+        let height = 200
+        
+        let snapshotView = UIView()
+        let views = ["snapshotView": snapshotView]
+        snapshotView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[snapshotView(300)]", options: [], metrics: nil, views: views))
+        snapshotView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[snapshotView(200)]", options: [], metrics: nil, views: views))
+        
+        let options = MKMapSnapshotOptions()
+        options.size = CGSize(width: width, height: height)
+        
+        options.mapType = .SatelliteFlyover
+        
+        options.camera = MKMapCamera(lookingAtCenterCoordinate: annotationView.annotation!.coordinate, fromDistance: 250, pitch: 65, heading: 0)
+        
+        let snapshotter = MKMapSnapshotter(options: options)
+        snapshotter.startWithCompletionHandler { snapshot, error in
+            if snapshot != nil {
+                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
+                imageView.image = snapshot!.image
+                snapshotView.addSubview(imageView)
+            }
+        }
+        
+        annotationView.detailCalloutAccessoryView = snapshotView
+    }
+
     
     /*func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         

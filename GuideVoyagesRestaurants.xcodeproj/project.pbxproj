@@ -19,6 +19,8 @@
 		E42A98171D53856900C0982C /* GuideVoyagesRestaurantsUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A98161D53856900C0982C /* GuideVoyagesRestaurantsUITests.swift */; };
 		E42A983C1D5649F300C0982C /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A983B1D5649F300C0982C /* Config.swift */; };
 		E42A98511D565D5700C0982C /* CustomRefreshView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E42A98501D565D5700C0982C /* CustomRefreshView.xib */; };
+		E442B4051D7499A90048E475 /* NewArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E442B4031D7499A90048E475 /* NewArticleViewController.xib */; };
+		E442B4061D7499A90048E475 /* NewArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E442B4041D7499A90048E475 /* NewArticleViewController.swift */; };
 		E44E18871D74512F000D6509 /* Reglo-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = E44E18861D74512F000D6509 /* Reglo-Bold.otf */; };
 		E44E188D1D7451F3000D6509 /* 5.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E44E18881D7451F3000D6509 /* 5.jpg */; };
 		E44E188E1D7451F3000D6509 /* 4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E44E18891D7451F3000D6509 /* 4.jpg */; };
@@ -77,6 +79,8 @@
 		E42A98181D53856900C0982C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E42A983B1D5649F300C0982C /* Config.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		E42A98501D565D5700C0982C /* CustomRefreshView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomRefreshView.xib; sourceTree = "<group>"; };
+		E442B4031D7499A90048E475 /* NewArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = NewArticleViewController.xib; sourceTree = "<group>"; };
+		E442B4041D7499A90048E475 /* NewArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewArticleViewController.swift; sourceTree = "<group>"; };
 		E44E18861D74512F000D6509 /* Reglo-Bold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Reglo-Bold.otf"; path = "Assets/fonts/Reglo-Bold.otf"; sourceTree = "<group>"; };
 		E44E18881D7451F3000D6509 /* 5.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 5.jpg; path = Assets/photos/5.jpg; sourceTree = "<group>"; };
 		E44E18891D7451F3000D6509 /* 4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = 4.jpg; path = Assets/photos/4.jpg; sourceTree = "<group>"; };
@@ -249,6 +253,7 @@
 		E44E18921D7454EC000D6509 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				E44E18AC1D749541000D6509 /* NewArticleView */,
 				E44E189E1D745668000D6509 /* HomeViewController.swift */,
 				E44E18941D7455A5000D6509 /* MapViewController */,
 				E44E18931D745597000D6509 /* ArticleViewController */,
@@ -281,6 +286,15 @@
 				E44E18971D745647000D6509 /* SectionCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		E44E18AC1D749541000D6509 /* NewArticleView */ = {
+			isa = PBXGroup;
+			children = (
+				E442B4031D7499A90048E475 /* NewArticleViewController.xib */,
+				E442B4041D7499A90048E475 /* NewArticleViewController.swift */,
+			);
+			name = NewArticleView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -400,6 +414,7 @@
 			files = (
 				E44E188F1D7451F3000D6509 /* 3.jpg in Resources */,
 				E42A98011D53856900C0982C /* LaunchScreen.storyboard in Resources */,
+				E442B4051D7499A90048E475 /* NewArticleViewController.xib in Resources */,
 				E44E188D1D7451F3000D6509 /* 5.jpg in Resources */,
 				E42A97FE1D53856900C0982C /* Assets.xcassets in Resources */,
 				E42A97F91D53856900C0982C /* Main.storyboard in Resources */,
@@ -567,6 +582,7 @@
 				E42A97F41D53856900C0982C /* AppDelegate.swift in Sources */,
 				E44E18A71D74567C000D6509 /* ArticleViewController.swift in Sources */,
 				E42A97FC1D53856900C0982C /* GuideVoyagesRestaurants.xcdatamodeld in Sources */,
+				E442B4061D7499A90048E475 /* NewArticleViewController.swift in Sources */,
 				E44E189D1D745660000D6509 /* Hotel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -713,7 +729,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GuideVoyagesRestaurants/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.di2pra.GuideVoyagesRestaurants;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -726,7 +742,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GuideVoyagesRestaurants/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.di2pra.GuideVoyagesRestaurants;
 				PRODUCT_NAME = "$(TARGET_NAME)";

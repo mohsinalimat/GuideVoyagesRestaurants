@@ -301,7 +301,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
              view.categoryTitle.text = data[section].category.title.uppercaseString*/
             
             view.title.text = hotels![section].nom
-            view.author.text = "PAR FRED LACROIX"
+            view.author.text = "PAR FRédéric LACROIX".uppercaseString
             view.categoryTitle.text = "HOTEL"
             
             
