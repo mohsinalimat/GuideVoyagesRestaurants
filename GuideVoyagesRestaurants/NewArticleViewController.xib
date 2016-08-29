@@ -56,7 +56,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rbi-Y9-qSg" userLabel="Article Title Bg">
                                     <rect key="frame" x="0.0" y="225" width="600" height="225"/>
                                     <subviews>
-                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUM-3g-fz2">
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WUM-3g-fz2">
                                             <rect key="frame" x="272" y="20" width="55" height="25"/>
                                             <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="25"/>
                                             <color key="textColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
