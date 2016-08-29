@@ -10,7 +10,7 @@ import UIKit
 
 let offset_HeaderStop:CGFloat = 50.0
 
-class ArticleViewController: UIViewController, UIScrollViewDelegate {
+class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
 
     @IBOutlet weak var articleWebView: UIWebView!
     
@@ -22,7 +22,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
         // Set up navigation items
         self.navigationItem.title = "Restaurant"
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "share.png"), forState: .Normal)
+        btnName.setImage(UIImage(named: "partager"), forState: .Normal)
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
         btnName.frame = CGRectMake(0, 0, 22, 22)
         
@@ -30,7 +30,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
         shareButton.customView = btnName
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "placeholder.png"), forState: .Normal)
+        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
         btnName.frame = CGRectMake(0, 0, 22, 22)
         
@@ -52,7 +52,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
         self.articleWebView.loadRequest(NSURLRequest(URL:url))*/
         
         let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        
+        //let url = NSURL(string: "https://di2pra.com/voyages/article.html")
         self.articleWebView.loadRequest(NSURLRequest(URL: url!))
         self.articleWebView.scrollView.delegate = self
         self.articleWebView.scrollView.showsVerticalScrollIndicator = false
@@ -67,6 +67,20 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - WebView
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if request.URL?.scheme == "inapp" {
+            
+            if request.URL?.host == "capture" {
+                print("hello")
+            }
+            
+            return false
+        }
+        
+        return true
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {

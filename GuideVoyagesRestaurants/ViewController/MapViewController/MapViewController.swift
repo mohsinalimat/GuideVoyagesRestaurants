@@ -49,7 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    /*func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         
         // Don't want to show a custom image if the annotation is the user's location.
         if annotation.isKindOfClass(MKUserLocation) {
@@ -86,7 +86,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         }
         
         return annotationView
-    }
+    }*/
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

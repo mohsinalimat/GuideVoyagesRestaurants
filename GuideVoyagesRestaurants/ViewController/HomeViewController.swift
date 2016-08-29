@@ -11,8 +11,7 @@ import Firebase
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
-    let menu = ["Accueil", "Restaurant", "Voyage", "Hotel", "Recette", "Shopping"]
-    let icon = ["home.png", "restaurants.png", "voyages.png", "travel.png", "chef.png", "magasins.png"]
+    let type:[Category] = [Category(id: 0, title: "accueil"), Category(id: 1, title: "restaurant"), Category(id: 2, title: "voyage"), Category(id: 3, title: "hotel"), Category(id: 4, title: "recette"), Category(id: 5, title: "shopping")]
     var selectedCategorie: Int = 0
     
     var hotels:[Hotel]?
@@ -111,7 +110,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Setup Navigation items :
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "placeholder.png"), forState: .Normal)
+        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
         btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
         btnName.frame = CGRectMake(0, 0, 22, 22)
         let leftBarButton = UIBarButtonItem()
@@ -119,7 +118,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.leftBarButtonItem = leftBarButton
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "search.png"), forState: .Normal)
+        btnName.setImage(UIImage(named: "recherche"), forState: .Normal)
         btnName.frame = CGRectMake(0, 0, 22, 22)
         btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
         let rightBarButton = UIBarButtonItem()
@@ -127,47 +126,48 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
+        
+        
         // Add scrollViewContainer
         let scrollViewContainer = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: scrollView.bounds.width, height: scrollView.bounds.height)))
         
         var offsetX: CGFloat = 5
-        var i:Int = 0
         
-        for item in menu {
+        var button: UIButton
+        
+        for item in type {
             
-            let button = UIButton(frame: CGRect(origin: CGPoint(x: offsetX, y:5), size: CGSize(width: scrollView.bounds.height - 10.0, height: scrollView.bounds.height - 10.0)))
+            button = UIButton(frame: CGRect(origin: CGPoint(x: offsetX, y:5), size: CGSize(width: scrollView.bounds.height - 10.0, height: scrollView.bounds.height - 10.0)))
             
             button.addTarget(self, action: #selector(self.changePage), forControlEvents: UIControlEvents.TouchUpInside)
-            button.setTitle(item.uppercaseString, forState: .Normal)
+            button.setTitle(item.title.uppercaseString, forState: .Normal)
             button.setTitleColor(mainColor, forState: .Normal)
             
             button.layer.cornerRadius = 10.0
             
             button.titleLabel?.font = UIFont(name: "Reglo-Bold", size: 10)
             
-            if i == selectedCategorie {
-              button.backgroundColor = highlightColor
+            if item.id == selectedCategorie {
+                button.backgroundColor = highlightColor
             }
-           
+            
             
             /*button.layer.borderWidth = 0.8
-            button.layer.borderColor = UIColor(red:0.11, green:0.27, blue:0.52, alpha:1.0).CGColor*/
-
+             button.layer.borderColor = UIColor(red:0.11, green:0.27, blue:0.52, alpha:1.0).CGColor*/
             
-            button.setImage(UIImage(named: icon[i]), forState: .Normal)
+            
+            button.setImage(UIImage(named: item.title), forState: .Normal)
             //button.setBackgroundImage(UIImage(named: icon[i]), forState: .Normal)
             
             button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 25, right: 15)
             button.titleEdgeInsets = UIEdgeInsets(top: 55, left: -256, bottom: 0, right: 0)
             
             button.tintColor = mainColor
-            button.tag = i
+            button.tag = item.id
             
             scrollViewContainer.addSubview(button)
             
             offsetX += scrollView.bounds.height - 5.0
-            
-            i += 1
             
         }
         
@@ -176,6 +176,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         var frame : CGRect = scrollViewContainer.frame
         frame.size.width = offsetX
         scrollViewContainer.frame = frame
+
         
         scrollView.addSubview(scrollViewContainer)
         
@@ -184,6 +185,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Trailing, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
         scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Bottom, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Bottom, multiplier: 1.0, constant: 0.0))
         scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Top, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Top, multiplier: 1.0, constant: 0.0))
+        
+        
+        
         
         
         
@@ -222,7 +226,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.title = "Guide Voyages & Restaurants"
 
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "placeholder.png"), forState: .Normal)
+        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
         btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
         btnName.frame = CGRectMake(0, 0, 22, 22)
         let leftBarButton = UIBarButtonItem()
@@ -230,7 +234,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.leftBarButtonItem = leftBarButton
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "search.png"), forState: .Normal)
+        btnName.setImage(UIImage(named: "recherche"), forState: .Normal)
         btnName.frame = CGRectMake(0, 0, 22, 22)
         btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
         let rightBarButton = UIBarButtonItem()
