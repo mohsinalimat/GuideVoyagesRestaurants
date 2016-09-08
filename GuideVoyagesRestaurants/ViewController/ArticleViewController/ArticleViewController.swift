@@ -8,8 +8,6 @@
 
 import UIKit
 
-let offset_HeaderStop:CGFloat = 50.0
-
 class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
 
     @IBOutlet weak var articleWebView: UIWebView!
@@ -18,6 +16,12 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Do any additional setup after loading the view.
+        
+        /* ----------------------
+        Navigation buttons
+        ---------------------- */
         
         // Set up navigation items
         self.navigationItem.title = "Restaurant"
@@ -39,20 +43,22 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         
         
         self.navigationItem.rightBarButtonItems = [shareButton, locButton]
-      
-
-        // Do any additional setup after loading the view.
+        
+        /* ----------------------
+         Adding the loading animation
+         ---------------------- */
+        
+        let loadingView = LoadingView.instanceFromNib()
+        loadingView.tag = 1
+        self.view.insertSubview(loadingView, aboveSubview: self.articleWebView)
         
         
-        // Load article html
-        /*guard let path = NSBundle.mainBundle().pathForResource("article", ofType: "html") else {
-            return
-        }
-        let url = NSURL(fileURLWithPath: path)
-        self.articleWebView.loadRequest(NSURLRequest(URL:url))*/
+        /* ----------------------
+         Loading the article html with webview
+         ---------------------- */
         
-        //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        let url = NSURL(string: "https://di2pra.com/voyages/article.html")
+        let url = NSURL(string: "http://localhost/guide_voyage/article.html")
+        //let url = NSURL(string: "https://di2pra.com/voyages/article.html")
         self.articleWebView.loadRequest(NSURLRequest(URL: url!))
         self.articleWebView.scrollView.delegate = self
         self.articleWebView.scrollView.showsVerticalScrollIndicator = false
@@ -74,7 +80,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         if request.URL?.scheme == "inapp" {
             
             if request.URL?.host == "capture" {
-                print("hello")
+                let authorViewController = NewAuthorViewController(nibName: "NewAuthorViewController", bundle: nil)
+                self.navigationController?.pushViewController(authorViewController, animated: true)
             }
             
             return false
@@ -82,6 +89,14 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         
         return true
     }
+    
+    func webViewDidFinishLoad(webView: UIWebView) {
+        if let loadingView = self.view.viewWithTag(1) {
+            loadingView.removeFromSuperview()
+        }
+    }
+    
+    // MARK: - ScrollView
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y

@@ -80,7 +80,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         FIREBASE CONNECTION
         -------------------*/
         
-        self.ref = FIRDatabase.database().reference().child("2")
+        /*self.ref = FIRDatabase.database().reference().child("2")
         
         ref!.queryLimitedToFirst(100).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
             
@@ -97,10 +97,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
         }) { (error) in
             print(error.localizedDescription)
-        }
+        }*/
         
         
-        
+        self.loadingView.hidden = true
         
         
         self.view.backgroundColor = bgColor
@@ -270,7 +270,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func showMapView(sender: UIButton) {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: nil)
         
-        mapViewController.hotels = self.hotels!
+        mapViewController.hotels = self.hotels
         
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
@@ -292,24 +292,33 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     // MARK : TableView
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if let _ = hotels {
+        
+        let view = tableView.dequeueReusableCellWithIdentifier("sectionCell") as! SectionCell
+        
+        view.title.text = data[section].title.uppercaseString
+        view.author.text = "PAR " + (data[section].author?.uppercaseString)!
+        view.categoryTitle.text = data[section].category.title.uppercaseString
+        
+        return view
+        
+        /*if let _ = hotels {
         
             let view = tableView.dequeueReusableCellWithIdentifier("sectionCell") as! SectionCell
             
-            /*view.title.text = data[section].title.uppercaseString
-             view.author.text = "PAR " + (data[section].author?.uppercaseString)!
-             view.categoryTitle.text = data[section].category.title.uppercaseString*/
+            view.title.text = data[section].title.uppercaseString
+            view.author.text = "PAR " + (data[section].author?.uppercaseString)!
+            view.categoryTitle.text = data[section].category.title.uppercaseString
             
-            view.title.text = hotels![section].nom
+            /*view.title.text = hotels![section].nom
             view.author.text = "PAR FRédéric LACROIX".uppercaseString
-            view.categoryTitle.text = "HOTEL"
+            view.categoryTitle.text = "HOTEL"*/
             
             
             return view
             
         } else {
             return UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: 0, height: 0)))
-        }
+        }*/
     }
     
     func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -321,11 +330,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         //return data.count
         
-        if let _ = hotels {
+        /*if let _ = hotels {
             return hotels!.count
         } else {
             return 0
-        }
+        }*/
+        
+        return data.count
         
         
     }
@@ -339,18 +350,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         let cell = tableView.dequeueReusableCellWithIdentifier("articleCell") as! ArticleCell
         
         
-        /*let cover = UIImage(named: data[indexPath.section].cover!)
+        let cover = UIImage(named: data[indexPath.section].cover!)
          
          cell.imageMain.clipsToBounds = true
          cell.imageMain.image = cover
-         cell.descText.text = data[indexPath.section].desc!*/
+         cell.descText.text = data[indexPath.section].desc!
         
         
-        let cover = UIImage(named: data[0].cover!)
+        /*let cover = UIImage(named: data[0].cover!)
         
         cell.imageMain.clipsToBounds = true
         cell.imageMain.image = cover
-        cell.descText.text = data[0].desc!
+        cell.descText.text = data[0].desc!*/
         
         
         return cell

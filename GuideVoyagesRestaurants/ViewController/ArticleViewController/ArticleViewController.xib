@@ -26,15 +26,9 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="wpB-Pz-Opj" secondAttribute="trailing" id="0Ul-cP-6E1"/>
                 <constraint firstAttribute="bottom" secondItem="wpB-Pz-Opj" secondAttribute="bottom" id="BFl-04-nrO"/>
-                <constraint firstItem="wpB-Pz-Opj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="119" id="eqo-DT-PZ1"/>
                 <constraint firstItem="wpB-Pz-Opj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="nZg-L2-MzH"/>
                 <constraint firstItem="wpB-Pz-Opj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="oBo-BP-JLZ"/>
             </constraints>
-            <variation key="default">
-                <mask key="constraints">
-                    <exclude reference="eqo-DT-PZ1"/>
-                </mask>
-            </variation>
         </view>
     </objects>
 </document>

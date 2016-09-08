@@ -15,7 +15,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     var locationManager = CLLocationManager()
     
-    var hotels:[Hotel] = []
+    var hotels:[Hotel]? = []
     
     func checkLocationAuthorizationStatus() {
         if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
@@ -36,7 +36,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         // Do any additional setup after loading the view.
         
-        for hotel in hotels {
+        for hotel in hotels! {
             
             let pinLocation = CLLocationCoordinate2DMake(CLLocationDegrees(hotel.latitude!), CLLocationDegrees(hotel.longitude!))
             
