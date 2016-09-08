@@ -368,7 +368,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
+        let articleViewController = NewArticleViewController(nibName: "NewArticleViewController", bundle: nil)
         self.navigationController?.pushViewController(articleViewController, animated: true)
     }
     

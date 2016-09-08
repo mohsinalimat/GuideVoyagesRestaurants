@@ -9,12 +9,9 @@
 import UIKit
 
 class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
-    @IBOutlet weak var coverView: UIView!
-    @IBOutlet weak var scrollView: UIScrollView!
-
+    
+    @IBOutlet weak var coverView: UIImageView!
     @IBOutlet weak var webView: UIWebView!
-    @IBOutlet weak var scrollViewContainer: UIView!
-    @IBOutlet weak var articleTitle: UILabel!
     
     
     override func viewDidLoad() {
@@ -33,18 +30,19 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         //coverView.clipsToBounds = true
         
         
-        scrollView.delegate = self
         
-        articleTitle.text = "Velouté d'asperge et oeuf coulant".uppercaseString
-        
-        
-        let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        //let url = NSURL(string: "https://di2pra.com/voyages/article.html")
+        //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
+        let url = NSURL(string: "https://di2pra.com/voyages/article.php")
         self.webView.loadRequest(NSURLRequest(URL: url!))
-        
-        webView.scrollView.scrollEnabled = false
         webView.delegate = self
         
+        //self.navigationController?.navigationBarHidden = true
+        
+        
+    }
+    
+    override func viewDidAppear(animated: Bool) {       
+        webView.scrollView.contentInset.top = 3/4 * self.view.bounds.width
     }
 
     override func didReceiveMemoryWarning() {
