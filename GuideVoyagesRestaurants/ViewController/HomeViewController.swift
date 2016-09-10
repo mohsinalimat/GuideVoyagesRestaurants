@@ -115,7 +115,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         btnName.frame = CGRectMake(0, 0, 22, 22)
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = btnName
-        self.navigationItem.leftBarButtonItem = leftBarButton
+        
         
         btnName = UIButton()
         btnName.setImage(UIImage(named: "recherche"), forState: .Normal)
@@ -123,8 +123,17 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = btnName
-        self.navigationItem.rightBarButtonItem = rightBarButton
         
+        
+        btnName = UIButton(type: UIButtonType.Custom)
+        btnName.setImage(UIImage(named: "back"), forState: .Normal)
+        btnName.frame = CGRectMake(0, 0, 22, 22)
+        let backBarButton = UIBarButtonItem()
+        backBarButton.customView = btnName
+        
+        
+        self.navigationItem.leftBarButtonItem = leftBarButton
+        self.navigationItem.rightBarButtonItem = rightBarButton
         
         
         

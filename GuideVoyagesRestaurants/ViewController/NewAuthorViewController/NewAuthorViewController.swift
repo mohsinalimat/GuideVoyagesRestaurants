@@ -19,7 +19,7 @@ class NewAuthorViewController: UIViewController {
         
         self.navigationItem.title = "A propos de Frédéric Lacroix"
         
-        let url = NSURL(string: "http://localhost/guide_voyage/auteur.html")
+        let url = NSURL(string: "https://di2pra.com/voyages/auteur.html")
         self.webView.loadRequest(NSURLRequest(URL: url!))
         self.webView.scrollView.showsVerticalScrollIndicator = false
         self.webView.scrollView.showsHorizontalScrollIndicator = false

@@ -10,7 +10,7 @@ import UIKit
 
 class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
     
-    @IBOutlet weak var coverView: UIImageView!
+    @IBOutlet weak var coverView: CoverView!
     @IBOutlet weak var webView: UIWebView!
     
     
@@ -19,35 +19,95 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
 
         // Do any additional setup after loading the view.
         
-        //print(coverView.bounds)
         
-        // Header - Image
-        /*headerImageView = UIImageView(frame: coverView.bounds)
-        headerImageView?.image = UIImage(named: "5.jpg")
-        headerImageView?.contentMode = UIViewContentMode.ScaleAspectFill
-        coverView.insertSubview(headerImageView, atIndex: 0)*/
+        /* ----------------------
+         Navigation buttons
+         ---------------------- */
         
-        //coverView.clipsToBounds = true
+        // Set up navigation items
+        self.navigationItem.title = "Restaurant"
         
         
+        var btnName = UIButton()
+        btnName.setImage(UIImage(named: "partager"), forState: .Normal)
+        //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
+        btnName.frame = CGRectMake(0, 0, 22, 22)
+        let shareButton = UIBarButtonItem()
+        shareButton.customView = btnName
         
+        
+        btnName = UIButton()
+        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
+        //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
+        btnName.frame = CGRectMake(0, 0, 22, 22)
+        let locButton = UIBarButtonItem()
+        locButton.customView = btnName
+        
+        
+        btnName = UIButton()
+        btnName.setImage(UIImage(named: "back"), forState: .Normal)
+        btnName.addTarget(self, action: #selector(self.popToRoot), forControlEvents: .TouchDown)
+        btnName.frame = CGRectMake(0, 0, 22, 22)
+        let backBarButton = UIBarButtonItem()
+        backBarButton.customView = btnName
+        
+        
+        self.navigationItem.rightBarButtonItems = [shareButton, locButton]
+        self.navigationItem.leftBarButtonItem = backBarButton
+        
+        /* ----------------------
+         ---------------------- */
+        
+        /*print(UIScreen.mainScreen().bounds.height - (3/4 * UIScreen.mainScreen().bounds.width))
+        
+        
+        let loadingView = LoadingView.instanceFromNib()
+        loadingView.tag = 1
+        //loadingView.frame = CGRect(origin: CGPoint(x: 3/4 * UIScreen.mainScreen().bounds.width ,y: 0), size: CGSize(width: UIScreen.mainScreen().bounds.width, height: 1/4 * UIScreen.mainScreen().bounds.width))
+        self.view.insertSubview(loadingView, aboveSubview: self.webView)
+        
+        loadingView.frame = CGRect(origin: CGPoint(x: 0, y: 3/4 * UIScreen.mainScreen().bounds.width), size: CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height - (3/4 * UIScreen.mainScreen().bounds.width)))*/
+        
+        
+        /* ----------------------
+         WebView Init
+         ---------------------- */
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
         let url = NSURL(string: "https://di2pra.com/voyages/article.php")
         self.webView.loadRequest(NSURLRequest(URL: url!))
         webView.delegate = self
+        webView.scrollView.delegate = self
         
-        //self.navigationController?.navigationBarHidden = true
-        
-        
+        webView.scrollView.contentInset.top = 3/4 * UIScreen.mainScreen().bounds.width
+        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.mainScreen().bounds.width
+        /* ----------------------
+         ---------------------- */
+
+    
     }
     
-    override func viewDidAppear(animated: Bool) {       
-        webView.scrollView.contentInset.top = 3/4 * self.view.bounds.width
+    func popToRoot(sender:UIBarButtonItem){
+        self.navigationController!.popToRootViewControllerAnimated(true)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // MARK: - WebView
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if request.URL?.scheme == "inapp" {
+            
+            if request.URL?.host == "capture" {
+                let authorViewController = NewAuthorViewController(nibName: "NewAuthorViewController", bundle: nil)
+                self.navigationController?.pushViewController(authorViewController, animated: true)
+            }
+            
+            return false
+        }
+        
+        return true
     }
     
     func webViewDidFinishLoad(webView: UIWebView) {
@@ -85,18 +145,37 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y
-        var headerTransform = CATransform3DIdentity
+        let offset = scrollView.contentOffset.y + 3/4 * self.view.bounds.width
+        //var coverViewTransform = CATransform3DIdentity
+        var coverImageTransform = CATransform3DIdentity
+        var coverDescTransform = CATransform3DIdentity
         
         if offset < 0 {
             
-            let headerScaleFactor:CGFloat = -(offset) / coverView.bounds.height
-            let headerSizevariation = ((coverView.bounds.height * (1.0 + headerScaleFactor)) - coverView.bounds.height)/2.0
-            headerTransform = CATransform3DTranslate(headerTransform, 0, headerSizevariation, 0)
-            headerTransform = CATransform3DScale(headerTransform, 1.0 + headerScaleFactor, 1.0 + headerScaleFactor, 0)
+            let coverImageScaleFactor:CGFloat = -(offset) / coverView.coverImage.bounds.height
+            let coverImageSizevariation = ((coverView.coverImage.bounds.height * (1.0 + coverImageScaleFactor)) - coverView.coverImage.bounds.height)/2.0
+            coverImageTransform = CATransform3DTranslate(coverImageTransform, 0, coverImageSizevariation, 0)
+            coverImageTransform = CATransform3DScale(coverImageTransform, 1.0 + coverImageScaleFactor, 1.0 + coverImageScaleFactor, 0)
             
-            coverView.layer.transform = headerTransform
+            coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, -offset, 0)
+            
+            
+        } else {
+            coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, max(-(3/4 * self.view.bounds.width), -offset), 0)
+            
+            
+            if offset > (3/4 * self.view.bounds.width) {
+                self.navigationItem.title = "Velouté d'Asperges et d'oeuf coulant"
+            } else {
+                self.navigationItem.title = "Restaurant"
+            }
+            
         }
+        
+        //coverView.layer.transform = coverViewTransform
+        coverView.coverImage.layer.transform = coverImageTransform
+        coverView.descView.layer.transform = coverDescTransform
+        
     }
     
 

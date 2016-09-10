@@ -36,6 +36,8 @@
 		E44E18A31D745671000D6509 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E44E18A11D745671000D6509 /* MapViewController.xib */; };
 		E44E18A61D74567C000D6509 /* ArticleViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E44E18A41D74567C000D6509 /* ArticleViewController.xib */; };
 		E44E18A71D74567C000D6509 /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E44E18A51D74567C000D6509 /* ArticleViewController.swift */; };
+		E4683C221D834A5E000FC030 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4683C211D834A5E000FC030 /* TransparentNavigationBar.swift */; };
+		E4683C251D83522D000FC030 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4683C241D83522D000FC030 /* CoverView.swift */; };
 		E4795D5E1D77546700C450C8 /* fredericlacroix.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E4795D5D1D77546700C450C8 /* fredericlacroix.jpg */; };
 		E49237F91D56715300C7DB88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E49237F81D56715300C7DB88 /* GoogleService-Info.plist */; };
 		E4B698D01D79AFF600289C01 /* NewAuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B698CE1D79AFF600289C01 /* NewAuthorViewController.swift */; };
@@ -104,6 +106,8 @@
 		E44E18A11D745671000D6509 /* MapViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = MapViewController.xib; path = ViewController/MapViewController/MapViewController.xib; sourceTree = "<group>"; };
 		E44E18A41D74567C000D6509 /* ArticleViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = ArticleViewController.xib; path = ViewController/ArticleViewController/ArticleViewController.xib; sourceTree = "<group>"; };
 		E44E18A51D74567C000D6509 /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleViewController.swift; path = ViewController/ArticleViewController/ArticleViewController.swift; sourceTree = "<group>"; };
+		E4683C211D834A5E000FC030 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransparentNavigationBar.swift; path = Class/TransparentNavigationBar.swift; sourceTree = "<group>"; };
+		E4683C241D83522D000FC030 /* CoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoverView.swift; path = View/CoverView.swift; sourceTree = "<group>"; };
 		E4795D5D1D77546700C450C8 /* fredericlacroix.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fredericlacroix.jpg; path = Assets/photos/fredericlacroix.jpg; sourceTree = "<group>"; };
 		E49237F81D56715300C7DB88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4B698CE1D79AFF600289C01 /* NewAuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewAuthorViewController.swift; path = ViewController/NewAuthorViewController/NewAuthorViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +206,7 @@
 		E42A97F21D53856900C0982C /* GuideVoyagesRestaurants */ = {
 			isa = PBXGroup;
 			children = (
+				E4683C231D834ACC000FC030 /* Class */,
 				E44E18951D74563C000D6509 /* View */,
 				E44E18921D7454EC000D6509 /* ViewController */,
 				E44E18841D7450E4000D6509 /* Assets */,
@@ -301,6 +306,7 @@
 		E44E18951D74563C000D6509 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4683C241D83522D000FC030 /* CoverView.swift */,
 				E4B698D61D79BD7300289C01 /* LoadingView */,
 				E44E18961D745647000D6509 /* ArticleCell.swift */,
 				E44E18971D745647000D6509 /* SectionCell.swift */,
@@ -315,6 +321,14 @@
 				E442B4041D7499A90048E475 /* NewArticleViewController.swift */,
 			);
 			name = NewArticleView;
+			sourceTree = "<group>";
+		};
+		E4683C231D834ACC000FC030 /* Class */ = {
+			isa = PBXGroup;
+			children = (
+				E4683C211D834A5E000FC030 /* TransparentNavigationBar.swift */,
+			);
+			name = Class;
 			sourceTree = "<group>";
 		};
 		E4B698CB1D79AFA400289C01 /* NewAuthorViewController */ = {
@@ -625,6 +639,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E4683C221D834A5E000FC030 /* TransparentNavigationBar.swift in Sources */,
 				E42A983C1D5649F300C0982C /* Config.swift in Sources */,
 				E44E18991D745647000D6509 /* SectionCell.swift in Sources */,
 				E44E189C1D745660000D6509 /* Article.swift in Sources */,
@@ -637,6 +652,7 @@
 				E44E18A71D74567C000D6509 /* ArticleViewController.swift in Sources */,
 				E4D2F3D11D75F5A1003A73DC /* IconImageView.swift in Sources */,
 				E42A97FC1D53856900C0982C /* GuideVoyagesRestaurants.xcdatamodeld in Sources */,
+				E4683C251D83522D000FC030 /* CoverView.swift in Sources */,
 				E442B4061D7499A90048E475 /* NewArticleViewController.swift in Sources */,
 				E4B698D01D79AFF600289C01 /* NewAuthorViewController.swift in Sources */,
 				E44E189D1D745660000D6509 /* Hotel.swift in Sources */,
