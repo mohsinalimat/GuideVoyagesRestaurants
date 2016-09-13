@@ -11,6 +11,7 @@ target 'GuideVoyagesRestaurants' do
   pod 'Firebase/Database'
   pod 'Alamofire', '~> 3.4'
   pod 'SwiftyJSON'
+  pod 'SDWebImage', '~>3.8'
 
   target 'GuideVoyagesRestaurantsTests' do
     inherit! :search_paths

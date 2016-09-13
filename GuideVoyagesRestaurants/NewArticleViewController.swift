@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import SDWebImage
 
 class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
     
     @IBOutlet weak var coverView: CoverView!
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet var webView: UIWebView!
     
     
     override func viewDidLoad() {
@@ -21,7 +22,7 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         
         
         /* ----------------------
-         Navigation buttons
+         Navigation bar
          ---------------------- */
         
         // Set up navigation items
@@ -58,36 +59,54 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         /* ----------------------
          ---------------------- */
         
-        /*print(UIScreen.mainScreen().bounds.height - (3/4 * UIScreen.mainScreen().bounds.width))
-        
-        
-        let loadingView = LoadingView.instanceFromNib()
-        loadingView.tag = 1
-        //loadingView.frame = CGRect(origin: CGPoint(x: 3/4 * UIScreen.mainScreen().bounds.width ,y: 0), size: CGSize(width: UIScreen.mainScreen().bounds.width, height: 1/4 * UIScreen.mainScreen().bounds.width))
-        self.view.insertSubview(loadingView, aboveSubview: self.webView)
-        
-        loadingView.frame = CGRect(origin: CGPoint(x: 0, y: 3/4 * UIScreen.mainScreen().bounds.width), size: CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height - (3/4 * UIScreen.mainScreen().bounds.width)))*/
+        /* ----------------------
+         COVER VIEW INIT
+         ---------------------- */
+        coverView.coverImage.sd_setImageWithURL(NSURL(string: "https://di2pra.com/voyages/img/1.jpg"))
+        /* ----------------------
+         ---------------------- */
         
         
         /* ----------------------
-         WebView Init
+         LOADING VIEW INIT
          ---------------------- */
+        let loadingView = LoadingView(frame: CGRect(origin: CGPoint(x: 0, y: 3/4 * UIScreen.mainScreen().bounds.width), size: CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height - (3/4 * UIScreen.mainScreen().bounds.width))))
+        loadingView.tag = 1
+        
+        self.view.addSubview(loadingView)
+        /* ----------------------
+         ---------------------- */
+        
+        
+        /* ----------------------
+         WEBVIEW INIT
+         ---------------------- */
+        
+        webView = UIWebView(frame: UIScreen.mainScreen().bounds)
+        webView.opaque = false
+        webView.backgroundColor = UIColor.clearColor()
+        
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
         let url = NSURL(string: "https://di2pra.com/voyages/article.php")
-        self.webView.loadRequest(NSURLRequest(URL: url!))
+        webView.loadRequest(NSURLRequest(URL: url!))
         webView.delegate = self
         webView.scrollView.delegate = self
-        
+        webView.scrollView.scrollEnabled = false
         webView.scrollView.contentInset.top = 3/4 * UIScreen.mainScreen().bounds.width
         webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.mainScreen().bounds.width
+        
+        self.view.addSubview(webView)
+        
         /* ----------------------
          ---------------------- */
+        
+        
 
     
     }
     
     func popToRoot(sender:UIBarButtonItem){
-        self.navigationController!.popToRootViewControllerAnimated(true)
+        self.navigationController!.popViewControllerAnimated(true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -100,7 +119,7 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         if request.URL?.scheme == "inapp" {
             
             if request.URL?.host == "capture" {
-                let authorViewController = NewAuthorViewController(nibName: "NewAuthorViewController", bundle: nil)
+                let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
                 self.navigationController?.pushViewController(authorViewController, animated: true)
             }
             
@@ -112,41 +131,15 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        /*if let widthString = webView.stringByEvaluatingJavaScriptFromString("document.width"),
-            width = Float(widthString) {
-            
-            var rect = webView.frame
-            rect.size.height = CGFloat(webView.scrollView.contentSize.height)
-            rect.size.width = CGFloat(width)
-            webView.frame = rect
-            
-            print(webView.bounds.size.height)
-            
-            let constraint = NSLayoutConstraint(item: webView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: webView.bounds.size.height)
-            
-            scrollViewContainer.addConstraint(constraint)
-            
-        }*/
-        
-        /*var frame = webView.frame
-        frame.size.height = webView.scrollView.contentSize.height
-        webView.frame = frame
-        
-        print(webView.frame.size.height)*/
-        
-        
-        //let constraint = NSLayoutConstraint(item: webView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: webView.frame.size.height)
-        
-        //scrollViewContainer.addConstraint(constraint)
-        
-        
-
+        if let loadingView = self.view.viewWithTag(1) {
+            loadingView.removeFromSuperview()
+            webView.scrollView.scrollEnabled = true
+        }
     }
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y + 3/4 * self.view.bounds.width
-        //var coverViewTransform = CATransform3DIdentity
+        let offset = scrollView.contentOffset.y + 3/4 * UIScreen.mainScreen().bounds.width
         var coverImageTransform = CATransform3DIdentity
         var coverDescTransform = CATransform3DIdentity
         
@@ -164,7 +157,7 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
             coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, max(-(3/4 * self.view.bounds.width), -offset), 0)
             
             
-            if offset > (3/4 * self.view.bounds.width) {
+            if offset > (3/4 * self.view.bounds.width - coverView.descView.frame.height) {
                 self.navigationItem.title = "Velouté d'Asperges et d'oeuf coulant"
             } else {
                 self.navigationItem.title = "Restaurant"
@@ -172,7 +165,6 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
             
         }
         
-        //coverView.layer.transform = coverViewTransform
         coverView.coverImage.layer.transform = coverImageTransform
         coverView.descView.layer.transform = coverDescTransform
         

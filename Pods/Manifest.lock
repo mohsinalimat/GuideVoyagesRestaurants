@@ -22,12 +22,16 @@ PODS:
   - GoogleSymbolUtilities (1.1.1)
   - GoogleUtilities (1.3.1):
     - GoogleSymbolUtilities (~> 1.0)
+  - SDWebImage (3.8.1):
+    - SDWebImage/Core (= 3.8.1)
+  - SDWebImage/Core (3.8.1)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Firebase
   - Firebase/Database
+  - SDWebImage (~> 3.8)
   - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -39,8 +43,9 @@ SPEC CHECKSUMS:
   GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
   GoogleSymbolUtilities: 33117db1b5f290c6fbf259585e4885b4c84b98d7
   GoogleUtilities: 56c5ac05b7aa5dc417a1bb85221a9516e04d7032
+  SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 378b95fcf57cad9d4a1aff1cf02624755eb0a5ee
+PODFILE CHECKSUM: 826b10dd8e32a8bba90b476fd2a7e524c6525e8a
 
 COCOAPODS: 1.0.1

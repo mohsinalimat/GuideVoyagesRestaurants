@@ -48,9 +48,9 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
          Adding the loading animation
          ---------------------- */
         
-        let loadingView = LoadingView.instanceFromNib()
+        /*let loadingView = LoadingView.instanceFromNib()
         loadingView.tag = 1
-        self.view.insertSubview(loadingView, aboveSubview: self.articleWebView)
+        self.view.insertSubview(loadingView, aboveSubview: self.articleWebView)*/
         
         
         /* ----------------------
