@@ -28,9 +28,9 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
         self.navigationItem.title = "A propos de Frédéric Lacroix"
         
         let btnName = UIButton()
-        btnName.setImage(UIImage(named: "back"), forState: .Normal)
-        btnName.addTarget(self, action: #selector(self.popToRoot), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.setImage(UIImage(named: "back"), for: UIControlState())
+        btnName.addTarget(self, action: #selector(self.popToRoot), for: .touchDown)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let backBarButton = UIBarButtonItem()
         backBarButton.customView = btnName
         
@@ -45,13 +45,13 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
          WebView Init
          ---------------------- */
         
-        let url = NSURL(string: "https://di2pra.com/voyages/article.php")
-        self.webView.loadRequest(NSURLRequest(URL: url!))
+        let url = URL(string: "https://di2pra.com/voyages/article.php")
+        self.webView.loadRequest(URLRequest(url: url!))
         webView.delegate = self
         webView.scrollView.delegate = self
         
-        webView.scrollView.contentInset.top = 3/4 * UIScreen.mainScreen().bounds.width + header.profileImageView.frame.height / 2
-        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.mainScreen().bounds.width + header.profileImageView.frame.height / 2
+        webView.scrollView.contentInset.top = 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2
+        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2
         
         /* ----------------------
          ---------------------- */
@@ -59,9 +59,9 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
     }
     
     // MARK: - ScrollView
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y + 3/4 * UIScreen.mainScreen().bounds.width + header.profileImageView.frame.height / 2
+        let offset = scrollView.contentOffset.y + 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2
         
         var coverImageTransform = CATransform3DIdentity
         var profileImageTransform = CATransform3DIdentity
@@ -78,11 +78,11 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
             
         } else {
             
-            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset, -(3/4 * UIScreen.mainScreen().bounds.width) + header.profileImageView.frame.height / 2 + 20), 0)
+            //headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset, -(3/4 * UIScreen.main.bounds.width) + header.profileImageView.frame.height / 2 + 20), 0)
             
-            let profileImageScaleFactor:CGFloat = -(offset) / (-(3/4 * UIScreen.mainScreen().bounds.width) + header.profileImageView.frame.height / 2 + 20)
+            //let profileImageScaleFactor:CGFloat = -(offset) / (-(3/4 * UIScreen.main.bounds.width) + header.profileImageView.frame.height / 2 + 20)
             
-            profileImageTransform = CATransform3DScale(profileImageTransform, max(0.4, 1.0 - profileImageScaleFactor), max(0.4, 1.0 - profileImageScaleFactor), 0)
+            //profileImageTransform = CATransform3DScale(profileImageTransform, max(0.4, 1.0 - profileImageScaleFactor), max(0.4, 1.0 - profileImageScaleFactor), 0)
             
 
             /*if offset == ((3/4 * UIScreen.mainScreen().bounds.width) - header.profileImageView.frame.height / 2 - 20) {
@@ -105,8 +105,8 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
     
     // MARK: - WebView
     
-    func popToRoot(sender:UIBarButtonItem){
-        self.navigationController!.popViewControllerAnimated(true)
+    func popToRoot(_ sender:UIBarButtonItem){
+        self.navigationController!.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {

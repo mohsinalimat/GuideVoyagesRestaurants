@@ -15,17 +15,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     var locationManager = CLLocationManager()
     
-    var hotels:[Hotel]? = []
+    //var hotels:[Hotel]? = []
     
     func checkLocationAuthorizationStatus() {
-        if CLLocationManager.authorizationStatus() == .AuthorizedWhenInUse {
+        if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
             mapView.showsUserLocation = true
         } else {
             locationManager.requestWhenInUseAuthorization()
         }
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         checkLocationAuthorizationStatus()
         
@@ -36,33 +36,33 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
         // Do any additional setup after loading the view.
         
-        for hotel in hotels! {
+        /*for hotel in hotels! {
             
             let pinLocation = CLLocationCoordinate2DMake(CLLocationDegrees(hotel.latitude!), CLLocationDegrees(hotel.longitude!))
             
             let dropPin = MKPointAnnotation()
             dropPin.coordinate = pinLocation
-            dropPin.title = hotel.nom.uppercaseString
-            dropPin.subtitle = "Par Frédéric Lacroix".uppercaseString
+            dropPin.title = hotel.nom.uppercased()
+            dropPin.subtitle = "Par Frédéric Lacroix".uppercased()
             mapView.addAnnotation(dropPin)
             
-        }
+        }*/
         
     }
     
-    func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
+    func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
         if annotation is MKUserLocation {
             return nil
         }
         
         let identifier = "ItemAnnotation"
         
-        var annotationView = mapView.dequeueReusableAnnotationViewWithIdentifier(identifier)
+        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
         if annotationView == nil {
             annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
             annotationView?.canShowCallout = true
             
-            let button = UIButton(type: UIButtonType.DetailDisclosure) as UIButton
+            let button = UIButton(type: UIButtonType.detailDisclosure) as UIButton
             annotationView?.rightCalloutAccessoryView = button
             
         } else {
@@ -71,7 +71,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         
         
         
-        let imageView = UIImageView(frame: CGRect(origin: CGPointZero, size: CGSize(width: annotationView!.frame.size.width, height: annotationView!.frame.size.height - 10.0)))
+        let imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: annotationView!.frame.size.width, height: annotationView!.frame.size.height - 10.0)))
         
         imageView.image = UIImage(named: "1.jpg")
         
@@ -95,14 +95,14 @@ class MapViewController: UIViewController, MKMapViewDelegate {
         return annotationView
     }
     
-    func mapView(mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
+    func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
         let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
         self.navigationController?.pushViewController(articleViewController, animated: true)
         
     }
     
-    func configureDetailView(annotationView: MKAnnotationView) {
+    func configureDetailView(_ annotationView: MKAnnotationView) {
         
         /*let width = 300
         let height = 200
@@ -140,7 +140,7 @@ class MapViewController: UIViewController, MKMapViewDelegate {
     
     // MARK: - MKMapView
     
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+    func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
         
         /*        
         var mapRegion = MKCoordinateRegion()

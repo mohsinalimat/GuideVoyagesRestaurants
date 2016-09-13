@@ -19,13 +19,13 @@ class NewAuthorViewController: UIViewController {
         
         self.navigationItem.title = "A propos de Frédéric Lacroix"
         
-        let url = NSURL(string: "https://di2pra.com/voyages/auteur.html")
-        self.webView.loadRequest(NSURLRequest(URL: url!))
+        let url = URL(string: "https://di2pra.com/voyages/auteur.html")
+        self.webView.loadRequest(URLRequest(url: url!))
         self.webView.scrollView.showsVerticalScrollIndicator = false
         self.webView.scrollView.showsHorizontalScrollIndicator = false
         self.webView.scrollView.bounces = false
-        self.webView.opaque = false
-        self.webView.backgroundColor = UIColor.clearColor()
+        self.webView.isOpaque = false
+        self.webView.backgroundColor = UIColor.clear
     }
 
     override func didReceiveMemoryWarning() {

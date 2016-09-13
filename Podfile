@@ -7,10 +7,10 @@ target 'GuideVoyagesRestaurants' do
 
   # Pods for GuideVoyagesRestaurants
 
-  pod 'Firebase'
-  pod 'Firebase/Database'
-  pod 'Alamofire', '~> 3.4'
-  pod 'SwiftyJSON'
+  # pod 'Firebase'
+  # pod 'Firebase/Database'
+  # pod 'Alamofire', '~> 3.4'
+  # pod 'SwiftyJSON'
   pod 'SDWebImage', '~>3.8'
 
   target 'GuideVoyagesRestaurantsTests' do

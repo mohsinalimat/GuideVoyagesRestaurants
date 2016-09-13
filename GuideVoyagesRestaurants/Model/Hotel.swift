@@ -7,9 +7,9 @@
 //
 
 import Foundation
-import Firebase
+//import Firebase
 
-
+/*
 struct Hotel {
     let key:String!
     var nom:String!
@@ -29,4 +29,4 @@ struct Hotel {
         ville = snapshot.value!["ville"] as? String
         
     }
-}
+}*/

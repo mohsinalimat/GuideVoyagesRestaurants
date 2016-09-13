@@ -7,19 +7,18 @@
 //
 
 import UIKit
-import Firebase
+//import Firebase
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
     let type:[Category] = [Category(id: 0, title: "accueil"), Category(id: 1, title: "restaurant"), Category(id: 2, title: "voyage"), Category(id: 3, title: "hotel"), Category(id: 4, title: "recette"), Category(id: 5, title: "shopping")]
     var selectedCategorie: Int = 0
     
-    var hotels:[Hotel]?
+    //var hotels:[Hotel]?
     
     var searchController: UISearchController!
     
     var refreshControl: UIRefreshControl!
-    var ref:FIRDatabaseReference?
     
     let data = [
         Article(
@@ -100,7 +99,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }*/
         
         
-        self.loadingView.hidden = true
+        self.loadingView.isHidden = true
         
         
         self.view.backgroundColor = bgColor
@@ -110,24 +109,24 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         // Setup Navigation items :
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
-        btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.setImage(UIImage(named: "localisation"), for: UIControlState())
+        btnName.addTarget(self, action: #selector(self.showMapView), for: .touchDown)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = btnName
         
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "recherche"), forState: .Normal)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
-        btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
+        btnName.setImage(UIImage(named: "recherche"), for: UIControlState())
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        btnName.addTarget(self, action: #selector(self.searchClick), for: UIControlEvents.touchUpInside)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = btnName
         
         
-        btnName = UIButton(type: UIButtonType.Custom)
-        btnName.setImage(UIImage(named: "back"), forState: .Normal)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName = UIButton(type: UIButtonType.custom)
+        btnName.setImage(UIImage(named: "back"), for: UIControlState())
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let backBarButton = UIBarButtonItem()
         backBarButton.customView = btnName
         
@@ -138,7 +137,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         
         // Add scrollViewContainer
-        let scrollViewContainer = UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: scrollView.bounds.width, height: scrollView.bounds.height)))
+        let scrollViewContainer = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: scrollView.bounds.width, height: scrollView.bounds.height)))
         
         var offsetX: CGFloat = 5
         
@@ -148,9 +147,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             button = UIButton(frame: CGRect(origin: CGPoint(x: offsetX, y:5), size: CGSize(width: scrollView.bounds.height - 10.0, height: scrollView.bounds.height - 10.0)))
             
-            button.addTarget(self, action: #selector(self.changePage), forControlEvents: UIControlEvents.TouchUpInside)
-            button.setTitle(item.title.uppercaseString, forState: .Normal)
-            button.setTitleColor(mainColor, forState: .Normal)
+            button.addTarget(self, action: #selector(self.changePage), for: UIControlEvents.touchUpInside)
+            button.setTitle(item.title.uppercased(), for: UIControlState())
+            button.setTitleColor(mainColor, for: UIControlState())
             
             button.layer.cornerRadius = 10.0
             
@@ -165,7 +164,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
              button.layer.borderColor = UIColor(red:0.11, green:0.27, blue:0.52, alpha:1.0).CGColor*/
             
             
-            button.setImage(UIImage(named: item.title), forState: .Normal)
+            button.setImage(UIImage(named: item.title), for: UIControlState())
             //button.setBackgroundImage(UIImage(named: icon[i]), forState: .Normal)
             
             button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 25, right: 15)
@@ -190,10 +189,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         scrollView.addSubview(scrollViewContainer)
         
         
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Leading, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Leading, multiplier: 1.0, constant: 0.0))
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Trailing, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Trailing, multiplier: 1.0, constant: 0.0))
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Bottom, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Bottom, multiplier: 1.0, constant: 0.0))
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .Top, relatedBy: .Equal, toItem: scrollViewContainer, attribute: .Top, multiplier: 1.0, constant: 0.0))
+        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: scrollViewContainer, attribute: .leading, multiplier: 1.0, constant: 0.0))
+        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal, toItem: scrollViewContainer, attribute: .trailing, multiplier: 1.0, constant: 0.0))
+        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: scrollViewContainer, attribute: .bottom, multiplier: 1.0, constant: 0.0))
+        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: scrollViewContainer, attribute: .top, multiplier: 1.0, constant: 0.0))
         
         
         
@@ -219,7 +218,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func searchClick(sender: UIButton) {
+    func searchClick(_ sender: UIButton) {
         
         self.navigationItem.rightBarButtonItem = nil
         self.navigationItem.leftBarButtonItem = nil
@@ -229,23 +228,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
 
         self.navigationItem.titleView = nil
         self.navigationItem.title = "Guide Voyages & Restaurants"
 
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
-        btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.setImage(UIImage(named: "localisation"), for: UIControlState())
+        btnName.addTarget(self, action: #selector(self.showMapView), for: .touchDown)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let leftBarButton = UIBarButtonItem()
         leftBarButton.customView = btnName
         self.navigationItem.leftBarButtonItem = leftBarButton
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "recherche"), forState: .Normal)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
-        btnName.addTarget(self, action: #selector(self.searchClick), forControlEvents: UIControlEvents.TouchUpInside)
+        btnName.setImage(UIImage(named: "recherche"), for: UIControlState())
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        btnName.addTarget(self, action: #selector(self.searchClick), for: UIControlEvents.touchUpInside)
         let rightBarButton = UIBarButtonItem()
         rightBarButton.customView = btnName
         self.navigationItem.rightBarButtonItem = rightBarButton
@@ -254,20 +253,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     }
     
-    func updateSearchResultsForSearchController(searchController: UISearchController) {
+    func updateSearchResults(for searchController: UISearchController) {
     }
     
     
     func animate() {
-        if !self.loadingView.hidden {
-            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-                self.animatingImage.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+        if !self.loadingView.isHidden {
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
+                self.animatingImage.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
                 
                 }, completion: { (finished) -> Void in
                     
-                    UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
                         
-                        self.animatingImage.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_4))
+                        self.animatingImage.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
                         
                         }, completion: { (finished) -> Void in
                             self.animate()
@@ -276,15 +275,15 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    func showMapView(sender: UIButton) {
+    func showMapView(_ sender: UIButton) {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: nil)
         
-        mapViewController.hotels = self.hotels
+        //mapViewController.hotels = self.hotels
         
         self.navigationController?.pushViewController(mapViewController, animated: true)
     }
     
-    func changePage(sender: UIButton) {
+    func changePage(_ sender: UIButton) {
         
         selectedCategorie = sender.tag
         
@@ -292,21 +291,21 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             if button.tag == selectedCategorie {
                 button.backgroundColor = highlightColor
             } else {
-                button.backgroundColor = UIColor.clearColor()
+                button.backgroundColor = UIColor.clear
             }
         }
         
     }
     
     // MARK : TableView
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         
-        let view = tableView.dequeueReusableCellWithIdentifier("sectionCell") as! SectionCell
+        let view = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as! SectionCell
         
-        view.title.text = data[section].title.uppercaseString
-        view.author.text = "PAR " + (data[section].author?.uppercaseString)!
-        view.categoryTitle.text = data[section].category.title.uppercaseString
+        view.title.text = data[section].title.uppercased()
+        view.author.text = "PAR " + (data[section].author?.uppercased())!
+        view.categoryTitle.text = data[section].category.title.uppercased()
         
         return view
         
@@ -330,13 +329,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }*/
     }
     
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         return view
     }
     
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         //return data.count
         
         /*if let _ = hotels {
@@ -350,20 +349,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("articleCell") as! ArticleCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell") as! ArticleCell
         
         
-        let cover = UIImage(named: data[indexPath.section].cover!)
+        let cover = UIImage(named: data[(indexPath as NSIndexPath).section].cover!)
          
          cell.imageMain.clipsToBounds = true
          cell.imageMain.image = cover
-         cell.descText.text = data[indexPath.section].desc!
+         cell.descText.text = data[(indexPath as NSIndexPath).section].desc!
         
         
         /*let cover = UIImage(named: data[0].cover!)
@@ -376,7 +375,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let articleViewController = NewArticleViewController(nibName: "NewArticleViewController", bundle: nil)
         self.navigationController?.pushViewController(articleViewController, animated: true)
         

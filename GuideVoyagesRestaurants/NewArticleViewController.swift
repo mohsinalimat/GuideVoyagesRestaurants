@@ -30,25 +30,25 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         
         
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "partager"), forState: .Normal)
+        btnName.setImage(UIImage(named: "partager"), for: UIControlState())
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let shareButton = UIBarButtonItem()
         shareButton.customView = btnName
         
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
+        btnName.setImage(UIImage(named: "localisation"), for: UIControlState())
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let locButton = UIBarButtonItem()
         locButton.customView = btnName
         
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "back"), forState: .Normal)
-        btnName.addTarget(self, action: #selector(self.popToRoot), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.setImage(UIImage(named: "back"), for: UIControlState())
+        btnName.addTarget(self, action: #selector(self.popToRoot), for: .touchDown)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let backBarButton = UIBarButtonItem()
         backBarButton.customView = btnName
         
@@ -62,7 +62,7 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         /* ----------------------
          COVER VIEW INIT
          ---------------------- */
-        coverView.coverImage.sd_setImageWithURL(NSURL(string: "https://di2pra.com/voyages/img/1.jpg"))
+        coverView.coverImage.sd_setImage(with: URL(string: "https://di2pra.com/voyages/img/1.jpg"))
         /* ----------------------
          ---------------------- */
         
@@ -70,7 +70,7 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         /* ----------------------
          LOADING VIEW INIT
          ---------------------- */
-        let loadingView = LoadingView(frame: CGRect(origin: CGPoint(x: 0, y: 3/4 * UIScreen.mainScreen().bounds.width), size: CGSize(width: UIScreen.mainScreen().bounds.width, height: UIScreen.mainScreen().bounds.height - (3/4 * UIScreen.mainScreen().bounds.width))))
+        let loadingView = LoadingView(frame: CGRect(origin: CGPoint(x: 0, y: 3/4 * UIScreen.main.bounds.width), size: CGSize(width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height - (3/4 * UIScreen.main.bounds.width))))
         loadingView.tag = 1
         
         self.view.addSubview(loadingView)
@@ -82,18 +82,18 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
          WEBVIEW INIT
          ---------------------- */
         
-        webView = UIWebView(frame: UIScreen.mainScreen().bounds)
-        webView.opaque = false
-        webView.backgroundColor = UIColor.clearColor()
+        webView = UIWebView(frame: UIScreen.main.bounds)
+        webView.isOpaque = false
+        webView.backgroundColor = UIColor.clear
         
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        let url = NSURL(string: "https://di2pra.com/voyages/article.php")
-        webView.loadRequest(NSURLRequest(URL: url!))
+        let url = URL(string: "https://di2pra.com/voyages/article.php")
+        webView.loadRequest(URLRequest(url: url!))
         webView.delegate = self
         webView.scrollView.delegate = self
-        webView.scrollView.scrollEnabled = false
-        webView.scrollView.contentInset.top = 3/4 * UIScreen.mainScreen().bounds.width
-        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.mainScreen().bounds.width
+        webView.scrollView.isScrollEnabled = false
+        webView.scrollView.contentInset.top = 3/4 * UIScreen.main.bounds.width
+        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.main.bounds.width
         
         self.view.addSubview(webView)
         
@@ -105,8 +105,8 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
     
     }
     
-    func popToRoot(sender:UIBarButtonItem){
-        self.navigationController!.popViewControllerAnimated(true)
+    func popToRoot(_ sender:UIBarButtonItem){
+        self.navigationController!.popViewController(animated: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -115,10 +115,10 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
     }
     
     // MARK: - WebView
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if request.URL?.scheme == "inapp" {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if request.url?.scheme == "inapp" {
             
-            if request.URL?.host == "capture" {
+            if request.url?.host == "capture" {
                 let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
                 self.navigationController?.pushViewController(authorViewController, animated: true)
             }
@@ -129,17 +129,17 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         return true
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         
         if let loadingView = self.view.viewWithTag(1) {
             loadingView.removeFromSuperview()
-            webView.scrollView.scrollEnabled = true
+            webView.scrollView.isScrollEnabled = true
         }
     }
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y + 3/4 * UIScreen.mainScreen().bounds.width
+        let offset = scrollView.contentOffset.y + 3/4 * UIScreen.main.bounds.width
         var coverImageTransform = CATransform3DIdentity
         var coverDescTransform = CATransform3DIdentity
         

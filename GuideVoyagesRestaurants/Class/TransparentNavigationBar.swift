@@ -14,7 +14,7 @@ extension UINavigationController {
     
     public func mainNavigationBar() {
         navigationBar.barTintColor = bgColor
-        navigationBar.translucent = false
+        navigationBar.isTranslucent = false
         navigationBar.tintColor = mainColor
         
         let attributes = [
@@ -26,8 +26,8 @@ extension UINavigationController {
     
     
     public func presentTransparentNavigationBar() {
-        navigationBar.setBackgroundImage(UIImage(), forBarMetrics:UIBarMetrics.Default)
-        navigationBar.translucent = true
+        navigationBar.setBackgroundImage(UIImage(), for:UIBarMetrics.default)
+        navigationBar.isTranslucent = true
         navigationBar.shadowImage = UIImage()
         setNavigationBarHidden(false, animated:true)
         
@@ -35,8 +35,8 @@ extension UINavigationController {
     
     public func hideTransparentNavigationBar() {
         setNavigationBarHidden(true, animated:false)
-        navigationBar.setBackgroundImage(UINavigationBar.appearance().backgroundImageForBarMetrics(UIBarMetrics.Default), forBarMetrics:UIBarMetrics.Default)
-        navigationBar.translucent = UINavigationBar.appearance().translucent
+        navigationBar.setBackgroundImage(UINavigationBar.appearance().backgroundImage(for: UIBarMetrics.default), for:UIBarMetrics.default)
+        navigationBar.isTranslucent = UINavigationBar.appearance().isTranslucent
         navigationBar.shadowImage = UINavigationBar.appearance().shadowImage
     }
     
@@ -44,15 +44,15 @@ extension UINavigationController {
     public func addBlurEffect() {
         // Add blur view
         var bounds = navigationBar.bounds as CGRect!
-        bounds.offsetInPlace(dx: 0.0, dy: -20.0)
-        bounds.size.height = bounds.height + 20.0
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Dark))
-        visualEffectView.frame = bounds
-        visualEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        visualEffectView.userInteractionEnabled = false
+        //bounds.offsetInPlace(dx: 0.0, dy: -20.0)
+        bounds?.size.height = (bounds?.height)! + 20.0
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .dark))
+        visualEffectView.frame = bounds!
+        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        visualEffectView.isUserInteractionEnabled = false
         navigationBar.addSubview(visualEffectView)
         
-        navigationBar.sendSubviewToBack(visualEffectView)
+        navigationBar.sendSubview(toBack: visualEffectView)
         
         // Here you can add visual effects to any UIView control.
         // Replace custom view with navigation bar in above code to add effects to custom view.

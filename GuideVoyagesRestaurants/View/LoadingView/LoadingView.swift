@@ -17,26 +17,26 @@ class LoadingView: UIView {
         
         super.init(frame: frame)
         
-        iconBody = UIImageView(frame: CGRectZero)
+        iconBody = UIImageView(frame: CGRect.zero)
         iconBody.image = UIImage(named: "geisha_body")
         iconBody.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(iconBody)
         
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: NSLayoutAttribute.CenterY, relatedBy: .Equal, toItem: self, attribute: .CenterY, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 55))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 25))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: NSLayoutAttribute.centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 55))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25))
         
         
-        iconHeader = UIImageView(frame: CGRectZero)
+        iconHeader = UIImageView(frame: CGRect.zero)
         iconHeader.image = UIImage(named: "geisha_head")
         iconHeader.translatesAutoresizingMaskIntoConstraints = false
         self.addSubview(iconHeader)
         
-        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .CenterX, relatedBy: .Equal, toItem: self, attribute: .CenterX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 25))
-        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: .NotAnAttribute, multiplier: 1, constant: 25))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .Top, relatedBy: .Equal, toItem: iconHeader, attribute: .Bottom, multiplier: 1, constant: 3))
+        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25))
+        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .top, relatedBy: .equal, toItem: iconHeader, attribute: .bottom, multiplier: 1, constant: 3))
         
         
         self.backgroundColor = bgColor
@@ -51,15 +51,15 @@ class LoadingView: UIView {
     }
     
     func animate() {
-        if !self.hidden {
-            UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
-                self.iconHeader!.transform = CGAffineTransformMakeRotation(CGFloat(M_PI_4))
+        if !self.isHidden {
+            UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
+                self.iconHeader!.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
                 
                 }, completion: { (finished) -> Void in
                     
-                    UIView.animateWithDuration(0.5, delay: 0.0, options: UIViewAnimationOptions.CurveLinear, animations: { () -> Void in
+                    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
                         
-                        self.iconHeader!.transform = CGAffineTransformMakeRotation(CGFloat(-M_PI_4))
+                        self.iconHeader!.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
                         
                         }, completion: { (finished) -> Void in
                             self.animate()

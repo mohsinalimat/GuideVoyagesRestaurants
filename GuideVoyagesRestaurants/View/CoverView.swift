@@ -20,16 +20,16 @@ class CoverView: UIView {
         
         
         
-        descView.backgroundColor = bgColor.colorWithAlphaComponent(0.8)
+        descView.backgroundColor = bgColor.withAlphaComponent(0.8)
         
         let bounds = descView.bounds as CGRect!
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .Light))
-        visualEffectView.frame = bounds
-        visualEffectView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
-        visualEffectView.userInteractionEnabled = false
+        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
+        visualEffectView.frame = bounds!
+        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        visualEffectView.isUserInteractionEnabled = false
         descView.addSubview(visualEffectView)
         
-        descView.sendSubviewToBack(visualEffectView)
+        descView.sendSubview(toBack: visualEffectView)
         
     }
     

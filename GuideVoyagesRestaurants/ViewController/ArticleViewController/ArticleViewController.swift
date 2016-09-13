@@ -26,17 +26,17 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         // Set up navigation items
         self.navigationItem.title = "Restaurant"
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "partager"), forState: .Normal)
+        btnName.setImage(UIImage(named: "partager"), for: UIControlState())
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
         let shareButton = UIBarButtonItem()
         shareButton.customView = btnName
         
         btnName = UIButton()
-        btnName.setImage(UIImage(named: "localisation"), forState: .Normal)
+        btnName.setImage(UIImage(named: "localisation"), for: UIControlState())
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRectMake(0, 0, 22, 22)
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         
         let locButton = UIBarButtonItem()
         locButton.customView = btnName
@@ -58,13 +58,13 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
          ---------------------- */
         
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        let url = NSURL(string: "https://di2pra.com/voyages/article.html")
-        self.articleWebView.loadRequest(NSURLRequest(URL: url!))
+        let url = URL(string: "https://di2pra.com/voyages/article.html")
+        self.articleWebView.loadRequest(URLRequest(url: url!))
         self.articleWebView.scrollView.delegate = self
         self.articleWebView.scrollView.showsVerticalScrollIndicator = false
         self.articleWebView.scrollView.showsHorizontalScrollIndicator = false
-        self.articleWebView.opaque = false
-        self.articleWebView.backgroundColor = UIColor.clearColor()
+        self.articleWebView.isOpaque = false
+        self.articleWebView.backgroundColor = UIColor.clear
         
         
         
@@ -76,10 +76,10 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     }
     
     // MARK: - WebView
-    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
-        if request.URL?.scheme == "inapp" {
+    func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        if request.url?.scheme == "inapp" {
             
-            if request.URL?.host == "capture" {
+            if request.url?.host == "capture" {
                 let authorViewController = NewAuthorViewController(nibName: "NewAuthorViewController", bundle: nil)
                 self.navigationController?.pushViewController(authorViewController, animated: true)
             }
@@ -90,7 +90,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         return true
     }
     
-    func webViewDidFinishLoad(webView: UIWebView) {
+    func webViewDidFinishLoad(_ webView: UIWebView) {
         if let loadingView = self.view.viewWithTag(1) {
             loadingView.removeFromSuperview()
         }
@@ -98,7 +98,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     
     // MARK: - ScrollView
     
-    func scrollViewDidScroll(scrollView: UIScrollView) {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let offset = scrollView.contentOffset.y
         
         if offset > 100 {

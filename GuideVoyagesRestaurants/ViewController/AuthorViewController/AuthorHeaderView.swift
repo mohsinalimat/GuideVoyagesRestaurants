@@ -20,7 +20,7 @@ class AuthorHeaderView: UIView {
         self.backgroundColor = bgColor
         
         self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
-        self.profileImageView.layer.borderColor = bgColor.CGColor
+        self.profileImageView.layer.borderColor = bgColor.cgColor
         self.profileImageView.layer.borderWidth = 5.0
         
     }
