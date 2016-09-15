@@ -65,7 +65,7 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
         
         var coverImageTransform = CATransform3DIdentity
         var profileImageTransform = CATransform3DIdentity
-        var headerTransform = CATransform3DIdentity
+        //var headerTransform = CATransform3DIdentity
         
         if offset < 0 {
             
@@ -97,7 +97,7 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
             
         }
         
-        header.layer.transform = headerTransform
+        //header.layer.transform = headerTransform
         header.bgImageView.layer.transform = coverImageTransform
         header.profileImageView.layer.transform = profileImageTransform
         

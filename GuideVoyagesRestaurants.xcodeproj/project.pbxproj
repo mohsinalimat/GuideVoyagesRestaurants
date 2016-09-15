@@ -795,6 +795,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = FA3667D9B2A2BEABC0A56EC2 /* Pods-GuideVoyagesRestaurants.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GuideVoyagesRestaurants/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -809,6 +810,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 43D9F5EF044358E7611AEE93 /* Pods-GuideVoyagesRestaurants.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GuideVoyagesRestaurants/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

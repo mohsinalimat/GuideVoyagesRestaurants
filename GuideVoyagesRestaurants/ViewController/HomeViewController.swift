@@ -14,8 +14,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     let type:[Category] = [Category(id: 0, title: "accueil"), Category(id: 1, title: "restaurant"), Category(id: 2, title: "voyage"), Category(id: 3, title: "hotel"), Category(id: 4, title: "recette"), Category(id: 5, title: "shopping")]
     var selectedCategorie: Int = 0
     
-    //var hotels:[Hotel]?
-    
     var searchController: UISearchController!
     
     var refreshControl: UIRefreshControl!
@@ -73,35 +71,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-    
-        self.animate()
-        /*-------------------
-        FIREBASE CONNECTION
-        -------------------*/
-        
-        /*self.ref = FIRDatabase.database().reference().child("2")
-        
-        ref!.queryLimitedToFirst(100).observeSingleEventOfType(.Value, withBlock: { (snapshot) in
-            
-            var data:[Hotel] = []
-            
-            for item in snapshot.children {
-                let hotel = Hotel(snapshot: item as! FIRDataSnapshot)
-                data.append(hotel)
-            }
-            
-            self.hotels = data
-            self.tableView.reloadData()
-            self.loadingView.hidden = true
-            
-        }) { (error) in
-            print(error.localizedDescription)
-        }*/
-        
-        
-        self.loadingView.isHidden = true
-        
-        
         self.view.backgroundColor = bgColor
         
         tableView.rowHeight = UITableViewAutomaticDimension
@@ -135,9 +104,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
-        
         // Add scrollViewContainer
-        let scrollViewContainer = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: scrollView.bounds.width, height: scrollView.bounds.height)))
+        let scrollViewContainerHeight:CGFloat = 80.0
+        
+        let scrollViewContainer = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: UIScreen.main.bounds.width, height: scrollViewContainerHeight)))
         
         var offsetX: CGFloat = 5
         
@@ -145,7 +115,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         for item in type {
             
-            button = UIButton(frame: CGRect(origin: CGPoint(x: offsetX, y:5), size: CGSize(width: scrollView.bounds.height - 10.0, height: scrollView.bounds.height - 10.0)))
+            button = UIButton(frame: CGRect(origin: CGPoint(x: offsetX, y:5), size: CGSize(width: scrollViewContainerHeight - 10.0, height: scrollViewContainerHeight - 10.0)))
             
             button.addTarget(self, action: #selector(self.changePage), for: UIControlEvents.touchUpInside)
             button.setTitle(item.title.uppercased(), for: UIControlState())
@@ -175,7 +145,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             scrollViewContainer.addSubview(button)
             
-            offsetX += scrollView.bounds.height - 5.0
+            offsetX += scrollViewContainerHeight - 5.0
             
         }
         
@@ -195,10 +165,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: scrollViewContainer, attribute: .top, multiplier: 1.0, constant: 0.0))
         
         
-        
-        
-        
-        
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Rechercher ici..."
@@ -215,6 +181,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl.addSubview(refreshView)
         
         tableView.addSubview(refreshControl)*/
+        
+        //self.tableView.addInfiniteScrollingWithHandler(() -> ())
         
     }
     
@@ -256,24 +224,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func updateSearchResults(for searchController: UISearchController) {
     }
     
-    
-    func animate() {
-        if !self.loadingView.isHidden {
-            UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
-                self.animatingImage.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
-                
-                }, completion: { (finished) -> Void in
-                    
-                    UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
-                        
-                        self.animatingImage.transform = CGAffineTransform(rotationAngle: CGFloat(-M_PI_4))
-                        
-                        }, completion: { (finished) -> Void in
-                            self.animate()
-                    })
-            })
-        }
-    }
     
     func showMapView(_ sender: UIButton) {
         let mapViewController = MapViewController(nibName: "MapViewController", bundle: nil)

@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
-        <mutableArray key="Reglo-Bold.otf">
+        <array key="Reglo-Bold.otf">
             <string>Reglo-Bold</string>
-            <string>Reglo-Bold</string>
-            <string>Reglo-Bold</string>
-        </mutableArray>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewArticleViewController" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
@@ -24,29 +23,23 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qxU-OM-6US" customClass="CoverView" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="nrV-ya-vJc">
-                            <rect key="frame" x="0.0" y="0.0" width="600" height="450"/>
-                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.33333333333333331" green="0.33333333333333331" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yAg-iY-C6T">
-                            <rect key="frame" x="0.0" y="357" width="600" height="93"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VELOUTÉ D'ASPERGE ET OEUF COULANT" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ojo-2I-eeS">
-                                    <rect key="frame" x="10" y="20" width="580" height="20"/>
                                     <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="20"/>
-                                    <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="par Frédéric Lacroix" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWK-XW-jzK">
-                                    <rect key="frame" x="10" y="48" width="580" height="15"/>
                                     <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
-                                    <color key="textColor" red="0.24313725489999999" green="0.074509803920000006" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.24313725489999999" green="0.074509803920000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="26 AOUT 2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1dD-E2-2Iz">
-                                    <rect key="frame" x="10" y="71" width="580" height="12"/>
                                     <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="12"/>
                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                     <nil key="highlightedColor"/>
@@ -74,7 +67,7 @@
                             </variation>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="qxU-OM-6US" secondAttribute="height" multiplier="4:3" id="7Me-Tk-gYC"/>
                         <constraint firstItem="nrV-ya-vJc" firstAttribute="leading" secondItem="qxU-OM-6US" secondAttribute="leading" id="7gj-b5-8fC"/>
@@ -91,7 +84,7 @@
                     </connections>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="qxU-OM-6US" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="AIE-oX-Bif"/>
                 <constraint firstAttribute="trailing" secondItem="qxU-OM-6US" secondAttribute="trailing" id="mrI-Xf-KCC"/>

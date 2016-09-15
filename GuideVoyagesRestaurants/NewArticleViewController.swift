@@ -82,6 +82,8 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
          WEBVIEW INIT
          ---------------------- */
         
+        print(self.navigationController?.navigationBar.frame.size.height)
+        
         webView = UIWebView(frame: UIScreen.main.bounds)
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear

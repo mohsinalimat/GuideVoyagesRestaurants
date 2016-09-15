@@ -33,6 +33,17 @@ class MapViewController: UIViewController, MKMapViewDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        var btnName = UIButton()
+        btnName = UIButton(type: UIButtonType.custom)
+        btnName.setImage(UIImage(named: "back"), for: UIControlState())
+        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+        btnName.addTarget(self, action: #selector(self.popToRoot), for: .touchDown)
+        let backBarButton = UIBarButtonItem()
+        backBarButton.customView = btnName
+        
+        self.navigationItem.leftBarButtonItem = backBarButton
 
         // Do any additional setup after loading the view.
         
@@ -48,6 +59,10 @@ class MapViewController: UIViewController, MKMapViewDelegate {
             
         }*/
         
+    }
+    
+    func popToRoot(_ sender:UIBarButtonItem){
+        self.navigationController!.popViewController(animated: true)
     }
     
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
