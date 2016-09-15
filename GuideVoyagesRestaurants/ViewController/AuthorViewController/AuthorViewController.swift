@@ -8,10 +8,12 @@
 
 import UIKit
 
-class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDelegate {
+class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var header: AuthorHeaderView!
-    @IBOutlet weak var webView: UIWebView!
+    @IBOutlet weak var tableView: UITableView!
+    
+    let headerInset:CGFloat = 3/4 * UIScreen.main.bounds.width + 75
     
     
     override func viewDidLoad() {
@@ -45,27 +47,30 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
          WebView Init
          ---------------------- */
         
-        let url = URL(string: "https://di2pra.com/voyages/article.php")
+        /*let url = URL(string: "https://di2pra.com/voyages/article.php")
         self.webView.loadRequest(URLRequest(url: url!))
         webView.delegate = self
         webView.scrollView.delegate = self
         
         webView.scrollView.contentInset.top = 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2
-        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2
+        webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2*/
         
         /* ----------------------
          ---------------------- */
-
+        tableView.contentInset.top = headerInset
+        tableView.scrollIndicatorInsets.top = headerInset
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 160.0
     }
     
     // MARK: - ScrollView
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let offset = scrollView.contentOffset.y + 3/4 * UIScreen.main.bounds.width + header.profileImageView.frame.height / 2
+        let offset = scrollView.contentOffset.y + headerInset
         
         var coverImageTransform = CATransform3DIdentity
-        var profileImageTransform = CATransform3DIdentity
-        //var headerTransform = CATransform3DIdentity
+        //var profileImageTransform = CATransform3DIdentity
+        var headerTransform = CATransform3DIdentity
         
         if offset < 0 {
             
@@ -74,36 +79,50 @@ class AuthorViewController: UIViewController, UIWebViewDelegate, UIScrollViewDel
             coverImageTransform = CATransform3DTranslate(coverImageTransform, 0, coverImageSizevariation, 0)
             coverImageTransform = CATransform3DScale(coverImageTransform, 1.0 + coverImageScaleFactor, 1.0 + coverImageScaleFactor, 0)
             
-            profileImageTransform = CATransform3DTranslate(profileImageTransform, 0, -offset, 0)
+            //profileImageTransform = CATransform3DTranslate(profileImageTransform, 0, -offset, 0)
             
         } else {
             
-            //headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset, -(3/4 * UIScreen.main.bounds.width) + header.profileImageView.frame.height / 2 + 20), 0)
+            headerTransform = CATransform3DTranslate(headerTransform, 0, max(-offset, -headerInset + 150), 0)
             
-            //let profileImageScaleFactor:CGFloat = -(offset) / (-(3/4 * UIScreen.main.bounds.width) + header.profileImageView.frame.height / 2 + 20)
+            /*let profileImageScaleFactor:CGFloat = -(offset) / (-headerInset + 20)
             
-            //profileImageTransform = CATransform3DScale(profileImageTransform, max(0.4, 1.0 - profileImageScaleFactor), max(0.4, 1.0 - profileImageScaleFactor), 0)
+            profileImageTransform = CATransform3DScale(profileImageTransform, max(0.4, 1.0 - profileImageScaleFactor), max(0.4, 1.0 - profileImageScaleFactor), 0)*/
             
 
-            /*if offset == ((3/4 * UIScreen.mainScreen().bounds.width) - header.profileImageView.frame.height / 2 - 20) {
+            if offset == (headerInset - 20) {
                 
                 header.layer.zPosition = 1
-                webView.layer.zPosition = 0
+                tableView.layer.zPosition = 0
                 
             } else {
                 header.layer.zPosition = 0
-                webView.layer.zPosition = 1
-            }*/
+                tableView.layer.zPosition = 1
+            }
             
         }
         
-        //header.layer.transform = headerTransform
+        header.layer.transform = headerTransform
         header.bgImageView.layer.transform = coverImageTransform
-        header.profileImageView.layer.transform = profileImageTransform
+        //header.profileImageView.layer.transform = profileImageTransform
         
     }
     
-    // MARK: - WebView
+    // MARK: - TableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
+        
+        cell.textLabel?.text = "Row"
+        
+        cell.backgroundColor = bgColor
+        
+        return cell
+    }
+    
     
     func popToRoot(_ sender:UIBarButtonItem){
         self.navigationController!.popViewController(animated: true)

@@ -11,7 +11,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="NewArticleViewController" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArticleViewController" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
             <connections>
                 <outlet property="coverView" destination="qxU-OM-6US" id="gRg-FL-96E"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -51,7 +51,7 @@
                                 <constraint firstAttribute="bottom" secondItem="fWK-XW-jzK" secondAttribute="bottom" constant="20" id="9lb-vp-GXG"/>
                                 <constraint firstAttribute="trailing" secondItem="Ojo-2I-eeS" secondAttribute="trailing" constant="10" id="G7A-17-D3b"/>
                                 <constraint firstItem="1dD-E2-2Iz" firstAttribute="leading" secondItem="yAg-iY-C6T" secondAttribute="leading" constant="10" id="M5F-2g-AkF"/>
-                                <constraint firstItem="Ojo-2I-eeS" firstAttribute="top" secondItem="yAg-iY-C6T" secondAttribute="top" constant="20" id="PfI-gd-hqk"/>
+                                <constraint firstItem="Ojo-2I-eeS" firstAttribute="top" secondItem="yAg-iY-C6T" secondAttribute="top" constant="15" id="PfI-gd-hqk"/>
                                 <constraint firstItem="Ojo-2I-eeS" firstAttribute="leading" secondItem="yAg-iY-C6T" secondAttribute="leading" constant="10" id="aFv-Af-IhB"/>
                                 <constraint firstAttribute="trailing" secondItem="fWK-XW-jzK" secondAttribute="trailing" constant="10" id="cAH-EQ-Vdr"/>
                                 <constraint firstAttribute="trailing" secondItem="1dD-E2-2Iz" secondAttribute="trailing" constant="10" id="h6P-iP-3NB"/>

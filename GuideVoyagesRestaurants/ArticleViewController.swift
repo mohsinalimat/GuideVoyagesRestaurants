@@ -9,7 +9,7 @@
 import UIKit
 import SDWebImage
 
-class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
+class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
     
     @IBOutlet weak var coverView: CoverView!
     @IBOutlet var webView: UIWebView!
@@ -84,13 +84,15 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         
         print(self.navigationController?.navigationBar.frame.size.height)
         
-        webView = UIWebView(frame: UIScreen.main.bounds)
+        webView = UIWebView(frame: CGRect.zero)
+        webView.translatesAutoresizingMaskIntoConstraints = false
         webView.isOpaque = false
         webView.backgroundColor = UIColor.clear
         
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
         let url = URL(string: "https://di2pra.com/voyages/article.php")
-        webView.loadRequest(URLRequest(url: url!))
+        
+        webView.loadRequest(URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60))
         webView.delegate = self
         webView.scrollView.delegate = self
         webView.scrollView.isScrollEnabled = false
@@ -98,6 +100,11 @@ class NewArticleViewController: UIViewController, UIScrollViewDelegate, UIWebVie
         webView.scrollView.scrollIndicatorInsets.top = 3/4 * UIScreen.main.bounds.width
         
         self.view.addSubview(webView)
+        
+        self.view.addConstraint(NSLayoutConstraint(item: self.webView, attribute: NSLayoutAttribute.top, relatedBy: .equal, toItem: self.topLayoutGuide, attribute: .bottom, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: self.bottomLayoutGuide, attribute: NSLayoutAttribute.top, relatedBy: .equal, toItem: self.webView, attribute: .bottom, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: self.webView, attribute: .leading, relatedBy: .equal, toItem: self.view, attribute: .leading, multiplier: 1, constant: 0))
+        self.view.addConstraint(NSLayoutConstraint(item: self.webView, attribute: .trailing, relatedBy: .equal, toItem: self.view, attribute: .trailing, multiplier: 1, constant: 0))
         
         /* ----------------------
          ---------------------- */

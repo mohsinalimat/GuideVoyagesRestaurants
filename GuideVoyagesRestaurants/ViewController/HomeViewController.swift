@@ -8,6 +8,7 @@
 
 import UIKit
 //import Firebase
+import ICSPullToRefresh
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
@@ -184,6 +185,34 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         //self.tableView.addInfiniteScrollingWithHandler(() -> ())
         
+        /*self.tableView.addInfiniteScrollingWithHandler {
+            /*dispatch_async(DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0), { () -> Void in
+                // do something in the background
+                dispatch_async(dispatch_get_main_queue(), { [unowned self] in
+                    self.tableView.reloadData()
+                    self.tableView.infiniteScrollingView?.stopAnimating()
+                    })
+            })*/
+        }*/
+        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        
+        super.viewDidAppear(animated)
+        
+        self.tableView.addInfiniteScrollingWithHandler {
+            
+            print("YOLO")
+            
+            /*dispatch_async(DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0), { () -> Void in
+             // do something in the background
+             dispatch_async(dispatch_get_main_queue(), { [unowned self] in
+             self.tableView.reloadData()
+             self.tableView.infiniteScrollingView?.stopAnimating()
+             })
+             })*/
+        }
     }
     
     func searchClick(_ sender: UIButton) {
@@ -326,11 +355,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let articleViewController = NewArticleViewController(nibName: "NewArticleViewController", bundle: nil)
-        self.navigationController?.pushViewController(articleViewController, animated: true)
+        /*let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
+        self.navigationController?.pushViewController(articleViewController, animated: true)*/
         
-        /*let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
-        self.navigationController?.pushViewController(authorViewController, animated: true)*/
+        let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
+        self.navigationController?.pushViewController(authorViewController, animated: true)
     }
     
 
