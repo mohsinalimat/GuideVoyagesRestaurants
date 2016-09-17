@@ -1,17 +1,17 @@
 PODS:
-  - ICSPullToRefresh (0.4)
+  - DistancePicker (0.8)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
 
 DEPENDENCIES:
-  - ICSPullToRefresh (~> 0.4)
+  - DistancePicker (~> 0.8)
   - SDWebImage (~> 3.8)
 
 SPEC CHECKSUMS:
-  ICSPullToRefresh: 9e6720df41f6d3e8a31e3cdd99a0b922850abe85
+  DistancePicker: 4296860891b728bfbc73bf565b94bf5393744a50
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
-PODFILE CHECKSUM: 59a93c8db7fd8191a42edf638159c18f41ced797
+PODFILE CHECKSUM: 3b3bb5f1e1cd185f87820bb382d73a802467c680
 
 COCOAPODS: 1.0.1

@@ -8,7 +8,6 @@
 
 import UIKit
 //import Firebase
-import ICSPullToRefresh
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
@@ -195,24 +194,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             })*/
         }*/
         
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        
-        super.viewDidAppear(animated)
-        
-        self.tableView.addInfiniteScrollingWithHandler {
-            
-            print("YOLO")
-            
-            /*dispatch_async(DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0), { () -> Void in
-             // do something in the background
-             dispatch_async(dispatch_get_main_queue(), { [unowned self] in
-             self.tableView.reloadData()
-             self.tableView.infiniteScrollingView?.stopAnimating()
-             })
-             })*/
-        }
     }
     
     func searchClick(_ sender: UIButton) {

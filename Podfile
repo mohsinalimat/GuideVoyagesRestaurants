@@ -12,7 +12,7 @@ target 'GuideVoyagesRestaurants' do
   # pod 'Alamofire', '~> 3.4'
   # pod 'SwiftyJSON'
   pod 'SDWebImage', '~>3.8'
-  pod 'ICSPullToRefresh', '~> 0.4'
+  pod 'DistancePicker', '~> 0.8'
 
   target 'GuideVoyagesRestaurantsTests' do
     inherit! :search_paths
