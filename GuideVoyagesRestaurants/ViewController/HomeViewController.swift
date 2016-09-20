@@ -11,6 +11,8 @@ import UIKit
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
+    let menuControl:MenuControl = MenuControl(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 60.0))
+    
     let type:[Category] = [Category(id: 0, title: "accueil"), Category(id: 1, title: "restaurant"), Category(id: 2, title: "voyage"), Category(id: 3, title: "hotel"), Category(id: 4, title: "recette"), Category(id: 5, title: "shopping")]
     var selectedCategorie: Int = 0
     
@@ -73,8 +75,11 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.view.backgroundColor = bgColor
         
+        
+        // Setup TableView :
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 300
+        
         
         // Setup Navigation items :
         var btnName = UIButton()
@@ -104,6 +109,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
+
+        // Setting Menu
+        menuControl.setItems(items: [MenuItem(title: "Accueil", icon: "accueil"), MenuItem(title: "Restaurant", icon: "restaurant"), MenuItem(title: "Voyage", icon: "voyage"), MenuItem(title: "Hotel", icon: "hotel"), MenuItem(title: "Recette", icon: "recette"), MenuItem(title: "Shopping", icon: "shopping")])
+        menuControl.backgroundColor = bgColor
+        self.view.addSubview(menuControl)
+        
+        
+        
         // Add scrollViewContainer
         let scrollViewContainerHeight:CGFloat = 80.0
         
@@ -130,13 +143,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
             
             
-            /*button.layer.borderWidth = 0.8
-             button.layer.borderColor = UIColor(red:0.11, green:0.27, blue:0.52, alpha:1.0).CGColor*/
-            
             
             button.setImage(UIImage(named: item.title), for: UIControlState())
-            //button.setBackgroundImage(UIImage(named: icon[i]), forState: .Normal)
-            
             button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 25, right: 15)
             button.titleEdgeInsets = UIEdgeInsets(top: 55, left: -256, bottom: 0, right: 0)
             
@@ -164,6 +172,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: scrollViewContainer, attribute: .bottom, multiplier: 1.0, constant: 0.0))
         scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: scrollViewContainer, attribute: .top, multiplier: 1.0, constant: 0.0))
         
+        
+        
+        // Setting up Search Controller
         
         searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
@@ -195,6 +206,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }*/
         
     }
+    
+    /*override func viewDidLayoutSubviews() {
+        menuControl.frame = CGRect(x: 0.0, y: 0.0, width: self.view.bounds.width, height: 60.0)
+    }*/
     
     func searchClick(_ sender: UIButton) {
         
@@ -236,11 +251,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     
     func showMapView(_ sender: UIButton) {
-        let mapViewController = MapViewController(nibName: "MapViewController", bundle: nil)
+        
+        if let mapViewController = storyboard?.instantiateViewController(withIdentifier: "mapViewController") as? MapViewController {
+            
+            self.navigationController?.pushViewController(mapViewController, animated: true)
+        }
+        
+        //self.menuControl.setSelectedItem(item: 3)
+        
         
         //mapViewController.hotels = self.hotels
         
-        self.navigationController?.pushViewController(mapViewController, animated: true)
+        
     }
     
     func changePage(_ sender: UIButton) {
@@ -339,9 +361,39 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         /*let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
         self.navigationController?.pushViewController(articleViewController, animated: true)*/
         
-        let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
-        self.navigationController?.pushViewController(authorViewController, animated: true)
+        /*let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
+        self.navigationController?.pushViewController(authorViewController, animated: true)*/
+        
+        if let authorViewController = storyboard?.instantiateViewController(withIdentifier: "authorViewController") as? AuthorViewController {
+            self.navigationController?.pushViewController(authorViewController, animated: true)
+        }
+        
+        
+        
     }
+    
+    /*let threshold:CGFloat = 100.0 // threshold from bottom of tableView
+    var isLoadingMore = false // flag
+    
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let contentOffset = scrollView.contentOffset.y
+        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
+        
+        if !isLoadingMore && (maximumOffset - contentOffset <= threshold) {
+            // Get more data - API call
+            self.isLoadingMore = true
+            
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+                self.isLoadingMore = false
+            }
+            
+        }
+        
+    }*/
     
 
     override func didReceiveMemoryWarning() {

@@ -54,7 +54,7 @@ open class DistancePicker : UIControl, UIDynamicAnimatorDelegate {
 	open var markLineLength: CGFloat {
 		return markSpacing * CGFloat(marks.count - 1)
 	}
-	
+ 
 	// MARK: - Selection State
 
 	// The selected position on the mark line that starts with zero and ends 
@@ -400,6 +400,16 @@ public func milesFromMeters(_ meters: Double) -> Double {
 private class PanGestureRecognizer : UIPanGestureRecognizer {
 	
 	var endEvent: UIEvent?
+    
+    override func touchesBegan(_ touches: Set<AnyHashable>!, with event: UIEvent!) {
+        super.touchesBegan(touches as Set<NSObject>, with: event)
+        endEvent = nil
+    }
+    
+    override func touchesEnded(_ touches: Set<AnyHashable>!, with event: UIEvent!) {
+        super.touchesEnded(touches as Set<NSObject>, with: event)
+        endEvent = event
+    }
 
 	/*override func touchesBegan(_ touches: Set<NSObject>!, with event: UIEvent!) {
 		super.touchesBegan(touches as Set<NSObject>, with: event)

@@ -17,11 +17,13 @@ class AuthorHeaderView: UIView {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.backgroundColor = bgColor
+        self.backgroundColor = UIColor.clear
         
-        self.profileImageView.layer.cornerRadius = self.profileImageView.frame.size.width / 2
+        //self.profileImageView.layer.cornerRadius = 75.0
         self.profileImageView.layer.borderColor = bgColor.cgColor
         self.profileImageView.layer.borderWidth = 5.0
+        
+        self.profileImageView.image = UIImage(named: "fredericlacroix.jpg")
         
     }
 }
