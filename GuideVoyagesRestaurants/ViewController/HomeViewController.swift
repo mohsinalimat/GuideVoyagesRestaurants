@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import SwiftyJSON
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
@@ -213,8 +214,13 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             //print(response.data)     // server data
             //print(response.result)   // result of response serialization
             
-            if let JSON = response.result.value {
-                print("JSON: \(JSON)")
+            if let value = response.result.value {
+                let json = JSON(value)
+                
+                if let data = json["data"].array {
+                    
+                }
+                
             }
         }
         
