@@ -1,5 +1,5 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c8a-LJ-d9p">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c8a-LJ-d9p">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -15,7 +15,7 @@
         <scene sceneID="xy3-wz-HbT">
             <objects>
                 <navigationController id="c8a-LJ-d9p" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FN4-zf-iM6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FN4-zf-iM6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -194,50 +194,67 @@
                                     <constraint firstAttribute="height" constant="50" id="gzy-pq-heY"/>
                                 </constraints>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q9m-tt-eCE">
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="q9m-tt-eCE" secondAttribute="height" multiplier="4:3" id="k66-R9-gzy"/>
-                                </constraints>
-                            </mapView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="81" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-TK-y2g">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="81" sectionHeaderHeight="4" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-TK-y2g">
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="customCell" rowHeight="81" id="aUK-Bi-PwN">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="81"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapViewArticleCell" rowHeight="81" id="aUK-Bi-PwN" customClass="MapViewArticleCell" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="4" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aUK-Bi-PwN" id="VD2-eI-VB6">
                                             <frame key="frameInset" width="375" height="81"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VOYAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cug-MD-mNC">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="18"/>
-                                                    <color key="textColor" red="0.63137254901960782" green="0.25098039215686274" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le volcan Sakurajima" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtM-LR-vga">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="16"/>
-                                                    <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à 3 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-QA-3s6">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
-                                                    <color key="textColor" red="0.83921568629999999" green="0.27058823529999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-39-zYF">
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VOYAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cug-MD-mNC">
+                                                            <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="18"/>
+                                                            <color key="textColor" red="0.63137254901960782" green="0.25098039215686274" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le volcan Sakurajima" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtM-LR-vga">
+                                                            <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="16"/>
+                                                            <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-tG-UGV">
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="20" id="RAR-wo-cKI"/>
+                                                                <constraint firstAttribute="height" constant="20" id="hGD-se-ZPF"/>
+                                                            </constraints>
+                                                        </imageView>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à 3 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-QA-3s6">
+                                                            <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
+                                                            <color key="textColor" red="0.83921568629999999" green="0.27058823529999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <constraints>
+                                                        <constraint firstItem="pNs-tG-UGV" firstAttribute="leading" secondItem="7h0-QA-3s6" secondAttribute="trailing" constant="8" id="1Sg-kv-xQv"/>
+                                                        <constraint firstItem="cug-MD-mNC" firstAttribute="top" secondItem="Phd-39-zYF" secondAttribute="top" constant="8" id="Cii-Dh-hJp"/>
+                                                        <constraint firstItem="pNs-tG-UGV" firstAttribute="centerY" secondItem="Phd-39-zYF" secondAttribute="centerY" id="Df4-8N-OuW"/>
+                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BtM-LR-vga" secondAttribute="bottom" constant="8" id="NX3-3W-fbZ"/>
+                                                        <constraint firstItem="7h0-QA-3s6" firstAttribute="centerY" secondItem="Phd-39-zYF" secondAttribute="centerY" id="Rhh-ZO-Wb5"/>
+                                                        <constraint firstItem="BtM-LR-vga" firstAttribute="top" secondItem="cug-MD-mNC" secondAttribute="bottom" constant="2" id="T1U-Js-JLS"/>
+                                                        <constraint firstAttribute="trailing" secondItem="pNs-tG-UGV" secondAttribute="trailing" constant="8" id="Yoh-Xm-HWU"/>
+                                                        <constraint firstItem="BtM-LR-vga" firstAttribute="leading" secondItem="Phd-39-zYF" secondAttribute="leading" constant="9" id="Z01-sq-UcG"/>
+                                                        <constraint firstItem="cug-MD-mNC" firstAttribute="leading" secondItem="Phd-39-zYF" secondAttribute="leading" constant="9" id="zZM-Hy-2SK"/>
+                                                    </constraints>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="7h0-QA-3s6" secondAttribute="trailing" constant="8" id="6t1-m5-dc8"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BtM-LR-vga" secondAttribute="bottom" constant="8" id="ILg-1C-AeZ"/>
-                                                <constraint firstItem="7h0-QA-3s6" firstAttribute="centerY" secondItem="VD2-eI-VB6" secondAttribute="centerY" id="ddE-7u-vGG"/>
-                                                <constraint firstItem="cug-MD-mNC" firstAttribute="leading" secondItem="VD2-eI-VB6" secondAttribute="leading" constant="8" id="g14-E9-J62"/>
-                                                <constraint firstItem="BtM-LR-vga" firstAttribute="leading" secondItem="VD2-eI-VB6" secondAttribute="leading" constant="8" id="kx6-SQ-Tr8"/>
-                                                <constraint firstItem="BtM-LR-vga" firstAttribute="top" secondItem="cug-MD-mNC" secondAttribute="bottom" constant="5" id="rtd-bk-qSc"/>
-                                                <constraint firstItem="cug-MD-mNC" firstAttribute="top" secondItem="VD2-eI-VB6" secondAttribute="top" constant="8" id="yve-RH-n4P"/>
+                                                <constraint firstItem="Phd-39-zYF" firstAttribute="top" secondItem="VD2-eI-VB6" secondAttribute="top" constant="4" id="BPh-Wx-GDJ"/>
+                                                <constraint firstAttribute="bottom" secondItem="Phd-39-zYF" secondAttribute="bottom" constant="4" id="IDS-fr-Som"/>
+                                                <constraint firstItem="Phd-39-zYF" firstAttribute="leading" secondItem="VD2-eI-VB6" secondAttribute="leading" constant="8" id="jCg-Ic-IGi"/>
+                                                <constraint firstAttribute="trailing" secondItem="Phd-39-zYF" secondAttribute="trailing" constant="8" id="tS7-Fa-M5w"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <connections>
+                                            <outlet property="bgView" destination="Phd-39-zYF" id="aAl-Df-aCF"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -245,6 +262,11 @@
                                     <outlet property="delegate" destination="a5y-Lw-qG3" id="MdY-LZ-SZD"/>
                                 </connections>
                             </tableView>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q9m-tt-eCE">
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="q9m-tt-eCE" secondAttribute="height" multiplier="4:3" id="k66-R9-gzy"/>
+                                </constraints>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -268,7 +290,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hdi-qt-DUw" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="549.375" y="143.75"/>
+            <point key="canvasLocation" x="548" y="143.47826086956522"/>
         </scene>
         <!--Author View Controller-->
         <scene sceneID="SM9-Pv-RzP">
@@ -429,5 +451,6 @@
     </scenes>
     <resources>
         <image name="4.jpg" width="400" height="300"/>
+        <image name="next" width="256" height="256"/>
     </resources>
 </document>

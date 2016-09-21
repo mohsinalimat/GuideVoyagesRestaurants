@@ -20,7 +20,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var refreshControl: UIRefreshControl!
     
-    let data = [
+    /*let data = [
         Article(
             id: 1,
             category: Category(id: 1, title: "Voyages"),
@@ -61,7 +61,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             cover: "5.jpg",
             desc: "Direction le marché Aligre dans le 12ème arrondissement pour partir en. Itlaie et plus précisément en Sardaigne. Nous voici chez Sardegna a Tavola, un restaurant à l'ancienne avec son ambiance particulière et ses énormes assiettes de cuisine sarde avec des recettes très originales."
         )
-    ]
+    ]*/
+    
+    var data:[Article] = []
 
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -205,6 +207,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             })*/
         }*/
         
+        
+        
     }
     
     /*override func viewDidLayoutSubviews() {
@@ -287,7 +291,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         view.title.text = data[section].title.uppercased()
         view.author.text = "PAR " + (data[section].author?.uppercased())!
-        view.categoryTitle.text = data[section].category.title.uppercased()
+        //view.categoryTitle.text = data[section].category.title.uppercased()
         
         return view
         

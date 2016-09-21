@@ -1,17 +1,20 @@
 PODS:
+  - Alamofire (4.0.0)
   - DistancePicker (0.8)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
 
 DEPENDENCIES:
+  - Alamofire (~> 4.0)
   - DistancePicker (~> 0.8)
   - SDWebImage (~> 3.8)
 
 SPEC CHECKSUMS:
+  Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   DistancePicker: 4296860891b728bfbc73bf565b94bf5393744a50
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
 
-PODFILE CHECKSUM: 3b3bb5f1e1cd185f87820bb382d73a802467c680
+PODFILE CHECKSUM: 1ce52d0268690b8397c699a1ee856526a215af63
 
 COCOAPODS: 1.0.1

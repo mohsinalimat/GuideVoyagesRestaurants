@@ -41,6 +41,7 @@
 		E4978AAE1D8DEFBC00670FED /* AuthorArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4978AAD1D8DEFBC00670FED /* AuthorArticleCell.swift */; };
 		E4B385E21D91258E00FC6423 /* MenuControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B385E11D91258E00FC6423 /* MenuControl.swift */; };
 		E4B698DA1D79BFA700289C01 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B698D81D79BFA700289C01 /* LoadingView.swift */; };
+		E4BF5E7E1D91CE9300EAEDC0 /* MapViewArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BF5E7D1D91CE9300EAEDC0 /* MapViewArticleCell.swift */; };
 		E4D2F3CE1D75A9F3003A73DC /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D2F3CC1D75A9F3003A73DC /* AuthorViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,6 +107,7 @@
 		E4978AAD1D8DEFBC00670FED /* AuthorArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthorArticleCell.swift; sourceTree = "<group>"; };
 		E4B385E11D91258E00FC6423 /* MenuControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuControl.swift; sourceTree = "<group>"; };
 		E4B698D81D79BFA700289C01 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = View/LoadingView/LoadingView.swift; sourceTree = "<group>"; };
+		E4BF5E7D1D91CE9300EAEDC0 /* MapViewArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewArticleCell.swift; sourceTree = "<group>"; };
 		E4D2F3CC1D75A9F3003A73DC /* AuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorViewController.swift; path = ViewController/AuthorViewController/AuthorViewController.swift; sourceTree = "<group>"; };
 		EBCD33568C59E68ADB6AA29B /* Pods_GuideVoyagesRestaurantsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideVoyagesRestaurantsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3667D9B2A2BEABC0A56EC2 /* Pods-GuideVoyagesRestaurants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideVoyagesRestaurants.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideVoyagesRestaurants/Pods-GuideVoyagesRestaurants.debug.xcconfig"; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				E4B698D81D79BFA700289C01 /* LoadingView.swift */,
 				E44E18961D745647000D6509 /* ArticleCell.swift */,
 				E44E18971D745647000D6509 /* SectionCell.swift */,
+				E4BF5E7D1D91CE9300EAEDC0 /* MapViewArticleCell.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				E42A97F41D53856900C0982C /* AppDelegate.swift in Sources */,
 				E4978AAE1D8DEFBC00670FED /* AuthorArticleCell.swift in Sources */,
 				E4B698DA1D79BFA700289C01 /* LoadingView.swift in Sources */,
+				E4BF5E7E1D91CE9300EAEDC0 /* MapViewArticleCell.swift in Sources */,
 				E42A97FC1D53856900C0982C /* GuideVoyagesRestaurants.xcdatamodeld in Sources */,
 				E4978AAB1D8DED8900670FED /* AuthorDescCell.swift in Sources */,
 				E4683C251D83522D000FC030 /* CoverView.swift in Sources */,

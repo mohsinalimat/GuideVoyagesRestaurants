@@ -15,7 +15,7 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     let headerInset:CGFloat = 3/4 * UIScreen.main.bounds.width + 75
     
-    let data = [
+    /*let data = [
         Article(
             id: 1,
             category: Category(id: 1, title: "Voyages"),
@@ -56,7 +56,9 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cover: "5.jpg",
             desc: "Direction le marché Aligre dans le 12ème arrondissement pour partir en. Itlaie et plus précisément en Sardaigne. Nous voici chez Sardegna a Tavola, un restaurant à l'ancienne avec son ambiance particulière et ses énormes assiettes de cuisine sarde avec des recettes très originales."
         )
-    ]
+    ]*/
+    
+    var data:[Article] = []
 
     
     override func viewDidLoad() {
@@ -171,7 +173,7 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
             
             cell.coverImageView.image = UIImage(named: data[indexPath.row-1].cover!)
             
-            cell.categorieLabel.text = data[indexPath.row-1].category.title.uppercased()
+            //cell.categorieLabel.text = data[indexPath.row-1].category.title.uppercased()
             cell.titleLabel.text = data[indexPath.row-1].title.uppercased()
             cell.descriptionLabel.text = data[indexPath.row-1].desc
             

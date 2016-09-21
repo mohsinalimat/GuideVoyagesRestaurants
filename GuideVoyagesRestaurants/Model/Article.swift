@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Article {
+/*struct Article {
     
     let id:Int!
     let category: Category!
@@ -19,6 +19,27 @@ struct Article {
     
     init(id: Int, category: Category, title: String, author: String, cover: String, desc: String) {
         self.id = id
+        self.category = category
+        self.title = title
+        self.author = author
+        self.cover = cover
+        self.desc = desc
+        
+    }
+    
+}*/
+
+struct Article {
+    
+    //let id:Int!
+    //let category: Category!
+    var title:String!
+    var category: String!
+    var author:String?
+    var cover:String?
+    var desc:String?
+    
+    init(category: String, title: String, author: String, cover: String, desc: String) {
         self.category = category
         self.title = title
         self.author = author

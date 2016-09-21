@@ -9,7 +9,7 @@ target 'GuideVoyagesRestaurants' do
 
   # pod 'Firebase'
   # pod 'Firebase/Database'
-  # pod 'Alamofire', '~> 3.4'
+  pod 'Alamofire', '~> 4.0’
   # pod 'SwiftyJSON'
   pod 'SDWebImage', '~>3.8'
   pod 'DistancePicker', '~> 0.8'

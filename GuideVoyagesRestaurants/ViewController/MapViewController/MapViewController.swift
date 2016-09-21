@@ -232,9 +232,15 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         return 5
     }
     
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 4.0))
+        
+        return view
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell")! as UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "mapViewArticleCell") as! MapViewArticleCell
         
         /*cell.contentView.backgroundColor = UIColor.clear
         
