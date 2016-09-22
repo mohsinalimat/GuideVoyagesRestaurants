@@ -22,7 +22,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         
         
         /* ----------------------
-         Navigation bar
+         NAVIGATION BAR
          ---------------------- */
         
         // Set up navigation items
@@ -82,7 +82,6 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
          WEBVIEW INIT
          ---------------------- */
         
-        print(self.navigationController?.navigationBar.frame.size.height)
         
         webView = UIWebView(frame: CGRect.zero)
         webView.translatesAutoresizingMaskIntoConstraints = false
@@ -128,8 +127,9 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         if request.url?.scheme == "inapp" {
             
             if request.url?.host == "capture" {
-                let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
-                self.navigationController?.pushViewController(authorViewController, animated: true)
+                if let authorViewController = storyboard?.instantiateViewController(withIdentifier: "authorViewController") as? AuthorViewController {
+                    self.navigationController?.pushViewController(authorViewController, animated: true)
+                }
             }
             
             return false

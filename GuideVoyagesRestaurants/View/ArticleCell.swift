@@ -12,5 +12,16 @@ class ArticleCell: UITableViewCell {
 
     @IBOutlet weak var imageMain: UIImageView!
     @IBOutlet weak var descText: UILabel!
+    @IBOutlet weak var imageMainHeight: NSLayoutConstraint!
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        // Initialization code
+        
+        imageMainHeight.constant = 3 * UIScreen.main.bounds.width / 4
+        
+        //descText.numberOfLines = 0
+        
+    }
 
 }

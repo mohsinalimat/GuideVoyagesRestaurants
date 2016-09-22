@@ -9,68 +9,20 @@
 import UIKit
 import Alamofire
 import SwiftyJSON
+import SDWebImage
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
     
     let menuControl:MenuControl = MenuControl(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 60.0))
     
-    let type:[Category] = [Category(id: 0, title: "accueil"), Category(id: 1, title: "restaurant"), Category(id: 2, title: "voyage"), Category(id: 3, title: "hotel"), Category(id: 4, title: "recette"), Category(id: 5, title: "shopping")]
-    var selectedCategorie: Int = 0
-    
     var searchController: UISearchController!
     
     var refreshControl: UIRefreshControl!
     
-    /*let data = [
-        Article(
-            id: 1,
-            category: Category(id: 1, title: "Voyages"),
-            title: "Le volcan Sakurajima",
-            author: "Frédéric Lacroix",
-            cover: "1.jpg",
-            desc: "Nous sommes tout au sud de l'île de Kyushu dans la baie de Kagoshima pour visiter le volcan Sakurajima. C'est l'un des volcans les plus actifs du Japon, sa dernière éruption importante datant de février 2016. Lorsque le volcan est calme nous pouvons faire des balades à pied ou en véhicule tout autour du volcan."
-        ),
-        Article(
-            id: 2,
-            category: Category(id: 1, title: "Voyages"),
-            title: "Kokura et Mojiko",
-            author: "Frédéric Lacroix",
-            cover: "2.jpg",
-            desc: "Nous voici au nord de la l'île de Kyushu pour faire une petite balade à Kokura et Mojiko. Ces deux villes ont fusionné en 1963 pour donner l'agglomération de Kitakyushu. Kokura possède un petit château dominé par un grand centre commercial ainsi qu'un marché intéressant. Mojiko est un petit port avec de nombreuses maisons occidentales."
-        ),
-        Article(
-            id: 3,
-            category: Category(id: 1, title: "Voyages"),
-            title: "Takayama",
-            author: "Frédéric Lacroix",
-            cover: "3.jpg",
-            desc: "Nous voici dans la région de Kochi au sud de l'île de Shikoku pour partir à la découverte de l'une des plus belles grottes du Japon et l'une des plus vaste. Elle est classée trésor national pour sa valeur naturelle mais elle a aussi une valeur historique pour ses trésors archéologiques découverts dans ses galeries."
-        ),
-        Article(
-            id: 4,
-            category: Category(id: 1, title: "Voyages"),
-            title: "Sardegna a Tavola",
-            author: "Frédéric Lacroix",
-            cover: "4.jpg",
-            desc: "Partons à la découverte de la petite ville de Takayama, dans les montagnes de Hida au pied des Alpes japonaises. Cette petite ville au passé historique riche porte aussi le nom de Petite Kyoto. Depuis quelques années elle est devenue l'un des sites touristiques les plus fréquentés surtout grave à son matsuri du printemps et de l'automne."
-        ),
-        Article(
-            id: 5,
-            category: Category(id: 2, title: "Restaurants"),
-            title: "Sardegna a Tavola",
-            author: "Frédéric Lacroix",
-            cover: "5.jpg",
-            desc: "Direction le marché Aligre dans le 12ème arrondissement pour partir en. Itlaie et plus précisément en Sardaigne. Nous voici chez Sardegna a Tavola, un restaurant à l'ancienne avec son ambiance particulière et ses énormes assiettes de cuisine sarde avec des recettes très originales."
-        )
-    ]*/
-    
     var data:[Article] = []
 
     
-    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var loadingView: UIView!
-    @IBOutlet weak var animatingImage: UIImageView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -119,64 +71,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(menuControl)
         
         
-        
-        // Add scrollViewContainer
-        let scrollViewContainerHeight:CGFloat = 80.0
-        
-        let scrollViewContainer = UIView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: UIScreen.main.bounds.width, height: scrollViewContainerHeight)))
-        
-        var offsetX: CGFloat = 5
-        
-        var button: UIButton
-        
-        for item in type {
-            
-            button = UIButton(frame: CGRect(origin: CGPoint(x: offsetX, y:5), size: CGSize(width: scrollViewContainerHeight - 10.0, height: scrollViewContainerHeight - 10.0)))
-            
-            button.addTarget(self, action: #selector(self.changePage), for: UIControlEvents.touchUpInside)
-            button.setTitle(item.title.uppercased(), for: UIControlState())
-            button.setTitleColor(mainColor, for: UIControlState())
-            
-            button.layer.cornerRadius = 10.0
-            
-            button.titleLabel?.font = UIFont(name: "Reglo-Bold", size: 10)
-            
-            if item.id == selectedCategorie {
-                button.backgroundColor = highlightColor
-            }
-            
-            
-            
-            button.setImage(UIImage(named: item.title), for: UIControlState())
-            button.imageEdgeInsets = UIEdgeInsets(top: 5, left: 15, bottom: 25, right: 15)
-            button.titleEdgeInsets = UIEdgeInsets(top: 55, left: -256, bottom: 0, right: 0)
-            
-            button.tintColor = mainColor
-            button.tag = item.id
-            
-            scrollViewContainer.addSubview(button)
-            
-            offsetX += scrollViewContainerHeight - 5.0
-            
-        }
-        
-        scrollViewContainer.backgroundColor = bgColor
-        
-        var frame : CGRect = scrollViewContainer.frame
-        frame.size.width = offsetX
-        scrollViewContainer.frame = frame
-
-        
-        scrollView.addSubview(scrollViewContainer)
-        
-        
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .leading, relatedBy: .equal, toItem: scrollViewContainer, attribute: .leading, multiplier: 1.0, constant: 0.0))
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .trailing, relatedBy: .equal, toItem: scrollViewContainer, attribute: .trailing, multiplier: 1.0, constant: 0.0))
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .bottom, relatedBy: .equal, toItem: scrollViewContainer, attribute: .bottom, multiplier: 1.0, constant: 0.0))
-        scrollView.addConstraint(NSLayoutConstraint(item: scrollView, attribute: .top, relatedBy: .equal, toItem: scrollViewContainer, attribute: .top, multiplier: 1.0, constant: 0.0))
-        
-        
-        
         // Setting up Search Controller
         
         searchController = UISearchController(searchResultsController: nil)
@@ -186,39 +80,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         searchController.dimsBackgroundDuringPresentation = false
         
         
-        /*refreshControl = UIRefreshControl()
+        
         
         // Custom Refresh View
-        let refreshContents = NSBundle.mainBundle().loadNibNamed("CustomRefreshView", owner: self, options: nil)
-        let refreshView = refreshContents[0] as! UIView
-        refreshView.frame = refreshControl.bounds
+        
+        refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(self.getLatestArticles), for: UIControlEvents.valueChanged)
+        let refreshView:LoadingView = LoadingView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: refreshControl.bounds.height))
         refreshControl.addSubview(refreshView)
         
-        tableView.addSubview(refreshControl)*/
+        let tableViewController = UITableViewController()
+        tableViewController.tableView = tableView
+        tableViewController.refreshControl = refreshControl
         
-        //self.tableView.addInfiniteScrollingWithHandler(() -> ())
         
-        /*self.tableView.addInfiniteScrollingWithHandler {
-            /*dispatch_async(DispatchQueue.global(DispatchQueue.GlobalQueuePriority.default, 0), { () -> Void in
-                // do something in the background
-                dispatch_async(dispatch_get_main_queue(), { [unowned self] in
-                    self.tableView.reloadData()
-                    self.tableView.infiniteScrollingView?.stopAnimating()
-                    })
-            })*/
-        }*/
-        
-        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/0/1").responseJSON { response in
-            //print(response.request)  // original URL request
-            //print(response.response) // HTTP URL response
-            //print(response.data)     // server data
-            //print(response.result)   // result of response serialization
+        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/0/5").responseJSON { response in
             
             if let value = response.result.value {
                 let json = JSON(value)
                 
-                if let data = json["data"].array {
-                    
+                if let articles = json["data"].array {
+                    for row in articles {
+                        if let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
+                            
+                            self.data.append(Article(category: category, title: title, author: author, cover: cover, desc: desc))
+                            
+                        }
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
                 }
                 
             }
@@ -228,9 +120,37 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    /*override func viewDidLayoutSubviews() {
-        menuControl.frame = CGRect(x: 0.0, y: 0.0, width: self.view.bounds.width, height: 60.0)
-    }*/
+    func getLatestArticles() {
+        
+        
+        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/0/5").responseJSON { response in
+            
+            if let value = response.result.value {
+                let json = JSON(value)
+                
+                if let articles = json["data"].array {
+                    for row in articles {
+                        if let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
+                            
+                            self.data.append(Article(category: category, title: title, author: author, cover: cover, desc: desc))
+                            
+                        }
+                    }
+                }
+                
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                    
+                    if (self.refreshControl != nil) {
+                        self.refreshControl.endRefreshing()
+                    }
+                }
+                
+            }
+        }
+        
+        
+    }
     
     func searchClick(_ sender: UIButton) {
         
@@ -277,27 +197,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             
             self.navigationController?.pushViewController(mapViewController, animated: true)
         }
-        
-        //self.menuControl.setSelectedItem(item: 3)
-        
-        
-        //mapViewController.hotels = self.hotels
-        
-        
-    }
-    
-    func changePage(_ sender: UIButton) {
-        
-        selectedCategorie = sender.tag
-        
-        for button in self.scrollView.subviews[0].subviews {
-            if button.tag == selectedCategorie {
-                button.backgroundColor = highlightColor
-            } else {
-                button.backgroundColor = UIColor.clear
-            }
-        }
-        
     }
     
     // MARK : TableView
@@ -308,48 +207,14 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         view.title.text = data[section].title.uppercased()
         view.author.text = "PAR " + (data[section].author?.uppercased())!
-        //view.categoryTitle.text = data[section].category.title.uppercased()
+        view.categoryTitle.text = data[section].category.uppercased()
         
-        return view
-        
-        /*if let _ = hotels {
-        
-            let view = tableView.dequeueReusableCellWithIdentifier("sectionCell") as! SectionCell
-            
-            view.title.text = data[section].title.uppercaseString
-            view.author.text = "PAR " + (data[section].author?.uppercaseString)!
-            view.categoryTitle.text = data[section].category.title.uppercaseString
-            
-            /*view.title.text = hotels![section].nom
-            view.author.text = "PAR FRédéric LACROIX".uppercaseString
-            view.categoryTitle.text = "HOTEL"*/
-            
-            
-            return view
-            
-        } else {
-            return UIView(frame: CGRect(origin: CGPointZero, size: CGSize(width: 0, height: 0)))
-        }*/
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        let view = UIView()
         return view
     }
     
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        //return data.count
-        
-        /*if let _ = hotels {
-            return hotels!.count
-        } else {
-            return 0
-        }*/
-        
         return data.count
-        
-        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -360,40 +225,36 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "articleCell") as! ArticleCell
         
-        
-        let cover = UIImage(named: data[(indexPath as NSIndexPath).section].cover!)
-         
-         cell.imageMain.clipsToBounds = true
-         cell.imageMain.image = cover
-         cell.descText.text = data[(indexPath as NSIndexPath).section].desc!
-        
-        
-        /*let cover = UIImage(named: data[0].cover!)
-        
-        cell.imageMain.clipsToBounds = true
-        cell.imageMain.image = cover
-        cell.descText.text = data[0].desc!*/
-        
+        cell.imageMain.sd_setImage(with: URL(string: data[indexPath.section].cover!))
+        cell.descText.text = data[indexPath.section].desc!
         
         return cell
     }
     
+    /*func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        // 1. set the initial state of the cell
+        cell.alpha = 0.0
+        
+        // 2. UIView animation method to change to the final state of the cell
+        
+            UIView.animate(withDuration: 0.5, animations: {
+                cell.alpha = 1.0
+            })
+        
+        
+        
+    }*/
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
-        self.navigationController?.pushViewController(articleViewController, animated: true)*/
         
-        /*let authorViewController = AuthorViewController(nibName: "AuthorViewController", bundle: nil)
-        self.navigationController?.pushViewController(authorViewController, animated: true)*/
-        
-        if let authorViewController = storyboard?.instantiateViewController(withIdentifier: "authorViewController") as? AuthorViewController {
-            self.navigationController?.pushViewController(authorViewController, animated: true)
+        if let articleViewController = storyboard?.instantiateViewController(withIdentifier: "articleViewController") as? ArticleViewController {
+            
+            self.navigationController?.pushViewController(articleViewController, animated: true)
         }
-        
-        
         
     }
     
-    /*let threshold:CGFloat = 100.0 // threshold from bottom of tableView
+    let threshold:CGFloat = 150.0 // threshold from bottom of tableView
     var isLoadingMore = false // flag
     
     
@@ -406,21 +267,50 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             // Get more data - API call
             self.isLoadingMore = true
             
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-                self.isLoadingMore = false
+            Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/\(data.count)/5").responseJSON { response in
+                
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    if let articles = json["data"].array {
+                        for row in articles {
+                            if let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
+                                
+                                self.data.append(Article(category: category, title: title, author: author, cover: cover, desc: desc))
+                                
+                            }
+                        }
+                    }
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                        self.isLoadingMore = false
+                    }
+                    
+                }
             }
             
         }
         
-    }*/
+    }
     
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    
+    /*
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
     
     
 
