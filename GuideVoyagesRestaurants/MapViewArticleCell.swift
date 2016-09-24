@@ -10,14 +10,12 @@ import UIKit
 
 class MapViewArticleCell: UITableViewCell {
     
-    @IBOutlet weak var bgView:UIView!
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
         
-        bgView.layer.cornerRadius = 10.0
-        bgView.backgroundColor = highlightColor
+        //bgView.layer.cornerRadius = 10.0
+        self.backgroundColor = highlightColor
         
     }
 

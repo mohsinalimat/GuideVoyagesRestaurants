@@ -12,7 +12,6 @@ import QuartzCore
 class MenuControl: UIControl {
     
     var items: [MenuItem] = []
-    //var itemsLayer: [CALayer] = []
     var animator: UIDynamicAnimator? = nil
     var snappingBehavior: UISnapBehavior?
     
@@ -33,9 +32,6 @@ class MenuControl: UIControl {
     
     private func updateItemsView() {
         
-        //var titleLabel: UILabel? = nil
-        //var iconImageView: UIImageView? = nil
-        
         let itemSpacing:CGFloat = 6.0
         let itemWidth = (self.bounds.width - ((CGFloat(items.count)+1.0) * itemSpacing))/CGFloat(items.count)
         let itemHeight = self.bounds.height - itemSpacing*2
@@ -53,29 +49,6 @@ class MenuControl: UIControl {
         var button: UIButton
         
         for menuItem in items {
-            
-            /*itemView = UIView(frame: CGRect(x: CGFloat(index+1) * itemSpacing + CGFloat(index) * itemWidth, y: itemSpacing, width: itemWidth, height: itemHeight))
-            itemView?.tag = index+1
-            
-            titleLabel = UILabel(frame: CGRect(x: 0, y: itemHeight - 15, width: itemWidth, height: 15))
-            titleLabel?.text = menuItem.title.uppercased()
-            titleLabel?.textColor = mainColor
-            titleLabel?.textAlignment = .center
-            titleLabel?.font = UIFont(name: "Reglo-Bold", size: 10)
-            
-            if itemWidth > (itemHeight-15.0) {
-                iconImageView = UIImageView(frame: CGRect(x: (itemWidth-itemHeight+19.0)/2.0, y: 2.0, width: itemHeight-19.0, height: itemHeight-19.0))
-            } else {
-                iconImageView = UIImageView(frame: CGRect(x: 2.0, y: 2.0, width: itemWidth-4.0, height: itemWidth-4.0))
-            }          
-            
-            
-            iconImageView?.image = UIImage(named: menuItem.icon)
-            
-            itemView?.addSubview(iconImageView!)
-            itemView?.addSubview(titleLabel!)
-            
-            self.addSubview(itemView!)*/
             
             button = UIButton(frame: CGRect(x: CGFloat(index+1) * itemSpacing + CGFloat(index) * itemWidth, y: itemSpacing, width: itemWidth, height: itemHeight))
             
@@ -117,9 +90,7 @@ class MenuControl: UIControl {
     
     func setSelectedItem(item: Int) {
         
-        if let snapBehavior = snappingBehavior {
-            self.animator?.removeBehavior(snapBehavior)
-        }
+        self.animator?.removeAllBehaviors()
         
         let selectedItem = self.viewWithTag(item)
         let bgView = self.viewWithTag(items.count+1)

@@ -31,7 +31,7 @@ import Foundation
 
 struct Article {
     
-    //let id:Int!
+    let id:String!
     //let category: Category!
     var title:String!
     var category: String!
@@ -39,7 +39,8 @@ struct Article {
     var cover:String?
     var desc:String?
     
-    init(category: String, title: String, author: String, cover: String, desc: String) {
+    init(id: String, category: String, title: String, author: String, cover: String, desc: String) {
+        self.id = id
         self.category = category
         self.title = title
         self.author = author

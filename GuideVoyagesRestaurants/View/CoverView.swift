@@ -13,6 +13,11 @@ class CoverView: UIView {
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var descView: UIView!
     
+    @IBOutlet weak var categorie: UILabel!
+    @IBOutlet weak var titre: UILabel!
+    @IBOutlet weak var auteur: UILabel!
+    
+    
     
     override func awakeFromNib() {
         super.awakeFromNib()

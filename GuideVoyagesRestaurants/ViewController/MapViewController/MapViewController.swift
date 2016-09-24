@@ -12,19 +12,23 @@ import DistancePicker
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
-    @IBOutlet var distancePicker: DistancePicker!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var tableView: UITableView!
     
+    var distancePickerControl: DistancePickerControl!
+    
     var searchRadiusOverlay: MKOverlay?
     var searchRadiusActive: Bool {
-        return distancePicker.selectedValue != DBL_MAX && isValidAuthorizationStatus(status: authorizationStatus)
+        //return distancePickerControl.distance != DBL_MAX && isValidAuthorizationStatus(status: authorizationStatus)
+        return isValidAuthorizationStatus(status: authorizationStatus)
     }
     var authorizationStatus = CLAuthorizationStatus.notDetermined
     var locationManager = CLLocationManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.view.backgroundColor = bgColor
         
         // Do any additional setup after loading the view.
         
@@ -40,11 +44,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         self.navigationItem.title = "Autour de vous"
         
         
-        distancePicker.target = self
-        distancePicker.action = #selector(updateUI)
-        distancePicker.backgroundColor = bgColor
-        distancePicker.tintColor = mainColor
-        distancePicker.usesMetricSystem = false
+        // Setting Distance Picker
+        distancePickerControl = DistancePickerControl(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 60.0))
+        distancePickerControl.target = self
+        distancePickerControl.action = #selector(updateUI)
+        self.view.addSubview(distancePickerControl)
         
         mapView.delegate = self
         mapView.isHidden = true
@@ -101,18 +105,20 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         }
         
         if searchRadiusActive {
+            
             searchRadiusOverlay = MKCircle(center: mapView.userLocation.coordinate,
-                                           radius: distancePicker.selectedValue)
+                                           radius: Double(distancePickerControl.distance*1000))
             mapView.add(searchRadiusOverlay!)
         }
     }
     
     func updateVisibleMapRect() {
+        
         if searchRadiusActive {
             let overlayInset = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
             let mapRect = mapView.mapRectThatFits(searchRadiusOverlay!.boundingMapRect, edgePadding: overlayInset)
             
-            mapView.setVisibleMapRect(mapRect, animated: false)
+            mapView.setVisibleMapRect(mapRect, animated: true)
         }
         else if isValidAuthorizationStatus(status: authorizationStatus) {
             mapView.setCenter(mapView.userLocation.coordinate, animated: true)

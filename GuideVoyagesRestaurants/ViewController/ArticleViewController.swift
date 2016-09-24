@@ -14,6 +14,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     @IBOutlet weak var coverView: CoverView!
     @IBOutlet var webView: UIWebView!
     
+    var article:Article?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +64,12 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         /* ----------------------
          COVER VIEW INIT
          ---------------------- */
-        coverView.coverImage.sd_setImage(with: URL(string: "https://di2pra.com/voyages/img/1.jpg"))
+        if let cover = article?.cover {
+            coverView.coverImage.sd_setImage(with: URL(string: cover))
+        }
+        
+        coverView.titre.text = article?.title.uppercased()
+        coverView.categorie.text = article?.category.uppercased()
         /* ----------------------
          ---------------------- */
         
@@ -89,9 +96,13 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         webView.backgroundColor = UIColor.clear
         
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
-        let url = URL(string: "https://di2pra.com/voyages/article.php")
         
-        webView.loadRequest(URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60))
+        if let id = article?.id {
+            let url = URL(string: "http://www.guide-restaurants-et-voyages-du-monde.com/articleforiphone/\(id)")            
+            webView.loadRequest(URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60))
+        }
+        
+        
         webView.delegate = self
         webView.scrollView.delegate = self
         webView.scrollView.isScrollEnabled = false
@@ -138,13 +149,20 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         return true
     }
     
-    func webViewDidFinishLoad(_ webView: UIWebView) {
-        
+    func webViewDidStartLoad(_ webView: UIWebView) {
         if let loadingView = self.view.viewWithTag(1) {
             loadingView.removeFromSuperview()
             webView.scrollView.isScrollEnabled = true
         }
     }
+    
+    /*func webViewDidFinishLoad(_ webView: UIWebView) {
+        
+        if let loadingView = self.view.viewWithTag(1) {
+            loadingView.removeFromSuperview()
+            webView.scrollView.isScrollEnabled = true
+        }
+    }*/
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
@@ -167,9 +185,9 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
             
             
             if offset > (3/4 * self.view.bounds.width - coverView.descView.frame.height) {
-                self.navigationItem.title = "Velouté d'Asperges et d'oeuf coulant"
+                self.navigationItem.title = article?.title
             } else {
-                self.navigationItem.title = "Restaurant"
+                self.navigationItem.title = article?.category.uppercased()
             }
             
         }

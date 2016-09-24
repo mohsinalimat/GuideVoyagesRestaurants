@@ -1,6 +1,5 @@
 PODS:
   - Alamofire (4.0.0)
-  - DistancePicker (0.8)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
@@ -8,16 +7,14 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
-  - DistancePicker (~> 0.8)
   - SDWebImage (~> 3.8)
   - SwiftyJSON (~> 3.0.0)
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
-  DistancePicker: 4296860891b728bfbc73bf565b94bf5393744a50
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 00f43ddadaa6ad7a2a78c3b3eb9a39caf96fe125
+PODFILE CHECKSUM: 5ceb25a0cf9a6174b41ec59cdadd7ac172cbcd3f
 
 COCOAPODS: 1.0.1

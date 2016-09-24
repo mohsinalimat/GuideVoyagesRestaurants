@@ -71,6 +71,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.view.addSubview(menuControl)
         
         
+        
         // Setting up Search Controller
         
         searchController = UISearchController(searchResultsController: nil)
@@ -85,7 +86,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Custom Refresh View
         
         refreshControl = UIRefreshControl()
-        refreshControl.addTarget(self, action: #selector(self.getLatestArticles), for: UIControlEvents.valueChanged)
+        refreshControl.addTarget(self, action: #selector(self.refreshArticles), for: UIControlEvents.valueChanged)
         let refreshView:LoadingView = LoadingView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: refreshControl.bounds.height))
         refreshControl.addSubview(refreshView)
         
@@ -93,46 +94,26 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableViewController.tableView = tableView
         tableViewController.refreshControl = refreshControl
         
-        
-        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/0/5").responseJSON { response in
-            
-            if let value = response.result.value {
-                let json = JSON(value)
-                
-                if let articles = json["data"].array {
-                    for row in articles {
-                        if let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
-                            
-                            self.data.append(Article(category: category, title: title, author: author, cover: cover, desc: desc))
-                            
-                        }
-                    }
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
-                }
-                
-            }
-        }
-        
+        self.loadArticles(from: 0, number: 5)
         
         
     }
     
-    func getLatestArticles() {
-        
-        
-        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/0/5").responseJSON { response in
+    func refreshArticles() {
+        self.loadArticles(from: 0, number: 5)
+    }
+    
+    func loadArticles(from: Int, number: Int) {
+        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/\(from)/\(number)").responseJSON { response in
             
             if let value = response.result.value {
                 let json = JSON(value)
                 
                 if let articles = json["data"].array {
                     for row in articles {
-                        if let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
+                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
                             
-                            self.data.append(Article(category: category, title: title, author: author, cover: cover, desc: desc))
+                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc))
                             
                         }
                     }
@@ -148,8 +129,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                 
             }
         }
-        
-        
     }
     
     func searchClick(_ sender: UIButton) {
@@ -249,6 +228,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if let articleViewController = storyboard?.instantiateViewController(withIdentifier: "articleViewController") as? ArticleViewController {
             
+            articleViewController.article = data[indexPath.section]
+            
             self.navigationController?.pushViewController(articleViewController, animated: true)
         }
         
@@ -266,29 +247,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         if !isLoadingMore && (maximumOffset - contentOffset <= threshold) {
             // Get more data - API call
             self.isLoadingMore = true
-            
-            Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/\(data.count)/5").responseJSON { response in
-                
-                if let value = response.result.value {
-                    let json = JSON(value)
-                    
-                    if let articles = json["data"].array {
-                        for row in articles {
-                            if let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
-                                
-                                self.data.append(Article(category: category, title: title, author: author, cover: cover, desc: desc))
-                                
-                            }
-                        }
-                    }
-                    
-                    DispatchQueue.main.async {
-                        self.tableView.reloadData()
-                        self.isLoadingMore = false
-                    }
-                    
-                }
-            }
+            self.loadArticles(from: data.count, number: 5)
+            self.isLoadingMore = false
             
         }
         

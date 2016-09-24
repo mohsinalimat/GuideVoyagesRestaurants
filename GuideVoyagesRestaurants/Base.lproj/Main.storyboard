@@ -183,78 +183,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lgO-Js-dvP" customClass="DistancePicker" customModule="DistancePicker">
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="gzy-pq-heY"/>
-                                </constraints>
-                            </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q9m-tt-eCE">
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="q9m-tt-eCE" secondAttribute="height" multiplier="4:3" id="k66-R9-gzy"/>
                                 </constraints>
                             </mapView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="81" sectionHeaderHeight="4" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-TK-y2g">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="81" sectionHeaderHeight="4" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-TK-y2g">
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <color key="separatorColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                <inset key="separatorInset" minX="5" minY="0.0" maxX="5" maxY="0.0"/>
+                                <color key="separatorColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapViewArticleCell" rowHeight="81" id="aUK-Bi-PwN" customClass="MapViewArticleCell" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="4" width="375" height="81"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aUK-Bi-PwN" id="VD2-eI-VB6">
-                                            <frame key="frameInset" width="375" height="81"/>
+                                            <frame key="frameInset" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Phd-39-zYF">
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VOYAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cug-MD-mNC">
-                                                            <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="18"/>
-                                                            <color key="textColor" red="0.63137254901960782" green="0.25098039215686274" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le volcan Sakurajima" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtM-LR-vga">
-                                                            <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="16"/>
-                                                            <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-tG-UGV">
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="20" id="RAR-wo-cKI"/>
-                                                                <constraint firstAttribute="height" constant="20" id="hGD-se-ZPF"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à 3 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-QA-3s6">
-                                                            <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
-                                                            <color key="textColor" red="0.83921568629999999" green="0.27058823529999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VOYAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cug-MD-mNC">
+                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="18"/>
+                                                    <color key="textColor" red="0.63137254901960782" green="0.25098039215686274" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Le volcan Sakurajima" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BtM-LR-vga">
+                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="16"/>
+                                                    <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="à 3 km" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7h0-QA-3s6">
+                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
+                                                    <color key="textColor" red="0.83921568629999999" green="0.27058823529999998" blue="0.25490196079999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="next" translatesAutoresizingMaskIntoConstraints="NO" id="pNs-tG-UGV">
                                                     <constraints>
-                                                        <constraint firstItem="pNs-tG-UGV" firstAttribute="leading" secondItem="7h0-QA-3s6" secondAttribute="trailing" constant="8" id="1Sg-kv-xQv"/>
-                                                        <constraint firstItem="cug-MD-mNC" firstAttribute="top" secondItem="Phd-39-zYF" secondAttribute="top" constant="8" id="Cii-Dh-hJp"/>
-                                                        <constraint firstItem="pNs-tG-UGV" firstAttribute="centerY" secondItem="Phd-39-zYF" secondAttribute="centerY" id="Df4-8N-OuW"/>
-                                                        <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BtM-LR-vga" secondAttribute="bottom" constant="8" id="NX3-3W-fbZ"/>
-                                                        <constraint firstItem="7h0-QA-3s6" firstAttribute="centerY" secondItem="Phd-39-zYF" secondAttribute="centerY" id="Rhh-ZO-Wb5"/>
-                                                        <constraint firstItem="BtM-LR-vga" firstAttribute="top" secondItem="cug-MD-mNC" secondAttribute="bottom" constant="2" id="T1U-Js-JLS"/>
-                                                        <constraint firstAttribute="trailing" secondItem="pNs-tG-UGV" secondAttribute="trailing" constant="8" id="Yoh-Xm-HWU"/>
-                                                        <constraint firstItem="BtM-LR-vga" firstAttribute="leading" secondItem="Phd-39-zYF" secondAttribute="leading" constant="9" id="Z01-sq-UcG"/>
-                                                        <constraint firstItem="cug-MD-mNC" firstAttribute="leading" secondItem="Phd-39-zYF" secondAttribute="leading" constant="9" id="zZM-Hy-2SK"/>
+                                                        <constraint firstAttribute="width" constant="20" id="RAR-wo-cKI"/>
+                                                        <constraint firstAttribute="height" constant="20" id="hGD-se-ZPF"/>
                                                     </constraints>
-                                                </view>
+                                                </imageView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Phd-39-zYF" firstAttribute="top" secondItem="VD2-eI-VB6" secondAttribute="top" constant="4" id="BPh-Wx-GDJ"/>
-                                                <constraint firstAttribute="bottom" secondItem="Phd-39-zYF" secondAttribute="bottom" constant="4" id="IDS-fr-Som"/>
-                                                <constraint firstItem="Phd-39-zYF" firstAttribute="leading" secondItem="VD2-eI-VB6" secondAttribute="leading" constant="8" id="jCg-Ic-IGi"/>
-                                                <constraint firstAttribute="trailing" secondItem="Phd-39-zYF" secondAttribute="trailing" constant="8" id="tS7-Fa-M5w"/>
+                                                <constraint firstAttribute="trailing" secondItem="pNs-tG-UGV" secondAttribute="trailing" constant="18" id="Hnp-Fo-M63"/>
+                                                <constraint firstItem="pNs-tG-UGV" firstAttribute="leading" secondItem="7h0-QA-3s6" secondAttribute="trailing" constant="8" id="Imx-v2-RcA"/>
+                                                <constraint firstItem="pNs-tG-UGV" firstAttribute="centerY" secondItem="VD2-eI-VB6" secondAttribute="centerY" id="JA6-8l-nHw"/>
+                                                <constraint firstItem="7h0-QA-3s6" firstAttribute="centerY" secondItem="VD2-eI-VB6" secondAttribute="centerY" id="Kao-2a-QQW"/>
+                                                <constraint firstItem="BtM-LR-vga" firstAttribute="top" secondItem="cug-MD-mNC" secondAttribute="bottom" constant="5" id="R1Y-fa-RgF"/>
+                                                <constraint firstItem="BtM-LR-vga" firstAttribute="leading" secondItem="VD2-eI-VB6" secondAttribute="leading" constant="8" id="YEl-LQ-QI2"/>
+                                                <constraint firstItem="cug-MD-mNC" firstAttribute="top" secondItem="VD2-eI-VB6" secondAttribute="top" constant="8" id="a4S-5x-bXE"/>
+                                                <constraint firstItem="cug-MD-mNC" firstAttribute="leading" secondItem="VD2-eI-VB6" secondAttribute="leading" constant="8" id="f5l-8r-V6t"/>
+                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="BtM-LR-vga" secondAttribute="bottom" constant="8" id="glW-OK-vMI"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
-                                        <connections>
-                                            <outlet property="bgView" destination="Phd-39-zYF" id="aAl-Df-aCF"/>
-                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -266,19 +246,15 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="bFz-TK-y2g" firstAttribute="leading" secondItem="PS1-C9-8db" secondAttribute="leading" id="524-3I-b7R"/>
-                            <constraint firstAttribute="trailing" secondItem="lgO-Js-dvP" secondAttribute="trailing" id="56c-D7-Ev9"/>
                             <constraint firstItem="q9m-tt-eCE" firstAttribute="leading" secondItem="PS1-C9-8db" secondAttribute="leading" id="EMw-Jz-8q8"/>
                             <constraint firstAttribute="trailing" secondItem="q9m-tt-eCE" secondAttribute="trailing" id="IiB-CO-zDB"/>
-                            <constraint firstItem="lgO-Js-dvP" firstAttribute="leading" secondItem="PS1-C9-8db" secondAttribute="leading" id="Opi-0f-G5b"/>
-                            <constraint firstItem="lgO-Js-dvP" firstAttribute="top" secondItem="PS1-C9-8db" secondAttribute="top" id="PiN-Ps-SfS"/>
-                            <constraint firstItem="q9m-tt-eCE" firstAttribute="top" secondItem="lgO-Js-dvP" secondAttribute="bottom" id="QNg-Hd-fg4"/>
+                            <constraint firstItem="q9m-tt-eCE" firstAttribute="top" secondItem="yZr-RD-x6l" secondAttribute="bottom" constant="60" id="OKl-gu-vxM"/>
                             <constraint firstItem="bFz-TK-y2g" firstAttribute="top" secondItem="q9m-tt-eCE" secondAttribute="bottom" id="gqK-b6-AEq"/>
                             <constraint firstAttribute="trailing" secondItem="bFz-TK-y2g" secondAttribute="trailing" id="ipH-dU-GXa"/>
                             <constraint firstAttribute="bottom" secondItem="bFz-TK-y2g" secondAttribute="bottom" id="sYY-wy-hMm"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="distancePicker" destination="lgO-Js-dvP" id="npv-UP-3b2"/>
                         <outlet property="mapView" destination="q9m-tt-eCE" id="Um8-CO-jBf"/>
                         <outlet property="tableView" destination="bFz-TK-y2g" id="lbE-cB-VLp"/>
                     </connections>
@@ -500,8 +476,11 @@
                                     <constraint firstItem="Lca-IG-dV5" firstAttribute="leading" secondItem="d9V-hz-YC7" secondAttribute="leading" id="sWb-hB-6fd"/>
                                 </constraints>
                                 <connections>
+                                    <outlet property="auteur" destination="Hgl-pf-ues" id="yGt-WN-6BE"/>
+                                    <outlet property="categorie" destination="eSy-Lg-Vhy" id="wS2-62-64R"/>
                                     <outlet property="coverImage" destination="Lca-IG-dV5" id="TNp-Ce-hnM"/>
                                     <outlet property="descView" destination="BLA-U0-HuE" id="LAi-Xv-N4S"/>
+                                    <outlet property="titre" destination="BuV-cX-lhb" id="y4O-Vk-4DF"/>
                                 </connections>
                             </view>
                         </subviews>

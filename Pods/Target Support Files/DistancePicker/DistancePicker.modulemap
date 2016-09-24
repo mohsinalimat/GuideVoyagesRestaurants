@@ -1,6 +1,0 @@
-framework module DistancePicker {
-  umbrella header "DistancePicker-umbrella.h"
-
-  export *
-  module * { export * }
-}
