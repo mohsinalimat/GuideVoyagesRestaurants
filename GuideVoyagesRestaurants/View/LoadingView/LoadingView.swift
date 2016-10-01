@@ -10,39 +10,29 @@ import UIKit
 
 class LoadingView: UIView {
     
-    var iconHeader: UIImageView! = nil
-    var iconBody: UIImageView! = nil
+    var iconHeader: UIImageView!
+    var iconBody: UIImageView!
+    var animating: Bool = true
     
     override init(frame: CGRect) {
         
         super.init(frame: frame)
         
-        iconBody = UIImageView(frame: CGRect.zero)
-        iconBody.image = UIImage(named: "geisha_body")
-        iconBody.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(iconBody)
-        
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: NSLayoutAttribute.centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 55))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25))
-        
+        iconBody = UIImageView(frame: CGRect(x: 0, y: 0, width: 1, height: 1))
+        iconBody?.image = UIImage(named: "geisha_body")
+        iconBody?.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(iconBody!)
         
         iconHeader = UIImageView(frame: CGRect.zero)
-        iconHeader.image = UIImage(named: "geisha_head")
-        iconHeader.translatesAutoresizingMaskIntoConstraints = false
-        self.addSubview(iconHeader)
-        
-        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
-        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25))
-        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 25))
-        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .top, relatedBy: .equal, toItem: iconHeader, attribute: .bottom, multiplier: 1, constant: 3))
-        
+        iconHeader?.image = UIImage(named: "geisha_head")
+        iconHeader?.translatesAutoresizingMaskIntoConstraints = false
+        self.addSubview(iconHeader!)
         
         self.backgroundColor = bgColor
+        
+        self.setConstraints(width: 55, height: 25)
+        
         self.animate()
-        
-        
         
     }
     
@@ -50,8 +40,28 @@ class LoadingView: UIView {
         super.init(coder: aDecoder)
     }
     
+    func setConstraints(width: CGFloat, height: CGFloat) {
+        
+        self.removeAllConstraints()
+        
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: NSLayoutAttribute.centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: width))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
+        
+        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
+        self.addConstraint(NSLayoutConstraint(item: iconHeader, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: height))
+        self.addConstraint(NSLayoutConstraint(item: iconBody, attribute: .top, relatedBy: .equal, toItem: iconHeader, attribute: .bottom, multiplier: 1, constant: 3))
+    }
+    
+    func updateSize(width: CGFloat, height: CGFloat) {
+        self.setConstraints(width: width, height: height)
+        self.layoutIfNeeded()
+    }
+    
     func animate() {
-        if !self.isHidden {
+        if animating {
             UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions.curveLinear, animations: { () -> Void in
                 self.iconHeader!.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_4))
                 
@@ -67,7 +77,7 @@ class LoadingView: UIView {
             })
         }
     }
-
+    
     /*
     // Only override drawRect: if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
@@ -76,4 +86,14 @@ class LoadingView: UIView {
     }
     */
 
+}
+
+
+extension UIView {
+    func removeAllConstraints() {
+        self.removeConstraints(self.constraints)
+        for view in self.subviews {
+            view.removeAllConstraints()
+        }
+    }
 }

@@ -20,6 +20,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var refreshControl: UIRefreshControl!
     
     var data:[Article] = []
+    
+    var isLoadingMore = false // flag
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -29,11 +31,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view, typically from a nib.
         
         self.view.backgroundColor = bgColor
-        
-        
-        // Setup TableView :
-        tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.estimatedRowHeight = 300
         
         
         // Setup Navigation items :
@@ -88,45 +85,71 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(self.refreshArticles), for: UIControlEvents.valueChanged)
         let refreshView:LoadingView = LoadingView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: refreshControl.bounds.height))
+        refreshView.updateSize(width: 55/2, height: 25/2)
         refreshControl.addSubview(refreshView)
         
         let tableViewController = UITableViewController()
         tableViewController.tableView = tableView
         tableViewController.refreshControl = refreshControl
         
-        self.loadArticles(from: 0, number: 5)
+        // Setup TableView :
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 300
         
+        tableView.sectionHeaderHeight = UITableViewAutomaticDimension
+        tableView.estimatedSectionHeaderHeight = 50
+        
+        self.tableView.register(UINib(nibName: "ArticleHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "articleHeader")
+        
+        self.loadArticles(from: 0, number: 10, refresh: true)
         
     }
     
     func refreshArticles() {
-        self.loadArticles(from: 0, number: 5)
+        if !isLoadingMore {
+            self.loadArticles(from: 0, number: 5, refresh: true)
+        }
     }
     
-    func loadArticles(from: Int, number: Int) {
+    func loadArticles(from: Int, number: Int, refresh: Bool) {
+        
+        self.isLoadingMore = true
+        
         Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/\(from)/\(number)").responseJSON { response in
             
             if let value = response.result.value {
                 let json = JSON(value)
                 
                 if let articles = json["data"].array {
+                    
+                    if refresh {
+                        self.data = []
+                    }
+                    
                     for row in articles {
-                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let category = row["categorie"].string {
+                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let date =  row["date"].string, let category = row["categorie"].string {
                             
-                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc))
+                            
+                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc, date: date))
                             
                         }
                     }
-                }
-                
-                DispatchQueue.main.async {
-                    self.tableView.reloadData()
                     
-                    if (self.refreshControl != nil) {
-                        self.refreshControl.endRefreshing()
+                    
+                    
+                    DispatchQueue.main.async {
+                        
+                        self.tableView.reloadData()
+                        
+                        
+                        
+                        if (self.refreshControl != nil) {
+                            self.refreshControl.endRefreshing()
+                        }
                     }
+                    
+                    self.isLoadingMore = false
                 }
-                
             }
         }
     }
@@ -182,11 +205,12 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
         
-        let view = tableView.dequeueReusableCell(withIdentifier: "sectionCell") as! SectionCell
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: "articleHeader") as! ArticleHeader
         
+        view.categoryTitle.text = data[section].category.uppercased()
         view.title.text = data[section].title.uppercased()
         view.author.text = "PAR " + (data[section].author?.uppercased())!
-        view.categoryTitle.text = data[section].category.uppercased()
+        view.dateLabel.text = data[section].date
         
         return view
     }
@@ -206,6 +230,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         cell.imageMain.sd_setImage(with: URL(string: data[indexPath.section].cover!))
         cell.descText.text = data[indexPath.section].desc!
+        
+        if indexPath.section + 7 >= self.data.count {
+            self.loadArticles(from: data.count, number: 10, refresh: false)
+        }
         
         return cell
     }
@@ -235,24 +263,18 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
-    let threshold:CGFloat = 150.0 // threshold from bottom of tableView
-    var isLoadingMore = false // flag
-    
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+    /*func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         let contentOffset = scrollView.contentOffset.y
         let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
         
         if !isLoadingMore && (maximumOffset - contentOffset <= threshold) {
             // Get more data - API call
-            self.isLoadingMore = true
-            self.loadArticles(from: data.count, number: 5)
-            self.isLoadingMore = false
+            self.loadArticles(from: data.count, number: 5, refresh: false, updating: true)
             
         }
         
-    }
+    }*/
     
 
     override func didReceiveMemoryWarning() {

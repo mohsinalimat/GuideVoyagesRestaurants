@@ -11,7 +11,7 @@ import SDWebImage
 
 class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDelegate {
     
-    @IBOutlet weak var coverView: CoverView!
+    @IBOutlet weak var articleHeaderView: ArticleHeaderView!
     @IBOutlet var webView: UIWebView!
     
     var article:Article?
@@ -65,11 +65,11 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
          COVER VIEW INIT
          ---------------------- */
         if let cover = article?.cover {
-            coverView.coverImage.sd_setImage(with: URL(string: cover))
+            articleHeaderView.coverImage.sd_setImage(with: URL(string: cover))
         }
         
-        coverView.titre.text = article?.title.uppercased()
-        coverView.categorie.text = article?.category.uppercased()
+        articleHeaderView.titre.text = article?.title.uppercased()
+        articleHeaderView.categorie.text = article?.category.uppercased()
         /* ----------------------
          ---------------------- */
         
@@ -150,10 +150,13 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     }
     
     func webViewDidStartLoad(_ webView: UIWebView) {
-        if let loadingView = self.view.viewWithTag(1) {
+        
+        if let loadingView = self.view.viewWithTag(1) as? LoadingView {
+            loadingView.animating = false
             loadingView.removeFromSuperview()
             webView.scrollView.isScrollEnabled = true
         }
+        
     }
     
     /*func webViewDidFinishLoad(_ webView: UIWebView) {
@@ -172,8 +175,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         
         if offset < 0 {
             
-            let coverImageScaleFactor:CGFloat = -(offset) / coverView.coverImage.bounds.height
-            let coverImageSizevariation = ((coverView.coverImage.bounds.height * (1.0 + coverImageScaleFactor)) - coverView.coverImage.bounds.height)/2.0
+            let coverImageScaleFactor:CGFloat = -(offset) / articleHeaderView.coverImage.bounds.height
+            let coverImageSizevariation = ((articleHeaderView.coverImage.bounds.height * (1.0 + coverImageScaleFactor)) - articleHeaderView.coverImage.bounds.height)/2.0
             coverImageTransform = CATransform3DTranslate(coverImageTransform, 0, coverImageSizevariation, 0)
             coverImageTransform = CATransform3DScale(coverImageTransform, 1.0 + coverImageScaleFactor, 1.0 + coverImageScaleFactor, 0)
             
@@ -184,7 +187,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
             coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, max(-(3/4 * self.view.bounds.width), -offset), 0)
             
             
-            if offset > (3/4 * self.view.bounds.width - coverView.descView.frame.height) {
+            if offset > (3/4 * self.view.bounds.width - articleHeaderView.descView.frame.height) {
                 self.navigationItem.title = article?.title
             } else {
                 self.navigationItem.title = article?.category.uppercased()
@@ -192,8 +195,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
             
         }
         
-        coverView.coverImage.layer.transform = coverImageTransform
-        coverView.descView.layer.transform = coverDescTransform
+        articleHeaderView.coverImage.layer.transform = coverImageTransform
+        articleHeaderView.descView.layer.transform = coverDescTransform
         
     }
     

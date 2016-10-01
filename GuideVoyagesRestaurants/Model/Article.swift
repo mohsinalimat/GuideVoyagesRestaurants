@@ -38,15 +38,22 @@ struct Article {
     var author:String?
     var cover:String?
     var desc:String?
+    var date:String?
+    var longitude: Double?
+    var latitude: Double?
+    var distance: Double?
     
-    init(id: String, category: String, title: String, author: String, cover: String, desc: String) {
+    init(id: String, category: String, title: String, author: String, cover: String, desc: String, date: String? = nil,  longitude: Double? = nil, latitude: Double? = nil, distance:Double? = nil) {
         self.id = id
         self.category = category
         self.title = title
         self.author = author
         self.cover = cover
         self.desc = desc
-        
+        self.date = date
+        self.longitude = longitude
+        self.latitude = latitude
+        self.distance = distance
     }
     
 }

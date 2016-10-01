@@ -13,7 +13,7 @@ class DistancePickerControl: UIControl, UIDynamicAnimatorDelegate {
     open weak var target: AnyObject?
     open var action: Selector?
     
-    let totalKM:Int = 10
+    let totalKM:Int = 100
     var space:CGFloat = 100.0
     
     var distance:CGFloat = 0.1
@@ -212,23 +212,13 @@ class DistancePickerControl: UIControl, UIDynamicAnimatorDelegate {
                    to: target!,
                    for: (gestureRecognizers![0] as! PanGestureRecognizer).endEvent)
     }
-
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
 }
 
 private class PanGestureRecognizer : UIPanGestureRecognizer {
     
     var endEvent: UIEvent?
     
-    override func touchesBegan(_ touches: Set<AnyHashable>!, with event: UIEvent!) {
+    /*override func touchesBegan(_ touches: Set<AnyHashable>!, with event: UIEvent!) {
         super.touchesBegan(touches as Set<NSObject>, with: event)
         endEvent = nil
     }
@@ -236,7 +226,7 @@ private class PanGestureRecognizer : UIPanGestureRecognizer {
     override func touchesEnded(_ touches: Set<AnyHashable>!, with event: UIEvent!) {
         super.touchesEnded(touches as Set<NSObject>, with: event)
         endEvent = event
-    }
+    }*/
 }
 
 

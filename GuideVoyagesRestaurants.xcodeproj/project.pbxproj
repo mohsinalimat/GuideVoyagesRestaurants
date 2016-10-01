@@ -10,6 +10,7 @@
 		9940414EDAD37EA28157F72F /* Pods_GuideVoyagesRestaurantsTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EBCD33568C59E68ADB6AA29B /* Pods_GuideVoyagesRestaurantsTests.framework */; };
 		A058C6C4CDB3FB271BF15CB9 /* Pods_GuideVoyagesRestaurants.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 286E48DBF19F3E4C55399F2C /* Pods_GuideVoyagesRestaurants.framework */; };
 		D0975BA4BB48AEFB3CFE5763 /* Pods_GuideVoyagesRestaurantsUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D214BB827ED2E0E60996DF76 /* Pods_GuideVoyagesRestaurantsUITests.framework */; };
+		E42701BB1D9A6E0300639EE8 /* ArticleAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42701BA1D9A6E0300639EE8 /* ArticleAnnotation.swift */; };
 		E42A97F41D53856900C0982C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E42A97F31D53856900C0982C /* AppDelegate.swift */; };
 		E42A97F91D53856900C0982C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E42A97F71D53856900C0982C /* Main.storyboard */; };
 		E42A97FC1D53856900C0982C /* GuideVoyagesRestaurants.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E42A97FA1D53856900C0982C /* GuideVoyagesRestaurants.xcdatamodeld */; };
@@ -33,7 +34,7 @@
 		E45172501D9463DC002AC286 /* DistancePickerControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = E451724F1D9463DC002AC286 /* DistancePickerControl.swift */; };
 		E46474781D849FFC0027E080 /* AuthorHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E46474771D849FFC0027E080 /* AuthorHeaderView.swift */; };
 		E4683C221D834A5E000FC030 /* TransparentNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4683C211D834A5E000FC030 /* TransparentNavigationBar.swift */; };
-		E4683C251D83522D000FC030 /* CoverView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4683C241D83522D000FC030 /* CoverView.swift */; };
+		E4683C251D83522D000FC030 /* ArticleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4683C241D83522D000FC030 /* ArticleHeaderView.swift */; };
 		E4795D5E1D77546700C450C8 /* fredericlacroix.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E4795D5D1D77546700C450C8 /* fredericlacroix.jpg */; };
 		E49237F91D56715300C7DB88 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E49237F81D56715300C7DB88 /* GoogleService-Info.plist */; };
 		E4978AA91D8DEBCF00670FED /* ArticleViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4978AA81D8DEBCF00670FED /* ArticleViewController.swift */; };
@@ -43,6 +44,8 @@
 		E4B698DA1D79BFA700289C01 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4B698D81D79BFA700289C01 /* LoadingView.swift */; };
 		E4BF5E7E1D91CE9300EAEDC0 /* MapViewArticleCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4BF5E7D1D91CE9300EAEDC0 /* MapViewArticleCell.swift */; };
 		E4D2F3CE1D75A9F3003A73DC /* AuthorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4D2F3CC1D75A9F3003A73DC /* AuthorViewController.swift */; };
+		E4EC964C1D9FA59D00BD4309 /* ArticleHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = E4EC964B1D9FA59D00BD4309 /* ArticleHeader.swift */; };
+		E4EC964E1D9FA5FB00BD4309 /* ArticleHeader.xib in Resources */ = {isa = PBXBuildFile; fileRef = E4EC964D1D9FA5FB00BD4309 /* ArticleHeader.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +73,7 @@
 		9C5FBF1B03382D15FD347773 /* Pods-GuideVoyagesRestaurantsTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideVoyagesRestaurantsTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideVoyagesRestaurantsTests/Pods-GuideVoyagesRestaurantsTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D214BB827ED2E0E60996DF76 /* Pods_GuideVoyagesRestaurantsUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideVoyagesRestaurantsUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D78109656BD7A43921B4AF75 /* Pods-GuideVoyagesRestaurantsUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideVoyagesRestaurantsUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideVoyagesRestaurantsUITests/Pods-GuideVoyagesRestaurantsUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		E42701BA1D9A6E0300639EE8 /* ArticleAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleAnnotation.swift; sourceTree = "<group>"; };
 		E42A97F01D53856900C0982C /* GuideVoyagesRestaurants.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GuideVoyagesRestaurants.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E42A97F31D53856900C0982C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E42A97F81D53856900C0982C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -99,7 +103,7 @@
 		E451724F1D9463DC002AC286 /* DistancePickerControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DistancePickerControl.swift; path = Class/DistancePickerControl.swift; sourceTree = "<group>"; };
 		E46474771D849FFC0027E080 /* AuthorHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorHeaderView.swift; path = ViewController/AuthorViewController/AuthorHeaderView.swift; sourceTree = "<group>"; };
 		E4683C211D834A5E000FC030 /* TransparentNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TransparentNavigationBar.swift; path = Class/TransparentNavigationBar.swift; sourceTree = "<group>"; };
-		E4683C241D83522D000FC030 /* CoverView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CoverView.swift; path = View/CoverView.swift; sourceTree = "<group>"; };
+		E4683C241D83522D000FC030 /* ArticleHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleHeaderView.swift; path = View/ArticleHeaderView.swift; sourceTree = "<group>"; };
 		E4795D5D1D77546700C450C8 /* fredericlacroix.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = fredericlacroix.jpg; path = Assets/photos/fredericlacroix.jpg; sourceTree = "<group>"; };
 		E49237F81D56715300C7DB88 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E4978AA81D8DEBCF00670FED /* ArticleViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArticleViewController.swift; path = ViewController/ArticleViewController.swift; sourceTree = "<group>"; };
@@ -109,6 +113,8 @@
 		E4B698D81D79BFA700289C01 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoadingView.swift; path = View/LoadingView/LoadingView.swift; sourceTree = "<group>"; };
 		E4BF5E7D1D91CE9300EAEDC0 /* MapViewArticleCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewArticleCell.swift; sourceTree = "<group>"; };
 		E4D2F3CC1D75A9F3003A73DC /* AuthorViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthorViewController.swift; path = ViewController/AuthorViewController/AuthorViewController.swift; sourceTree = "<group>"; };
+		E4EC964B1D9FA59D00BD4309 /* ArticleHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArticleHeader.swift; sourceTree = "<group>"; };
+		E4EC964D1D9FA5FB00BD4309 /* ArticleHeader.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArticleHeader.xib; sourceTree = "<group>"; };
 		EBCD33568C59E68ADB6AA29B /* Pods_GuideVoyagesRestaurantsTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GuideVoyagesRestaurantsTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA3667D9B2A2BEABC0A56EC2 /* Pods-GuideVoyagesRestaurants.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GuideVoyagesRestaurants.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GuideVoyagesRestaurants/Pods-GuideVoyagesRestaurants.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -277,14 +283,32 @@
 		E44E18951D74563C000D6509 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				E4620EAF1D97DBE2000088C4 /* HomeViewController */,
+				E4620EAE1D97DBC1000088C4 /* ArticleViewController */,
 				E4978AAC1D8DEEB300670FED /* AuthorViewController */,
-				E4683C241D83522D000FC030 /* CoverView.swift */,
 				E4B698D81D79BFA700289C01 /* LoadingView.swift */,
-				E44E18961D745647000D6509 /* ArticleCell.swift */,
-				E44E18971D745647000D6509 /* SectionCell.swift */,
 				E4BF5E7D1D91CE9300EAEDC0 /* MapViewArticleCell.swift */,
 			);
 			name = View;
+			sourceTree = "<group>";
+		};
+		E4620EAE1D97DBC1000088C4 /* ArticleViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E4683C241D83522D000FC030 /* ArticleHeaderView.swift */,
+			);
+			name = ArticleViewController;
+			sourceTree = "<group>";
+		};
+		E4620EAF1D97DBE2000088C4 /* HomeViewController */ = {
+			isa = PBXGroup;
+			children = (
+				E44E18971D745647000D6509 /* SectionCell.swift */,
+				E44E18961D745647000D6509 /* ArticleCell.swift */,
+				E4EC964B1D9FA59D00BD4309 /* ArticleHeader.swift */,
+				E4EC964D1D9FA5FB00BD4309 /* ArticleHeader.xib */,
+			);
+			name = HomeViewController;
 			sourceTree = "<group>";
 		};
 		E4683C231D834ACC000FC030 /* Class */ = {
@@ -293,6 +317,7 @@
 				E4683C211D834A5E000FC030 /* TransparentNavigationBar.swift */,
 				E4B385E11D91258E00FC6423 /* MenuControl.swift */,
 				E451724F1D9463DC002AC286 /* DistancePickerControl.swift */,
+				E42701BA1D9A6E0300639EE8 /* ArticleAnnotation.swift */,
 			);
 			name = Class;
 			sourceTree = "<group>";
@@ -432,6 +457,7 @@
 				E42A97F91D53856900C0982C /* Main.storyboard in Resources */,
 				E4795D5E1D77546700C450C8 /* fredericlacroix.jpg in Resources */,
 				E44E18871D74512F000D6509 /* Reglo-Bold.otf in Resources */,
+				E4EC964E1D9FA5FB00BD4309 /* ArticleHeader.xib in Resources */,
 				E44E18911D7451F3000D6509 /* 2.jpg in Resources */,
 				E44E18901D7451F3000D6509 /* 1.jpg in Resources */,
 				E44E188E1D7451F3000D6509 /* 4.jpg in Resources */,
@@ -588,6 +614,7 @@
 				E42A983C1D5649F300C0982C /* Config.swift in Sources */,
 				E44E18991D745647000D6509 /* SectionCell.swift in Sources */,
 				E45172501D9463DC002AC286 /* DistancePickerControl.swift in Sources */,
+				E4EC964C1D9FA59D00BD4309 /* ArticleHeader.swift in Sources */,
 				E44E189C1D745660000D6509 /* Article.swift in Sources */,
 				E4D2F3CE1D75A9F3003A73DC /* AuthorViewController.swift in Sources */,
 				E44E189F1D745668000D6509 /* HomeViewController.swift in Sources */,
@@ -597,11 +624,12 @@
 				E44E18981D745647000D6509 /* ArticleCell.swift in Sources */,
 				E42A97F41D53856900C0982C /* AppDelegate.swift in Sources */,
 				E4978AAE1D8DEFBC00670FED /* AuthorArticleCell.swift in Sources */,
+				E42701BB1D9A6E0300639EE8 /* ArticleAnnotation.swift in Sources */,
 				E4B698DA1D79BFA700289C01 /* LoadingView.swift in Sources */,
 				E4BF5E7E1D91CE9300EAEDC0 /* MapViewArticleCell.swift in Sources */,
 				E42A97FC1D53856900C0982C /* GuideVoyagesRestaurants.xcdatamodeld in Sources */,
 				E4978AAB1D8DED8900670FED /* AuthorDescCell.swift in Sources */,
-				E4683C251D83522D000FC030 /* CoverView.swift in Sources */,
+				E4683C251D83522D000FC030 /* ArticleHeaderView.swift in Sources */,
 				E44E189D1D745660000D6509 /* Hotel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

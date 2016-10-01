@@ -1,5 +1,5 @@
 //
-//  CoverView.swift
+//  ArticleHeaderView.swift
 //  GuideVoyagesRestaurants
 //
 //  Created by Pradheep Rajendirane on 09/09/2016.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CoverView: UIView {
+class ArticleHeaderView: UIView {
     
     @IBOutlet weak var coverImage: UIImageView!
     @IBOutlet weak var descView: UIView!

@@ -8,7 +8,8 @@
 
 import MapKit
 import UIKit
-import DistancePicker
+import Alamofire
+import SwiftyJSON
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -24,6 +25,11 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     }
     var authorizationStatus = CLAuthorizationStatus.notDetermined
     var locationManager = CLLocationManager()
+    var locValue:CLLocationCoordinate2D? = nil
+    
+    var data:[Article] = []
+    
+    var isLoadingMore = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,27 +61,21 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        locationManager.startUpdatingLocation()
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 30
-        
-        /*for hotel in hotels! {
-         
-         let pinLocation = CLLocationCoordinate2DMake(CLLocationDegrees(hotel.latitude!), CLLocationDegrees(hotel.longitude!))
-         
-         let dropPin = MKPointAnnotation()
-         dropPin.coordinate = pinLocation
-         dropPin.title = hotel.nom.uppercased()
-         dropPin.subtitle = "Par Frédéric Lacroix".uppercased()
-         mapView.addAnnotation(dropPin)
-         
-         }*/
         
     }
     
     func popToRoot(_ sender:UIBarButtonItem){
         self.navigationController!.popViewController(animated: true)
     }
+    
+    
+    
+    // MARK: - CLLocationManager
     
     func isValidAuthorizationStatus(status: CLAuthorizationStatus) -> Bool {
         // For iOS 7, AuthorizedAlways corresponds to Authorized
@@ -91,11 +91,74 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         updateUI()
     }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        locValue = manager.location?.coordinate
+    }
+    
+    
+    
     // MARK: - Updating UI
     
     func updateUI() {
         updateSearchRadiusOverlay()
         updateVisibleMapRect()
+        loadArticles()
+    }
+    
+    func loadPins() {
+        
+        mapView.removeAnnotations(mapView.annotations)
+        
+        var index = 0
+        
+        for article in data {
+            let pinLocation = CLLocationCoordinate2DMake(CLLocationDegrees(article.latitude!), CLLocationDegrees(article.longitude!))
+            
+            let articlePin = ArticleAnnotation(id: index)
+            articlePin.coordinate = pinLocation
+            articlePin.title = article.title.uppercased()
+            articlePin.subtitle = article.author?.uppercased()
+            mapView.addAnnotation(articlePin)
+            
+            index += 1
+        }
+        
+        self.tableView.reloadData()
+        
+        
+    }
+    
+    func loadArticles() {
+        
+        if let longitude = self.locValue?.longitude, let latitude = self.locValue?.latitude {
+            self.isLoadingMore = true
+            
+            Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/location/all/0/100/\(latitude)-\(longitude)-\(self.distancePickerControl.distance)").responseJSON { response in
+                
+                if let value = response.result.value {
+                    let json = JSON(value)
+                    
+                    if let articles = json["data"].array {
+                        
+                        self.data = []
+                        
+                        for row in articles {
+                            if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let date = row["date"].string, let category = row["categorie"].string, let latitude = row["latitude"].string, let longitude = row["longitude"].string, let distance = row["distance"].string {
+                                
+                                self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc, date: date, longitude: Double(longitude), latitude: Double(latitude), distance: Double(distance)))
+                                
+                            }
+                        }
+                        
+                        self.isLoadingMore = false
+                        
+                        DispatchQueue.main.async {
+                            self.loadPins()
+                        }
+                    }
+                }
+            }
+        }
     }
     
     func updateSearchRadiusOverlay() {
@@ -108,7 +171,9 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             
             searchRadiusOverlay = MKCircle(center: mapView.userLocation.coordinate,
                                            radius: Double(distancePickerControl.distance*1000))
-            mapView.add(searchRadiusOverlay!)
+            
+            mapView.add(searchRadiusOverlay!, level: MKOverlayLevel.aboveLabels)
+            //mapView.add(searchRadiusOverlay!)
         }
     }
     
@@ -123,6 +188,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         else if isValidAuthorizationStatus(status: authorizationStatus) {
             mapView.setCenter(mapView.userLocation.coordinate, animated: true)
         }
+        
         // On launch, hide the map until we know the user location, otherwise
         // the map is briefly centered on another location.
         mapView.isHidden = false
@@ -135,12 +201,14 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         updateUI()
     }
     
-    private func mapView(mapView: MKMapView, rendererForOverlay overlay: MKOverlay) -> MKOverlayRenderer {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        
+        
         if overlay is MKCircle {
             let circle = MKCircleRenderer(overlay: overlay)
             
-            circle.strokeColor = UIColor.red
-            circle.fillColor = UIColor.red.withAlphaComponent(0.1)
+            circle.strokeColor = mainColor
+            circle.fillColor = mainColor.withAlphaComponent(0.1)
             circle.lineWidth = 1
             
             return circle
@@ -156,115 +224,103 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
             return nil
         }
         
-        let identifier = "ItemAnnotation"
-        
-        var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier)
-        if annotationView == nil {
-            annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
-            annotationView?.canShowCallout = true
+        if annotation is ArticleAnnotation {
             
-            let button = UIButton(type: UIButtonType.detailDisclosure) as UIButton
-            annotationView?.rightCalloutAccessoryView = button
-            
-        } else {
-            annotationView!.annotation = annotation
+            if let articleAnnotation = annotation as? ArticleAnnotation {
+                
+                let identifier = "ArticleAnnotation"
+                
+                var annotationView = mapView.dequeueReusableAnnotationView(withIdentifier: identifier) as? MKPinAnnotationView
+                
+                if annotationView == nil {
+                    
+                    annotationView = MKPinAnnotationView(annotation: annotation, reuseIdentifier: identifier)
+                    annotationView?.canShowCallout = true
+                    annotationView?.tintColor = mainColor
+                    annotationView?.pinTintColor = mainColor
+                    let button = UIButton(type: UIButtonType.detailDisclosure) as UIButton
+                    annotationView?.rightCalloutAccessoryView = button
+                    
+                } else {
+                    annotationView!.annotation = annotation
+                }
+                
+                
+                
+                let imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: annotationView!.frame.size.width, height: annotationView!.frame.size.height - 10.0)))
+                
+                imageView.image = UIImage(named: "1.jpg")
+                
+                annotationView?.leftCalloutAccessoryView = imageView
+                annotationView?.tag = articleAnnotation.id
+                
+                return annotationView
+            }
         }
         
+        return nil
         
-        
-        let imageView = UIImageView(frame: CGRect(origin: CGPoint.zero, size: CGSize(width: annotationView!.frame.size.width, height: annotationView!.frame.size.height - 10.0)))
-        
-        imageView.image = UIImage(named: "1.jpg")
-        
-        annotationView?.leftCalloutAccessoryView = imageView
-        annotationView?.tintColor = mainColor
-        
-        
-        /*let label = UILabel()
-        label.text = "Le titre de l'article"
-        label.font = UIFont(name: "Reglo-Bold", size: 14)
-        label.textColor = mainColor
-        
-        if #available(iOS 9.0, *) {
-            annotationView?.detailCalloutAccessoryView = label
-        } else {
-            annotationView?.leftCalloutAccessoryView = label
-        }*/
-        
-        
-        
-        return annotationView
     }
     
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         
-        /*let articleViewController = ArticleViewController(nibName: "ArticleViewController", bundle: nil)
-        self.navigationController?.pushViewController(articleViewController, animated: true)*/
+        if let articleViewController = storyboard?.instantiateViewController(withIdentifier: "articleViewController") as? ArticleViewController {
+            
+            articleViewController.article = data[view.tag]
+            
+            self.navigationController?.pushViewController(articleViewController, animated: true)
+        }
         
     }
     
-    func configureDetailView(_ annotationView: MKAnnotationView) {
-        
-        /*let width = 300
-        let height = 200
-        
-        let snapshotView = UIView()
-        let views = ["snapshotView": snapshotView]
-        snapshotView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:[snapshotView(300)]", options: [], metrics: nil, views: views))
-        snapshotView.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:[snapshotView(200)]", options: [], metrics: nil, views: views))
-        
-        let options = MKMapSnapshotOptions()
-        options.size = CGSize(width: width, height: height)
-        
-        options.mapType = .SatelliteFlyover
-        
-        options.camera = MKMapCamera(lookingAtCenterCoordinate: annotationView.annotation!.coordinate, fromDistance: 250, pitch: 65, heading: 0)
-        
-        let snapshotter = MKMapSnapshotter(options: options)
-        snapshotter.startWithCompletionHandler { snapshot, error in
-            if snapshot != nil {
-                let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: width, height: height))
-                imageView.image = snapshot!.image
-                snapshotView.addSubview(imageView)
-            }
-        }
-        
-        annotationView.detailCalloutAccessoryView = snapshotView*/
-        
-    }
     
     // MARK: - UITableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return data.count
     }
     
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    /*func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 4.0))
         
         return view
-    }
+    }*/
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "mapViewArticleCell") as! MapViewArticleCell
         
-        /*cell.contentView.backgroundColor = UIColor.clear
         
-        let whiteRoundedView = UIView(frame: CGRect(x: 8.0, y: 8.0, width: cell.frame.width - 16.0, height: cell.frame.height - 16.0))
+        cell.categorieLabel.text = data[indexPath.row].category.uppercased()
+        cell.titleLabel.text = data[indexPath.row].title
+        cell.dateLabel.text = data[indexPath.row].date
         
-        whiteRoundedView.layer.cornerRadius = 10.0
-        whiteRoundedView.backgroundColor = highlightColor
-        
-        cell.contentView.addSubview(whiteRoundedView)
-        cell.contentView.sendSubview(toBack: whiteRoundedView)*/
-        /*let cell = UITableViewCell()
-        
-        cell.textLabel?.text = "Salut"
-        cell.textLabel?.textColor = mainColor
-        
-        cell.backgroundColor = bgColor*/
+        if var distance = data[indexPath.row].distance {
+            
+            if distance >= 1 {
+                
+                distance = round(distance*100)/100
+                cell.distanceLabel.text = "à \(distance.description) km"
+            } else {
+                
+                distance = round(distance*1000)
+                cell.distanceLabel.text = "à \(distance.description) m"
+                
+            }
+            
+        }
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        if let articleViewController = storyboard?.instantiateViewController(withIdentifier: "articleViewController") as? ArticleViewController {
+            
+            articleViewController.article = data[indexPath.row]
+            
+            self.navigationController?.pushViewController(articleViewController, animated: true)
+        }
+        
     }
     
 
@@ -272,22 +328,6 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-    // MARK: - MKMapView
-    
-    /*func mapView(_ mapView: MKMapView, didUpdate userLocation: MKUserLocation) {
-        
-        
-        var mapRegion = MKCoordinateRegion()
-        mapRegion.center = mapView.userLocation.coordinate
-        mapRegion.span.latitudeDelta = 0.1
-        mapRegion.span.longitudeDelta = 0.1
-        
-        mapView.setRegion(mapRegion, animated: true)
-        
-    }*/
-
     
 
     /*
