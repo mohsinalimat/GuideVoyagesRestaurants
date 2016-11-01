@@ -1,20 +1,26 @@
 PODS:
   - Alamofire (4.0.0)
+  - HMSegmentedControl (1.5.3)
   - SDWebImage (3.8.1):
     - SDWebImage/Core (= 3.8.1)
   - SDWebImage/Core (3.8.1)
+  - SVPullToRefresh (0.4.1)
   - SwiftyJSON (3.0.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.0)
+  - HMSegmentedControl
   - SDWebImage (~> 3.8)
+  - SVPullToRefresh
   - SwiftyJSON (~> 3.0.0)
 
 SPEC CHECKSUMS:
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
+  HMSegmentedControl: 7c6145afb50f26cec5f3243082f6f12b9f41318f
   SDWebImage: 35f9627a3e44b4f292a8a8ce6a531fa488239b91
+  SVPullToRefresh: ba2e718695a43253d8bea6852d2960097dc15d8c
   SwiftyJSON: f57b2b44bc166617372d1c70773591fe9f0f5fd4
 
-PODFILE CHECKSUM: 5ceb25a0cf9a6174b41ec59cdadd7ac172cbcd3f
+PODFILE CHECKSUM: 24de3f4bfcda4fa31058ac59f1369ebb5475458a
 
 COCOAPODS: 1.0.1

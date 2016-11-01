@@ -10,10 +10,10 @@ import UIKit
 import Alamofire
 import SwiftyJSON
 import SDWebImage
+import SVPullToRefresh
+import HMSegmentedControl
 
 class HomeViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate {
-    
-    let menuControl:MenuControl = MenuControl(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: 60.0))
     
     var searchController: UISearchController!
     
@@ -22,6 +22,10 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
     var data:[Article] = []
     
     var isLoadingMore = false // flag
+    
+    var categorie:String = "all"
+    
+    let categoriesName:[String] = ["all", "restaurants", "voyages", "shopping", "gastronomie", "bonus"]
 
     
     @IBOutlet weak var tableView: UITableView!
@@ -61,11 +65,20 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.rightBarButtonItem = rightBarButton
         
         
-
-        // Setting Menu
-        menuControl.setItems(items: [MenuItem(title: "Accueil", icon: "accueil"), MenuItem(title: "Restaurant", icon: "restaurant"), MenuItem(title: "Voyage", icon: "voyage"), MenuItem(title: "Hotel", icon: "hotel"), MenuItem(title: "Recette", icon: "recette"), MenuItem(title: "Shopping", icon: "shopping")])
-        menuControl.backgroundColor = bgColor
-        self.view.addSubview(menuControl)
+        // Categorie Header
+        let menuControl = HMSegmentedControl(sectionTitles: ["ACCUEIL", "RESTAURANT", "VOYAGE", "SHOPPING", "GASTRONOMIE", "BONUS"])
+        menuControl?.frame = CGRect(x: 0.0, y: 0.0, width: view.bounds.width, height: 40.0)
+        menuControl?.addTarget(self, action: #selector(self.controlValueChanged), for: .valueChanged)
+        //menuControl?.selectionStyle = HMSegmentedControlSelectionStyle.fullWidthStripe
+        menuControl?.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocation.down
+        menuControl?.titleTextAttributes = [
+            NSFontAttributeName : UIFont(name: "Reglo-Bold", size: 15)!,
+            NSForegroundColorAttributeName : mainColor
+        ]
+        menuControl?.backgroundColor = bgColor
+        menuControl?.selectionIndicatorColor = mainColor
+        menuControl?.segmentEdgeInset = UIEdgeInsetsMake(0, 5.0, 0, 5.0)
+        view.addSubview(menuControl!)
         
         
         
@@ -99,10 +112,23 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.sectionHeaderHeight = UITableViewAutomaticDimension
         tableView.estimatedSectionHeaderHeight = 50
         
+        /*tableView.rowHeight = 400
+        tableView.sectionHeaderHeight = 60*/
+        
         self.tableView.register(UINib(nibName: "ArticleHeader", bundle: nil), forHeaderFooterViewReuseIdentifier: "articleHeader")
         
         self.loadArticles(from: 0, number: 10, refresh: true)
         
+        
+        self.tableView.addInfiniteScrolling {
+            self.loadMore(count: 5)
+        }
+        
+    }
+    
+    func controlValueChanged(control: HMSegmentedControl) {
+        self.categorie = categoriesName[control.selectedSegmentIndex]
+        self.loadArticles(from: 0, number: 10, refresh: true)
     }
     
     func refreshArticles() {
@@ -115,7 +141,7 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.isLoadingMore = true
         
-        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/all/\(from)/\(number)").responseJSON { response in
+        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/\(categorie)/\(from)/\(number)").responseJSON { response in
             
             if let value = response.result.value {
                 let json = JSON(value)
@@ -127,10 +153,9 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
                     }
                     
                     for row in articles {
-                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let date =  row["date"].string, let category = row["categorie"].string {
+                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let date = row["date"].string, let category = row["categorie"].string, let latitude = row["latitude"].string, let longitude = row["longitude"].string {
                             
-                            
-                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc, date: date))
+                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc, date: date, longitude: Double(longitude), latitude: Double(latitude)))
                             
                         }
                     }
@@ -153,6 +178,40 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
             }
         }
     }
+    
+    func loadMore(count: Int) {
+        
+        let from = self.data.count - 1
+        
+        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/last/\(categorie)/\(self.data.count)/\(count)").responseJSON { response in
+            
+            if let value = response.result.value {
+                let json = JSON(value)
+                
+                if let articles = json["data"].array {
+                    
+                    for row in articles {
+                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let date = row["date"].string, let category = row["categorie"].string, let latitude = row["latitude"].string, let longitude = row["longitude"].string {
+                            
+                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc, date: date, longitude: Double(longitude), latitude: Double(latitude)))
+                            
+                        }
+                    }
+                    
+                    
+                    let indexSection:IndexSet = IndexSet(integersIn: from..<(from+count))
+                    
+                    self.tableView.beginUpdates()
+                    self.tableView.insertSections(indexSection, with: UITableViewRowAnimation.fade)
+                    self.tableView.endUpdates()
+                    
+                    self.tableView.infiniteScrollingView.stopAnimating()
+                    
+                }
+            }
+        }
+    }
+
     
     func searchClick(_ sender: UIButton) {
         
@@ -231,26 +290,8 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.imageMain.sd_setImage(with: URL(string: data[indexPath.section].cover!))
         cell.descText.text = data[indexPath.section].desc!
         
-        if indexPath.section + 7 >= self.data.count {
-            self.loadArticles(from: data.count, number: 10, refresh: false)
-        }
-        
         return cell
     }
-    
-    /*func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        // 1. set the initial state of the cell
-        cell.alpha = 0.0
-        
-        // 2. UIView animation method to change to the final state of the cell
-        
-            UIView.animate(withDuration: 0.5, animations: {
-                cell.alpha = 1.0
-            })
-        
-        
-        
-    }*/
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
@@ -262,19 +303,6 @@ class HomeViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         
     }
-    
-    /*func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        
-        let contentOffset = scrollView.contentOffset.y
-        let maximumOffset = scrollView.contentSize.height - scrollView.frame.size.height;
-        
-        if !isLoadingMore && (maximumOffset - contentOffset <= threshold) {
-            // Get more data - API call
-            self.loadArticles(from: data.count, number: 5, refresh: false, updating: true)
-            
-        }
-        
-    }*/
     
 
     override func didReceiveMemoryWarning() {

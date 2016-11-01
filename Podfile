@@ -13,6 +13,8 @@ target 'GuideVoyagesRestaurants' do
   pod 'SwiftyJSON', '~> 3.0.0'
   # pod 'SwiftyJSON'
   pod 'SDWebImage', '~>3.8'
+  pod 'SVPullToRefresh'
+  pod 'HMSegmentedControl'
   # pod 'DistancePicker', '~> 0.8'
 
   target 'GuideVoyagesRestaurantsTests' do

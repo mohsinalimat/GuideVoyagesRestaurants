@@ -32,19 +32,24 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         
         
         var btnName = UIButton()
-        btnName.setImage(UIImage(named: "partager"), for: UIControlState())
+        /*btnName.setImage(UIImage(named: "partager"), for: UIControlState())
         //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
         btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
         let shareButton = UIBarButtonItem()
-        shareButton.customView = btnName
+        shareButton.customView = btnName*/
+        
+        if let _ = article?.latitude, let _ = article?.longitude {
+            btnName = UIButton()
+            btnName.setImage(UIImage(named: "localisation"), for: UIControlState())
+            //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
+            btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
+            let locButton = UIBarButtonItem()
+            locButton.customView = btnName
+            
+            self.navigationItem.rightBarButtonItems = [/*shareButton,*/ locButton]
+        }
         
         
-        btnName = UIButton()
-        btnName.setImage(UIImage(named: "localisation"), for: UIControlState())
-        //btnName.addTarget(self, action: #selector(self.showMapView), forControlEvents: .TouchDown)
-        btnName.frame = CGRect(x: 0, y: 0, width: 22, height: 22)
-        let locButton = UIBarButtonItem()
-        locButton.customView = btnName
         
         
         btnName = UIButton()
@@ -55,8 +60,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         backBarButton.customView = btnName
         
         
-        self.navigationItem.rightBarButtonItems = [shareButton, locButton]
-        self.navigationItem.leftBarButtonItem = backBarButton
+                self.navigationItem.leftBarButtonItem = backBarButton
         
         /* ----------------------
          ---------------------- */
@@ -68,8 +72,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
             articleHeaderView.coverImage.sd_setImage(with: URL(string: cover))
         }
         
-        articleHeaderView.titre.text = article?.title.uppercased()
-        articleHeaderView.categorie.text = article?.category.uppercased()
+        //articleHeaderView.titre.text = article?.title.uppercased()
+        //articleHeaderView.categorie.text = article?.category.uppercased()
         /* ----------------------
          ---------------------- */
         
@@ -98,7 +102,8 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         //let url = NSURL(string: "http://localhost/guide_voyage/article.html")
         
         if let id = article?.id {
-            let url = URL(string: "http://www.guide-restaurants-et-voyages-du-monde.com/articleforiphone/\(id)")            
+            //let url = URL(string: "http://www.guide-restaurants-et-voyages-du-monde.com/articleforiphone/\(id)")
+            let url = URL(string: "http://di2pra.com/voyages/article.php")
             webView.loadRequest(URLRequest(url: url!, cachePolicy: .returnCacheDataElseLoad, timeoutInterval: 60))
         }
         
@@ -137,7 +142,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
     func webView(_ webView: UIWebView, shouldStartLoadWith request: URLRequest, navigationType: UIWebViewNavigationType) -> Bool {
         if request.url?.scheme == "inapp" {
             
-            if request.url?.host == "capture" {
+            if request.url?.host == "authorViewController" {
                 if let authorViewController = storyboard?.instantiateViewController(withIdentifier: "authorViewController") as? AuthorViewController {
                     self.navigationController?.pushViewController(authorViewController, animated: true)
                 }
@@ -171,7 +176,7 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
         
         let offset = scrollView.contentOffset.y + 3/4 * UIScreen.main.bounds.width
         var coverImageTransform = CATransform3DIdentity
-        var coverDescTransform = CATransform3DIdentity
+        //var coverDescTransform = CATransform3DIdentity
         
         if offset < 0 {
             
@@ -180,23 +185,23 @@ class ArticleViewController: UIViewController, UIScrollViewDelegate, UIWebViewDe
             coverImageTransform = CATransform3DTranslate(coverImageTransform, 0, coverImageSizevariation, 0)
             coverImageTransform = CATransform3DScale(coverImageTransform, 1.0 + coverImageScaleFactor, 1.0 + coverImageScaleFactor, 0)
             
-            coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, -offset, 0)
+            //coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, -offset, 0)
             
             
         } else {
-            coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, max(-(3/4 * self.view.bounds.width), -offset), 0)
+            //coverDescTransform = CATransform3DTranslate(coverDescTransform, 0, max(-(3/4 * self.view.bounds.width), -offset), 0)
             
             
-            if offset > (3/4 * self.view.bounds.width - articleHeaderView.descView.frame.height) {
+            /*if offset > (3/4 * self.view.bounds.width - articleHeaderView.descView.frame.height) {
                 self.navigationItem.title = article?.title
             } else {
                 self.navigationItem.title = article?.category.uppercased()
-            }
+            }*/
             
         }
         
         articleHeaderView.coverImage.layer.transform = coverImageTransform
-        articleHeaderView.descView.layer.transform = coverDescTransform
+        //articleHeaderView.descView.layer.transform = coverDescTransform
         
     }
     

@@ -10,6 +10,7 @@ import MapKit
 import UIKit
 import Alamofire
 import SwiftyJSON
+import HMSegmentedControl
 
 class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewDelegate, UITableViewDataSource, UITableViewDelegate {
     
@@ -30,6 +31,10 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
     var data:[Article] = []
     
     var isLoadingMore = false
+    
+    var categorie:String = "all"
+    
+    let categoriesName:[String] = ["all", "restaurants", "voyages", "shopping", "gastronomie", "bonus"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -67,6 +72,29 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 30
         
+        
+        // Setting section control
+        let menuControl = HMSegmentedControl(sectionTitles: ["TOUT", "RESTAURANT", "VOYAGE", "SHOPPING", "GASTRONOMIE", "BONUS"])
+        
+        menuControl?.frame = CGRect(x: 0.0, y: view.bounds.width * 3 / 4 + distancePickerControl.bounds.height, width: view.bounds.width, height: 40.0)
+        menuControl?.addTarget(self, action: #selector(self.controlValueChanged), for: .valueChanged)
+        //menuControl?.selectionStyle = HMSegmentedControlSelectionStyle.fullWidthStripe
+        menuControl?.selectionIndicatorLocation = HMSegmentedControlSelectionIndicatorLocation.down
+        menuControl?.titleTextAttributes = [
+            NSFontAttributeName : UIFont(name: "Reglo-Bold", size: 15)!,
+            NSForegroundColorAttributeName : mainColor
+        ]
+        menuControl?.backgroundColor = bgColor
+        menuControl?.selectionIndicatorColor = mainColor
+        menuControl?.segmentEdgeInset = UIEdgeInsetsMake(0, 5.0, 0, 5.0)
+        
+        view.addSubview(menuControl!)
+        
+    }
+    
+    func controlValueChanged(control: HMSegmentedControl) {
+        self.categorie = categoriesName[control.selectedSegmentIndex]
+        self.loadArticles()
     }
     
     func popToRoot(_ sender:UIBarButtonItem){
@@ -133,7 +161,7 @@ class MapViewController: UIViewController, CLLocationManagerDelegate, MKMapViewD
         if let longitude = self.locValue?.longitude, let latitude = self.locValue?.latitude {
             self.isLoadingMore = true
             
-            Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/location/all/0/100/\(latitude)-\(longitude)-\(self.distancePickerControl.distance)").responseJSON { response in
+            Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/location/\(self.categorie)/0/100/\(latitude)-\(longitude)-\(self.distancePickerControl.distance)").responseJSON { response in
                 
                 if let value = response.result.value {
                     let json = JSON(value)

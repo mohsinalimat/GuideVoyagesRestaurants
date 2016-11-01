@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c8a-LJ-d9p">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="c8a-LJ-d9p">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -15,12 +15,12 @@
         <scene sceneID="xy3-wz-HbT">
             <objects>
                 <navigationController id="c8a-LJ-d9p" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="FN4-zf-iM6">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="FN4-zf-iM6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="bTn-V6-RLn"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="yO3-vA-30T"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GNv-d2-t26" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -30,7 +30,7 @@
         <!--Guide Restaurants & Voyages-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="HomeViewController" customModule="GuideVoyagesRestaurants" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="homeViewController" automaticallyAdjustsScrollViewInsets="NO" id="BYZ-38-t0r" customClass="HomeViewController" customModule="GuideVoyagesRestaurants" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -43,67 +43,8 @@
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="sectionIndexBackgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="sectionCell" rowHeight="59" id="DUT-Cl-vAm" customClass="SectionCell" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="50" width="375" height="59"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DUT-Cl-vAm" id="Snz-ow-QCb">
-                                            <frame key="frameInset" width="375" height="59"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAR FREDERIC LACROIX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aTg-z2-qA2">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="12"/>
-                                                    <color key="textColor" red="0.24313725490196078" green="0.074509803921568626" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="prf-rF-IEG">
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="40" id="8t5-Pn-Z2S"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="14"/>
-                                                    <color key="textColor" red="0.63137254901960782" green="0.25098039215686274" blue="0.035294117647058823" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6PM-6a-Up6">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="12"/>
-                                                    <color key="textColor" red="0.95686274510000002" green="0.70196078429999997" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bj2-G1-JUO">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
-                                                    <color key="textColor" red="0.10588235294117647" green="0.26666666666666666" blue="0.51764705882352935" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="prf-rF-IEG" secondAttribute="trailing" constant="8" id="1aG-7G-Fqs"/>
-                                                <constraint firstItem="bj2-G1-JUO" firstAttribute="top" secondItem="Snz-ow-QCb" secondAttribute="top" constant="10" id="5uG-LS-JQD"/>
-                                                <constraint firstItem="prf-rF-IEG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="aTg-z2-qA2" secondAttribute="trailing" constant="10" id="EYf-P1-Uym"/>
-                                                <constraint firstAttribute="trailing" secondItem="6PM-6a-Up6" secondAttribute="trailing" constant="8" id="MIJ-Zm-KaN"/>
-                                                <constraint firstItem="prf-rF-IEG" firstAttribute="top" secondItem="Snz-ow-QCb" secondAttribute="top" constant="10" id="O3e-Ti-uvH"/>
-                                                <constraint firstAttribute="bottom" secondItem="6PM-6a-Up6" secondAttribute="bottom" constant="10" id="Ofh-nD-4r0"/>
-                                                <constraint firstItem="aTg-z2-qA2" firstAttribute="leading" secondItem="Snz-ow-QCb" secondAttribute="leading" constant="8" id="cAz-Sl-54m"/>
-                                                <constraint firstItem="aTg-z2-qA2" firstAttribute="top" secondItem="bj2-G1-JUO" secondAttribute="bottom" constant="3" id="eFO-9T-5gK"/>
-                                                <constraint firstItem="prf-rF-IEG" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bj2-G1-JUO" secondAttribute="trailing" constant="10" id="fcM-d0-Z6h"/>
-                                                <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="aTg-z2-qA2" secondAttribute="bottom" constant="10" id="gvt-7d-2Kk"/>
-                                                <constraint firstItem="bj2-G1-JUO" firstAttribute="leading" secondItem="Snz-ow-QCb" secondAttribute="leading" constant="8" id="hEZ-nJ-WAD"/>
-                                                <constraint firstItem="bj2-G1-JUO" firstAttribute="centerY" secondItem="Snz-ow-QCb" secondAttribute="centerY" id="x85-69-fxg"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="x85-69-fxg"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                        <color key="backgroundColor" red="0.99607843137254903" green="0.96078431372549022" blue="0.92549019607843142" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <connections>
-                                            <outlet property="author" destination="aTg-z2-qA2" id="hsL-X1-BvI"/>
-                                            <outlet property="categoryTitle" destination="prf-rF-IEG" id="swq-Gp-gbI"/>
-                                            <outlet property="dateLabel" destination="6PM-6a-Up6" id="9QM-r3-472"/>
-                                            <outlet property="title" destination="bj2-G1-JUO" id="uAx-G3-kDU"/>
-                                        </connections>
-                                    </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleAspectFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="articleCell" rowHeight="346" id="aXg-2v-YFN" customClass="ArticleCell" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="109" width="375" height="346"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="346"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aXg-2v-YFN" id="IVU-k9-Fhj">
                                             <frame key="frameInset" width="375" height="346"/>
@@ -168,8 +109,8 @@
                         </subviews>
                         <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="Gfh-5Q-ZCA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="40" id="807-1e-Abt"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Gfh-5Q-ZCA" secondAttribute="bottom" id="WeF-Pw-Uth"/>
-                            <constraint firstItem="Gfh-5Q-ZCA" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" constant="60" id="eZ7-UX-mJy"/>
                             <constraint firstItem="Gfh-5Q-ZCA" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="iIe-ci-i1m"/>
                             <constraint firstAttribute="trailing" secondItem="Gfh-5Q-ZCA" secondAttribute="trailing" id="k1K-R1-B5q"/>
                         </constraints>
@@ -195,27 +136,25 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q9m-tt-eCE">
-                                <frame key="frameInset" width="1000" height="1000"/>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="q9m-tt-eCE">
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="q9m-tt-eCE" secondAttribute="height" multiplier="4:3" id="k66-R9-gzy"/>
+                                    <constraint firstAttribute="width" secondItem="q9m-tt-eCE" secondAttribute="height" multiplier="4:3" id="7QE-xh-hVC"/>
                                 </constraints>
                             </mapView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="81" sectionHeaderHeight="4" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-TK-y2g">
-                                <frame key="frameInset" width="1000" height="1000"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="81" sectionHeaderHeight="4" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bFz-TK-y2g">
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="separatorColor" red="0.95686274510000002" green="0.70196078429999997" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="mapViewArticleCell" rowHeight="80" id="aUK-Bi-PwN" customClass="MapViewArticleCell" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="4" width="1000" height="80"/>
+                                        <rect key="frame" x="0.0" y="4" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aUK-Bi-PwN" id="VD2-eI-VB6">
-                                            <frame key="frameInset" width="1000" height="79"/>
+                                            <frame key="frameInset" width="375" height="79.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VOYAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cug-MD-mNC">
-                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="14"/>
                                                     <color key="textColor" red="0.63137254901960782" green="0.25098039215686274" blue="0.035294117647058823" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -237,7 +176,7 @@
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jnv-Wu-t6m">
                                                     <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="12"/>
-                                                    <color key="textColor" red="0.95686274510000002" green="0.70196078429999997" blue="0.31372549020000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="textColor" red="0.57647058823529407" green="0.40392156862745099" blue="0.12549019607843137" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -270,13 +209,13 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="bFz-TK-y2g" firstAttribute="leading" secondItem="PS1-C9-8db" secondAttribute="leading" id="524-3I-b7R"/>
-                            <constraint firstItem="q9m-tt-eCE" firstAttribute="leading" secondItem="PS1-C9-8db" secondAttribute="leading" id="EMw-Jz-8q8"/>
-                            <constraint firstAttribute="trailing" secondItem="q9m-tt-eCE" secondAttribute="trailing" id="IiB-CO-zDB"/>
+                            <constraint firstItem="q9m-tt-eCE" firstAttribute="leading" secondItem="PS1-C9-8db" secondAttribute="leading" id="6oc-hK-R8l"/>
+                            <constraint firstAttribute="trailing" secondItem="q9m-tt-eCE" secondAttribute="trailing" id="Mhj-ec-MMV"/>
                             <constraint firstItem="q9m-tt-eCE" firstAttribute="top" secondItem="yZr-RD-x6l" secondAttribute="bottom" constant="60" id="OKl-gu-vxM"/>
-                            <constraint firstItem="bFz-TK-y2g" firstAttribute="top" secondItem="q9m-tt-eCE" secondAttribute="bottom" id="gqK-b6-AEq"/>
+                            <constraint firstItem="bFz-TK-y2g" firstAttribute="top" secondItem="q9m-tt-eCE" secondAttribute="bottom" constant="40" id="gqK-b6-AEq"/>
                             <constraint firstAttribute="trailing" secondItem="bFz-TK-y2g" secondAttribute="trailing" id="ipH-dU-GXa"/>
                             <constraint firstAttribute="bottom" secondItem="bFz-TK-y2g" secondAttribute="bottom" id="sYY-wy-hMm"/>
                         </constraints>
@@ -461,55 +400,17 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d9V-hz-YC7" customClass="ArticleHeaderView" customModule="GuideVoyagesRestaurants" customModuleProvider="target">
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Lca-IG-dV5"/>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BLA-U0-HuE">
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VOYAGE" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eSy-Lg-Vhy">
-                                                <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="17"/>
-                                                <color key="textColor" red="0.63137254899999995" green="0.25098039220000001" blue="0.035294117649999998" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="RESTAURANT LE BAMBOU D'OR" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BuV-cX-lhb">
-                                                <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="15"/>
-                                                <color key="textColor" red="0.1058823529" green="0.2666666667" blue="0.51764705879999995" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PAR FREDERIC LACROIX" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hgl-pf-ues">
-                                                <fontDescription key="fontDescription" name="Reglo-Bold" family="Reglo" pointSize="13"/>
-                                                <color key="textColor" red="0.24313725489999999" green="0.074509803920000006" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="BuV-cX-lhb" secondAttribute="trailing" constant="20" id="0to-7y-0or"/>
-                                            <constraint firstItem="Hgl-pf-ues" firstAttribute="centerX" secondItem="BLA-U0-HuE" secondAttribute="centerX" id="9Rn-r1-bnU"/>
-                                            <constraint firstItem="BuV-cX-lhb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="BLA-U0-HuE" secondAttribute="leading" constant="20" id="BML-Ts-Odd"/>
-                                            <constraint firstItem="BuV-cX-lhb" firstAttribute="centerX" secondItem="BLA-U0-HuE" secondAttribute="centerX" id="K35-As-Ahh"/>
-                                            <constraint firstItem="BuV-cX-lhb" firstAttribute="top" secondItem="eSy-Lg-Vhy" secondAttribute="bottom" constant="5" id="XHN-ZY-xfe"/>
-                                            <constraint firstItem="eSy-Lg-Vhy" firstAttribute="centerX" secondItem="BLA-U0-HuE" secondAttribute="centerX" id="gun-dr-wuI"/>
-                                            <constraint firstItem="Hgl-pf-ues" firstAttribute="top" secondItem="BuV-cX-lhb" secondAttribute="bottom" constant="5" id="hs6-SB-J0O"/>
-                                            <constraint firstAttribute="bottom" secondItem="Hgl-pf-ues" secondAttribute="bottom" constant="5" id="jXX-op-m4j"/>
-                                            <constraint firstItem="eSy-Lg-Vhy" firstAttribute="top" secondItem="BLA-U0-HuE" secondAttribute="top" constant="5" id="qdg-NO-eCe"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99607843139999996" green="0.96078431369999995" blue="0.92549019610000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="BLA-U0-HuE" secondAttribute="bottom" id="48p-FO-U5r"/>
                                     <constraint firstAttribute="bottom" secondItem="Lca-IG-dV5" secondAttribute="bottom" id="BtU-5H-pUy"/>
                                     <constraint firstAttribute="trailing" secondItem="Lca-IG-dV5" secondAttribute="trailing" id="LYN-lh-JuL"/>
                                     <constraint firstAttribute="width" secondItem="d9V-hz-YC7" secondAttribute="height" multiplier="4:3" id="SVr-2y-2Rz"/>
-                                    <constraint firstAttribute="trailing" secondItem="BLA-U0-HuE" secondAttribute="trailing" id="Uqv-hc-rSV"/>
                                     <constraint firstItem="Lca-IG-dV5" firstAttribute="top" secondItem="d9V-hz-YC7" secondAttribute="top" id="Zbv-Uv-hEc"/>
-                                    <constraint firstItem="BLA-U0-HuE" firstAttribute="leading" secondItem="d9V-hz-YC7" secondAttribute="leading" id="eKr-HN-fgu"/>
                                     <constraint firstItem="Lca-IG-dV5" firstAttribute="leading" secondItem="d9V-hz-YC7" secondAttribute="leading" id="sWb-hB-6fd"/>
                                 </constraints>
                                 <connections>
-                                    <outlet property="auteur" destination="Hgl-pf-ues" id="yGt-WN-6BE"/>
-                                    <outlet property="categorie" destination="eSy-Lg-Vhy" id="wS2-62-64R"/>
                                     <outlet property="coverImage" destination="Lca-IG-dV5" id="TNp-Ce-hnM"/>
-                                    <outlet property="descView" destination="BLA-U0-HuE" id="LAi-Xv-N4S"/>
-                                    <outlet property="titre" destination="BuV-cX-lhb" id="y4O-Vk-4DF"/>
                                 </connections>
                             </view>
                         </subviews>

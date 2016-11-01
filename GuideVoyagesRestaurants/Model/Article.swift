@@ -45,12 +45,30 @@ struct Article {
     
     init(id: String, category: String, title: String, author: String, cover: String, desc: String, date: String? = nil,  longitude: Double? = nil, latitude: Double? = nil, distance:Double? = nil) {
         self.id = id
-        self.category = category
+        
+        switch category {
+        case "restaurants":
+            self.category = "restaurant"
+            break
+        case "voyages":
+            self.category = "voyage"
+            break
+        default:
+            self.category = category
+        }
+        
         self.title = title
         self.author = author
         self.cover = cover
         self.desc = desc
-        self.date = date
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        let cdate = formatter.date(from: date!)
+        formatter.dateStyle = DateFormatter.Style.long
+        
+        
+        self.date = formatter.string(from: cdate!)
         self.longitude = longitude
         self.latitude = latitude
         self.distance = distance

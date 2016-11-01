@@ -11,30 +11,11 @@ import UIKit
 class ArticleHeaderView: UIView {
     
     @IBOutlet weak var coverImage: UIImageView!
-    @IBOutlet weak var descView: UIView!
-    
-    @IBOutlet weak var categorie: UILabel!
-    @IBOutlet weak var titre: UILabel!
-    @IBOutlet weak var auteur: UILabel!
     
     
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        
-        
-        
-        descView.backgroundColor = bgColor.withAlphaComponent(0.8)
-        
-        let bounds = descView.bounds as CGRect!
-        let visualEffectView = UIVisualEffectView(effect: UIBlurEffect(style: .light))
-        visualEffectView.frame = bounds!
-        visualEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        visualEffectView.isUserInteractionEnabled = false
-        descView.addSubview(visualEffectView)
-        
-        descView.sendSubview(toBack: visualEffectView)
         
     }
     

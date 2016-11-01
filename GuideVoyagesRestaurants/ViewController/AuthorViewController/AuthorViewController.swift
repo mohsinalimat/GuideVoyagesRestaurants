@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import SwiftyJSON
+import Alamofire
 
 class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
@@ -14,6 +16,9 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
     
     let headerInset:CGFloat = 3/4 * UIScreen.main.bounds.width + 75
+    
+    var authorId:Int? = nil
+    var isLoading:Bool = false
     
     /*let data = [
         Article(
@@ -58,7 +63,7 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
         )
     ]*/
     
-    var data:[Article] = []
+    var articles:[Article] = []
 
     
     override func viewDidLoad() {
@@ -102,10 +107,45 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         /* ----------------------
          ---------------------- */
+        
         tableView.contentInset.top = headerInset
         tableView.scrollIndicatorInsets.top = headerInset
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 160.0
+        
+        self.loadData()
+    }
+    
+    func loadData() {
+        self.isLoading = true
+        
+        Alamofire.request("http://www.guide-restaurants-et-voyages-du-monde.com/api/get/authors/\(authorId)").responseJSON { response in
+            
+            if let value = response.result.value {
+                let json = JSON(value)
+                
+                if let data = json["data"].array {
+                    
+                    
+                    
+                    /*for row in articles {
+                        if let id = row["article_id"].string, let title = row["titre"].string, let author = row["auteur"].string, let cover = row["urlphoto"].string, let desc =  row["introduction"].string, let date = row["date"].string, let category = row["categorie"].string, let latitude = row["latitude"].string, let longitude = row["longitude"].string {
+                            
+                            self.data.append(Article(id: id, category: category, title: title, author: author, cover: cover, desc: desc, date: date, longitude: Double(longitude), latitude: Double(latitude)))
+                            
+                        }
+                    }*/
+                    
+                    
+                    
+                    DispatchQueue.main.async {
+                        self.tableView.reloadData()
+                    }
+                    
+                    self.isLoading = false
+                }
+            }
+        }
     }
     
     // MARK: - ScrollView
@@ -160,7 +200,7 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return data.count + 1
+        return articles.count + 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -171,11 +211,11 @@ class AuthorViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "authorArticleCell")! as! AuthorArticleCell
             
-            cell.coverImageView.image = UIImage(named: data[indexPath.row-1].cover!)
+            cell.coverImageView.image = UIImage(named: articles[indexPath.row-1].cover!)
             
             //cell.categorieLabel.text = data[indexPath.row-1].category.title.uppercased()
-            cell.titleLabel.text = data[indexPath.row-1].title.uppercased()
-            cell.descriptionLabel.text = data[indexPath.row-1].desc
+            cell.titleLabel.text = articles[indexPath.row-1].title.uppercased()
+            cell.descriptionLabel.text = articles[indexPath.row-1].desc
             
             return cell
         }
